@@ -11,4 +11,24 @@ package autobahnmaut.model;
  */
 public class Standort {
     
+    private int standortID;
+    private String bezeichnung;
+
+    public int getStandortID() {
+        return standortID;
+    }
+
+    public void setStandortID(int standortID) {
+        this.standortID = standortID;
+    }
+
+    public String getBezeichnung() {
+        return bezeichnung;
+    }
+
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
+    }
+    
+    
 }
