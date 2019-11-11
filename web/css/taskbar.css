@@ -1,14 +1,39 @@
-/*Normalnutzer*/
-
-
-/*Polizei*/
-
-
-/*Ministerium*/
-
-
-/*Verkehrswacht*/
-
-
-/*Administrator*/
-
+.navigation{
+    width: 100%;
+    padding: 18px 0;
+    font-weight: 700;
+    box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.2);
+    display: block;
+    background: white;
+    height: 8%;
+    z-index: 999;
+    align-content: center;
+}
+.navigation text{
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 17px;
+    text-transform: uppercase;
+    color: black;
+    margin-left: 2%;
+    margin-right: 45%;
+    margin-top: 8px;
+}
+.navigation a{
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 17px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+    border: 2px;
+    border-color: transparent;
+    border-radius: 15px;
+    padding: 3px;
+    margin-right: 3%;
+    transition: 0.2s;
+}
+.navigation a:hover{
+    background: black;
+    color: white;
+    border-color: black;
+    transform: scale(1.05);
+}
