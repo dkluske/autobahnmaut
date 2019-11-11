@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\mainCSS.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\taskbar.css">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="${pageContext.request.contextPath}\\favicon.ico">
         <title>Statistik | Autobahnmaut</title>
     </head>
     <body>
@@ -18,12 +19,16 @@
             <div id="inb1">
                 <div class="navigation">
                 <p></p>
-                <text>Autobahnmaut</text>
+                <!--<text>Autobahnmaut</text>-->
+                <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                 <a href="">Function 1</a>
                 <a href="">Function 2</a>
                 <a href="">Function 3</a>
                 <a href="">Function 4</a>
                 </div>
+                <!--<div>
+                <%--<jsp:include page="taskbar.jsp"/>--%>
+                </div>-->
                 
                 <h1 id="head_start">Statistik</h1>
             </div>
