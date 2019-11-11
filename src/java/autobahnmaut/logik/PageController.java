@@ -1,4 +1,4 @@
-package devMautBautzen;
+package autobahnmaut.logik;
 
 public class PageController {
 

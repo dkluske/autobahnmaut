@@ -1,4 +1,4 @@
-package devMautBautzen;
+package autobahnmaut.model;
 
 public class Statistik {
 
