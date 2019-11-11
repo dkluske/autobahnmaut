@@ -41,8 +41,8 @@ public class FahrzeugManager {
 
                 fahrzeugListe.add(f);
 
-                return fahrzeugListe;
-            }
+                
+            }return fahrzeugListe;
         } catch (SQLException sqle) {
 
         }
