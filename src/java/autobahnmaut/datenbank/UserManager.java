@@ -16,6 +16,7 @@ import java.sql.Statement;
  */
 public class UserManager {
 
+    //Es wird ein Nutzer mit den übergebenen Paramtern versucht einzuloggen, bei Erfolg wird der hinterlegte Nutzer zurückgegeben
     public static Nutzer login(String email, String passwort) {
 
         String query = "select \n"
@@ -50,39 +51,7 @@ public class UserManager {
         return null;
     }
     
-    public static Nutzer getNutzerById(int nutzerId) {
-
-        String query = "select \n"
-                + "	* \n"
-                + "from \n"
-                + "	autobahnmaut.nutzer\n"
-                + "where \n"
-                + "	nutzerid = '" + nutzerId + "');";
-        try {
-            Statement stm = Datenbank.getStatement();
-            ResultSet rs = stm.executeQuery(query);
-            if (rs.next()) {
-                Nutzer n = new Nutzer();
-                n.setNutzerId(rs.getInt("nutzerid"));
-                n.setName(rs.getString("name"));
-                n.setEmail(rs.getString("email"));
-                n.setRolle(rs.getString("rolle"));
-                n.setStrasse(rs.getString("strasse"));
-                n.setPlz(rs.getString("plz"));
-                n.setRabatt(rs.getDouble("rabatt"));
-
-                return n;
-            }
-        } catch (SQLException sqle) {
-
-        }
-
-        /*wenn ein kunde gefunden wurde gib Kunden zurück
-                ansonsten null
-         */
-        return null;
-    }
-
+    
     //Es wird ein nutzer registriert und die Daten aus dem Formular übergeben
     //Der angelegte Nutzer wird zurückgegebn und es wird geprüft ob der neue Nutzer schon vorhanden ist
     public static Nutzer registrieren(String anmeldeemail, String anmeldepasswort, String rolle,
@@ -139,6 +108,41 @@ public class UserManager {
             } catch (SQLException sqle) {
 
             }
+        }
+
+        /*wenn ein kunde gefunden wurde gib Kunden zurück
+                ansonsten null
+         */
+        return null;
+    }
+    
+    
+    //Den Nutzer zur ID ermitteln
+    public static Nutzer getNutzerById(int nutzerId) {
+
+        String query = "select \n"
+                + "	* \n"
+                + "from \n"
+                + "	autobahnmaut.nutzer\n"
+                + "where \n"
+                + "	nutzerid = '" + nutzerId + "');";
+        try {
+            Statement stm = Datenbank.getStatement();
+            ResultSet rs = stm.executeQuery(query);
+            if (rs.next()) {
+                Nutzer n = new Nutzer();
+                n.setNutzerId(rs.getInt("nutzerid"));
+                n.setName(rs.getString("name"));
+                n.setEmail(rs.getString("email"));
+                n.setRolle(rs.getString("rolle"));
+                n.setStrasse(rs.getString("strasse"));
+                n.setPlz(rs.getString("plz"));
+                n.setRabatt(rs.getDouble("rabatt"));
+
+                return n;
+            }
+        } catch (SQLException sqle) {
+
         }
 
         /*wenn ein kunde gefunden wurde gib Kunden zurück
