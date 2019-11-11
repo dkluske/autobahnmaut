@@ -7,6 +7,12 @@ html, body{
     overflow-x: hidden;
     overflow-y: hidden;
 }
+img{
+    height: 60px;
+    width: 65px;
+    margin-left: 10px;
+    margin-right: 54%;    
+}
 /*Startseite*/
 #b1{
     width: 100%;
