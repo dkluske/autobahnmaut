@@ -30,6 +30,7 @@ public class UserManager {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
             if (rs.next()) {
+                
                 Nutzer n = new Nutzer();
                 n.setNutzerId(rs.getInt("nutzerid"));
                 n.setName(rs.getString("name"));
