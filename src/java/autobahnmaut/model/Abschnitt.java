@@ -10,7 +10,7 @@ package autobahnmaut.model;
  * @author 17wi1188
  */
 public class Abschnitt {
-    
+
     private int abschnittID;
     private double distanz;
     private String startStandort;
@@ -47,6 +47,5 @@ public class Abschnitt {
     public void setEndStandort(String endStandort) {
         this.endStandort = endStandort;
     }
-    
-    
+
 }

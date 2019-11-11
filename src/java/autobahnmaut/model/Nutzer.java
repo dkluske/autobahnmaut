@@ -5,6 +5,8 @@
  */
 package autobahnmaut.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author 17wi1188
@@ -18,7 +20,17 @@ public class Nutzer {
     private String strasse;
     private String plz;
     private double rabatt = 1;
+    private ArrayList<Fahrzeug> fahrzeugListe = new ArrayList<>();
 
+    public ArrayList<Fahrzeug> getFahrzeugListe() {
+        return fahrzeugListe;
+    }
+
+    public void setFahrzeugListe(ArrayList<Fahrzeug> fahrzeugListe) {
+       this.fahrzeugListe = autobahnmaut.datenbank.FahrzeugManager.fahrzeuglisteNutzer(this.nutzerId);         
+    }
+
+    
     @Override
     public String toString() {
         return "Nutzer{" + "name=" + name + ", rolle=" + rolle + ", email=" + email + ", strasse=" + strasse + ", plz=" + plz + ", rabatt=" + rabatt + '}';
