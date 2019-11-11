@@ -17,7 +17,7 @@
         <section id="a1">
             <div id="ina1">
                 <div>
-                    <h1 id="head_log">Autobahnmaut</h1>
+                    <h1 id="head_log">Autobahnmaut Test</h1>
                 </div>
                 <div id="log_back">
                     <div id="log_form">
