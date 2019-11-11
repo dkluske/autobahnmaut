@@ -1,3 +1,8 @@
+<%-- 
+    Document   : statistik
+    Created on : 11.11.2019, 12:31:22
+    Author     : Dome
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,8 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\mainCSS.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\taskbar.css">
-        <link rel="icon" type="image/vnd.microsoft.icon" href="${pageContext.request.contextPath}\\favicon.ico">
-        <title>Startseite | Autobahnmaut</title>
+        <title>Statistik | Autobahnmaut</title>
     </head>
     <body>
         <section id="b1">
@@ -21,7 +25,10 @@
                 <a href="">Function 4</a>
                 </div>
                 
-                <h1 id="head_start"> Startseite</h1>
+                <h1 id="head_start">Statistik</h1>
+            </div>
+            <div id="back_white">
+                
             </div>
         </section>
     </body>

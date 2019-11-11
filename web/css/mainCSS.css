@@ -1,2 +1,31 @@
-
-
+/*General*/
+html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+/*Startseite*/
+#b1{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    top: 0;
+    background: url(general_BG.png) no-repeat 50% 50%;
+    background-size: cover;
+    display: table;
+}
+#head_start{
+    font-family: 'Segoe UI';
+    margin-left: 8px;
+}
+/*Statistik*/
+#back_white{
+    width: 100%;
+    height: 78.5%;
+    border: 1px solid transparent;
+    border-radius: 15px;
+    background-color: rgba(255,255,255,0.8);
+}
