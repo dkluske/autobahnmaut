@@ -16,7 +16,41 @@ public class Messdaten {
     private Mautbruecke mautbruecke;
     private LocalDateTime messZeit;    
     private String landBezeichnung;
-    private String kennzeichen; 
+    private String kennzeichen;
+
+    public Mautbruecke getMautbruecke() {
+        return mautbruecke;
+    }
+
+    public void setMautbruecke(Mautbruecke mautbruecke) {
+        this.mautbruecke = mautbruecke;
+    }
+
+    public LocalDateTime getMessZeit() {
+        return messZeit;
+    }
+
+    public void setMessZeit(LocalDateTime messZeit) {
+        this.messZeit = messZeit;
+    }
+
+    public String getLandBezeichnung() {
+        return landBezeichnung;
+    }
+
+    public void setLandBezeichnung(String landBezeichnung) {
+        this.landBezeichnung = landBezeichnung;
+    }
+
+    public String getKennzeichen() {
+        return kennzeichen;
+    }
+
+    public void setKennzeichen(String kennzeichen) {
+        this.kennzeichen = kennzeichen;
+    }
+    
+    
 
     
 

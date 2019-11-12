@@ -59,7 +59,7 @@ public class FahrzeugManager {
         String query = "select \n"
                 + "	* \n"
                 + "from \n"
-                + "	Autobahn.land\n"
+                + "	land\n"
                 + "where \n"
                 + "	landId = '" + landId + "');";
         try {
