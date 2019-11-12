@@ -67,7 +67,7 @@ public class Register extends HttpServlet {
         System.out.println("" + firma+ anschr + UST);
         
         UserManager UM = new UserManager();
-        Nutzer n = UM.register();
+//        Nutzer n = UM.register();
     }
 
 }
