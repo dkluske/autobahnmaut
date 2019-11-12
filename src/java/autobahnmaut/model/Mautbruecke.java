@@ -10,6 +10,7 @@ package autobahnmaut.model;
  * @author 17wi1188
  */
 public class Mautbruecke {
+
     private int mautbrueckeID;
     private boolean abfahrt;
     private Standort standort;
@@ -37,5 +38,5 @@ public class Mautbruecke {
     public void setStandort(Standort standort) {
         this.standort = standort;
     }
-    
+
 }

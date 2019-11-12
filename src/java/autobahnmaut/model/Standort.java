@@ -10,9 +10,11 @@ package autobahnmaut.model;
  * @author 17wi1188
  */
 public class Standort {
-    
+
     private int standortID;
     private String bezeichnung;
+    
+    
 
     public int getStandortID() {
         return standortID;
@@ -29,6 +31,5 @@ public class Standort {
     public void setBezeichnung(String bezeichnung) {
         this.bezeichnung = bezeichnung;
     }
-    
-    
+
 }

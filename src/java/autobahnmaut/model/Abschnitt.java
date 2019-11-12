@@ -10,11 +10,11 @@ package autobahnmaut.model;
  * @author 17wi1188
  */
 public class Abschnitt {
-    
+
     private int abschnittID;
     private double distanz;
-    private String startStandort;
-    private String endStandort;
+    private Standort startStandort;
+    private Standort endStandort;
 
     public int getAbschnittID() {
         return abschnittID;
@@ -32,21 +32,20 @@ public class Abschnitt {
         this.distanz = distanz;
     }
 
-    public String getStartStandort() {
+    public Standort getStartStandort() {
         return startStandort;
     }
 
-    public void setStartStandort(String startStandort) {
+    public void setStartStandort(Standort startStandort) {
         this.startStandort = startStandort;
     }
 
-    public String getEndStandort() {
+    public Standort getEndStandort() {
         return endStandort;
     }
 
-    public void setEndStandort(String endStandort) {
+    public void setEndStandort(Standort endStandort) {
         this.endStandort = endStandort;
     }
-    
-    
+
 }
