@@ -12,11 +12,12 @@ import autobahnmaut.model.FahrtenLaufend;
  * @author 17wi1188
  */
 public class DatenInput {
+    
+    private static void datenAnnehmen(String Messdaten){
+        
+    }
     private static FahrtenLaufend laufendeFahrtAnlegen(){
         FahrtenLaufend aktuelleFahrt = new FahrtenLaufend();
-        
-        
-        
         return aktuelleFahrt;
     }
 }

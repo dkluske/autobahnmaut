@@ -24,7 +24,7 @@ public class FahrzeugManager {
         String query = "select \n"
                 + "	* \n"
                 + "from \n"
-                + "	autobahnmaut.fahrzeug\n"
+                + "	Autobahn.fahrzeug\n"
                 + "where \n"
                 + "	nutzerid = '" + nutzerId + "';";
         try {
@@ -41,8 +41,8 @@ public class FahrzeugManager {
 
                 fahrzeugListe.add(f);
 
-                return fahrzeugListe;
-            }
+                
+            }return fahrzeugListe;
         } catch (SQLException sqle) {
 
         }
@@ -59,7 +59,7 @@ public class FahrzeugManager {
         String query = "select \n"
                 + "	* \n"
                 + "from \n"
-                + "	autobahnmaut.land\n"
+                + "	land\n"
                 + "where \n"
                 + "	landId = '" + landId + "');";
         try {

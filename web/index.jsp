@@ -32,7 +32,7 @@
                             <!--Passwort Feld -->
                             <input type="password" name="password" placeholder="Passwort" id="password"><br/><br/>
                             <!--Link zur Registrieren Seite-->
-                            <a href="jsp\\register.jsp">Registrieren</a><br/><br/>
+                            <a href="${pageContext.request.contextPath}/register">Registrieren</a><br/><br/>
                             <!--Login Button-->
                             <input type="submit" value="Login" id="loginbtn">
                         </form>

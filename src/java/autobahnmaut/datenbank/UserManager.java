@@ -22,7 +22,7 @@ public class UserManager {
         String query = "select \n"
                 + "	* \n"
                 + "from \n"
-                + "	autobahnmaut.nutzer\n"
+                + "	nutzer\n"
                 + "where \n"
                 + "	email = '" + email + "' and \n"
                 + "	passwort = crypt('" + passwort + "',passwort);";
@@ -30,14 +30,16 @@ public class UserManager {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
             if (rs.next()) {
+
                 Nutzer n = new Nutzer();
-                n.setNutzerId(rs.getInt("nutzerid"));
-                n.setName(rs.getString("name"));
+                n.setNutzerId(rs.getInt("id"));
+                n.setName(rs.getString("nutzername"));
                 n.setEmail(rs.getString("email"));
                 n.setRolle(rs.getString("rolle"));
                 n.setStrasse(rs.getString("strasse"));
                 n.setPlz(rs.getString("plz"));
                 n.setRabatt(rs.getDouble("rabatt"));
+                n.setOrt(rs.getString("ort"));
 
                 return n;
             }
@@ -50,18 +52,17 @@ public class UserManager {
          */
         return null;
     }
-    
-    
+
     //Es wird ein nutzer registriert und die Daten aus dem Formular übergeben
     //Der angelegte Nutzer wird zurückgegebn und es wird geprüft ob der neue Nutzer schon vorhanden ist
     public static Nutzer registrieren(String anmeldeemail, String anmeldepasswort, String rolle,
-            String name, String strasse, String plz, double rabatt) {
-        
+            String name, String strasse, String plz, String ort, double rabatt) {
+
         if (anmeldeemail != "" && anmeldepasswort != "") {
             String query = "select \n"
                     + "	* \n"
                     + "from \n"
-                    + "	autobahnmaut.nutzer\n"
+                    + "	nutzer\n"
                     + "where \n"
                     + "	email = '" + anmeldeemail + "' and \n"
                     + "	passwort = crypt('" + anmeldepasswort + "',passwort);";
@@ -74,39 +75,41 @@ public class UserManager {
                 } else {
                     //sonst wird Nutzer mit den Daten angelegt
                     stm = Datenbank.getStatement();
-                    query = "INSERT INTO autobahnmaut.nutzer(\n"
-                            + "	email, passwort, rolle, name, strasse, plz, rabatt)\n"
+                    query = "INSERT INTO nutzer(\n"
+                            + "	email, passwort, rolle, nutzername, strasse, plz, ort, rabatt)\n"
                             + "	VALUES ('" + anmeldeemail + "',crypt('" + anmeldepasswort
                             + "',gen_salt('md5')) ,'" + rolle + "','" + name + "','" + strasse
-                            + "','" + plz + "'," + rabatt + ");";
+                            + "','" + plz + "','" + ort + "'," + rabatt + ");";
 
                     stm.executeUpdate(query);
 
                     query = "select \n"
                             + "	* \n"
                             + "from \n"
-                            + "	autobahnmaut.nutzer\n"
+                            + "	nutzer\n"
                             + "where \n"
                             + "	email = '" + anmeldeemail + "' and \n"
                             + "	passwort = crypt('" + anmeldepasswort + "',passwort);";
-                    
+
                     stm = Datenbank.getStatement();
                     rs = stm.executeQuery(query);
                     if (rs.next()) {
+                        
                         //Der angelegte Nutzer wird in einem Nutzerobjekt abgelegt und zurückgegeben
                         Nutzer n = new Nutzer();
-                        n.setNutzerId(rs.getInt("nutzerid"));
-                        n.setName(rs.getString("name"));
+                        n.setNutzerId(rs.getInt("id"));
+                        n.setName(rs.getString("nutzername"));
                         n.setEmail(rs.getString("email"));
                         n.setRolle(rs.getString("rolle"));
                         n.setStrasse(rs.getString("strasse"));
                         n.setPlz(rs.getString("plz"));
                         n.setRabatt(rs.getDouble("rabatt"));
+                        n.setOrt(rs.getString("ort"));
                         return n;
                     }
                 }
             } catch (SQLException sqle) {
-
+                System.out.println(sqle);
             }
         }
 
@@ -115,15 +118,14 @@ public class UserManager {
          */
         return null;
     }
-    
-    
+
     //Den Nutzer zur ID ermitteln
     public static Nutzer getNutzerById(int nutzerId) {
 
         String query = "select \n"
                 + "	* \n"
                 + "from \n"
-                + "	autobahnmaut.nutzer\n"
+                + "	nutzer\n"
                 + "where \n"
                 + "	nutzerid = '" + nutzerId + "');";
         try {
