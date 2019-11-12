@@ -48,6 +48,14 @@ public class DatenInput {
             aktuelleFahrt.setMautbrueckeRecent(messdaten.getMautbruecke());
             aktuelleFahrt.setAktuelleZeit(messdaten.getMessZeit());
             
+        }else{
+            aktuelleFahrt.setAktuelleZeit(messdaten.getMessZeit());
+            aktuelleFahrt.setFahrzeug(messdaten.getFahrzeug());
+            aktuelleFahrt.setKilometer(0);
+            aktuelleFahrt.setMautbrueckeRecent(messdaten.getMautbruecke());
+            aktuelleFahrt.setMautbrueckeStart(messdaten.getMautbruecke());
+            aktuelleFahrt.setStartZeit(messdaten.getMessZeit());
+            
         }
         return aktuelleFahrt;
     }
