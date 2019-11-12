@@ -19,7 +19,9 @@
                         <text id="head_form">Registrieren</text>
                         <br/><br/><br/>
                         <input type="text" name="firma" placeholder="Firmenname"><br/>
-                        <input type="text" name="anschr" placeholder="Anschrift"><br/>
+                        <input type="text" name="strasse" placeholder="Straße"><br/>
+                        <input type="text" name="plz" placeholder="PLZ"><br/>
+                        <input type="text" name="ort" placeholder="Ort"><br/>
                         <input type="text" name="UST" placeholder="Ust-ID"><br/><br/><br/>
                         <input type="text" name="email" placeholder="E-Mail-Adresse"><br/>
                         <input type="password" name="password" placeholder="Passwort"><br/>

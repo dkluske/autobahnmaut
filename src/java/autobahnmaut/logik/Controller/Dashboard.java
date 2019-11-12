@@ -36,7 +36,7 @@ public class Dashboard extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("nutzer") == null) {
-            response.sendRedirect("/Autobahnmaut/login");
+            response.sendRedirect(request.getContextPath() + "/login");
         }else{
             RequestDispatcher rd;
             rd = request.getRequestDispatcher("/jsp/dashboard.jsp");

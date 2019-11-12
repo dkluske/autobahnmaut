@@ -30,8 +30,6 @@ public class Nutzer {
     public void setFahrzeugListe(ArrayList<Fahrzeug> fahrzeugListe) {
        this.fahrzeugListe = autobahnmaut.datenbank.FahrzeugManager.fahrzeuglisteNutzer(this.nutzerId);         
     }
-
-    
     @Override
     public String toString() {
         return "Nutzer{" + "name=" + name + ", rolle=" + rolle + ", email=" + email + ", strasse=" + strasse + ", plz=" + plz + ", rabatt=" + rabatt + '}';

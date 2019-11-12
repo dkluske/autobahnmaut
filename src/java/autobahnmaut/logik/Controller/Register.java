@@ -5,17 +5,19 @@
  */
 package autobahnmaut.logik.Controller;
 
-import autobahnmaut.datenbank.Datenbank;
 import autobahnmaut.datenbank.UserManager;
+import autobahnmaut.logik.Helper;
 import autobahnmaut.model.Nutzer;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -55,19 +57,59 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+//        Übergebene Parameter erfassen
+        String anmeldeemail = request.getParameter("email");
+        String anmeldepasswort = request.getParameter("password");
+        String passwordwdh = request.getParameter("passwdh");
+        String rolle = "Nutzer";
+        String name = request.getParameter("firma");
+        String strasse = request.getParameter("strasse");
+        String plz = request.getParameter("plz");
+        String ort = request.getParameter("ort");
+        Double rabatt = 1.0;
+        List<String> errors = new ArrayList<String>();
         
-        
-        String firma = request.getParameter("firma");
-        String anschr = request.getParameter("anschr");
-        String UST = request.getParameter("UST");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String passwordwdh = request.getParameter("passwordwdh");
-        
-        System.out.println("" + firma+ anschr + UST);
-        
-        UserManager UM = new UserManager();
-//        Nutzer n = UM.register();
+//        Validation
+        if (anmeldeemail.isEmpty()|| !Helper.isValidEmail(anmeldeemail)){
+            errors.add("Email");
+        }
+        if (anmeldepasswort.isEmpty() || !anmeldepasswort.matches(passwordwdh)) {
+            errors.add("Password");
+        }
+        if (passwordwdh.isEmpty()) {
+            errors.add("Password Wiederholen");
+        }
+        if (name.isEmpty()) {
+            errors.add("Firma");
+        }
+        if (strasse.isEmpty()) {
+            errors.add("Strasse");
+        }
+        if (plz.isEmpty()) {
+            errors.add("PLZ");
+        }
+        if (ort.isEmpty()) {
+            errors.add("Ort");
+        }
+
+        if(!errors.isEmpty()){
+            request.setAttribute("errors", errors);
+            request.getRequestDispatcher("jsp/register.jsp").forward(request, response);
+        }else{
+            Nutzer n = UserManager.registrieren(
+                    anmeldeemail, 
+                    anmeldepasswort, 
+                    rolle,
+                    name, 
+                    strasse, 
+                    plz, 
+                    ort, 
+                    rabatt);
+    //      Nutzer in session speichern;
+            HttpSession session = request.getSession();
+            session.setAttribute("Nutzer", n);
+        }
+
     }
 
 }

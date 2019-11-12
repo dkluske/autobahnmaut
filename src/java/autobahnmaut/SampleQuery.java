@@ -17,7 +17,6 @@ public class SampleQuery {
     public static void main (String[] args){
         
         autobahnmaut.datenbank.Datenbank.getConnection();
-       
                         
         autobahnmaut.datenbank.UserManager.registrieren("test@web.de", "admin", "Nutzer", "Testnutzer", "Teststraße","12341", "Testort", 0);
     }
