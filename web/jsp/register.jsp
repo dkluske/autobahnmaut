@@ -3,6 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--CSS und Favicon eingebunden -->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\welcome.css">
         <link rel="icon" type="image/vnd.microsoft.icon" href="${pageContext.request.contextPath}\\favicon.ico">
         <title>Registrieren | Autobahnmaut</title>
