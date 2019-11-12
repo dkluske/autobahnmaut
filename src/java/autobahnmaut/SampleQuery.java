@@ -7,6 +7,7 @@
 package autobahnmaut;
 
 
+import autobahnmaut.datenbank.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -17,8 +18,8 @@ public class SampleQuery {
         
         autobahnmaut.datenbank.Datenbank.getConnection();
        
-        
-        
+                        
+        autobahnmaut.datenbank.UserManager.registrieren("test@web.de", "admin", "Nutzer", "Testnutzer", "Teststraße","12341", "Testort", 0);
     }
            
     

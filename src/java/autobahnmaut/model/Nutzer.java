@@ -19,6 +19,7 @@ public class Nutzer {
     private String email;
     private String strasse;
     private String plz;
+    private String ort;
     private double rabatt = 1;
     private ArrayList<Fahrzeug> fahrzeugListe = new ArrayList<>();
 
@@ -34,6 +35,14 @@ public class Nutzer {
     @Override
     public String toString() {
         return "Nutzer{" + "name=" + name + ", rolle=" + rolle + ", email=" + email + ", strasse=" + strasse + ", plz=" + plz + ", rabatt=" + rabatt + '}';
+    }
+
+    public String getOrt() {
+        return ort;
+    }
+
+    public void setOrt(String ort) {
+        this.ort = ort;
     }
 
     public int getNutzerId() {
