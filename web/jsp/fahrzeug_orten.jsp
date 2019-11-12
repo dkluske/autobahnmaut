@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\mainCSS.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\taskbar.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\welcome.css">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="${pageContext.request.contextPath}\\favicon.ico">
         <title>Fahrzeug orten | Autobahnmaut</title>
     </head>
     
@@ -43,7 +44,7 @@
                             <input type="text" name="modell" placeholder="Modell"><br/>
                             <input type="text" name="farbe" placeholder="Farbe"><br/>
                             <input type="text" name="kennzeichen" placeholder="Kennzeichen"><br/><br/><br/>
-                            <input type="submit" name="bestätigen" placeholder="Bestätigen" id="loginbtn">
+                            <input type="confirm" name="bestätigen" placeholder="Bestätigen" id="loginbtn">
                         </div>
                     </form>
                 </div>

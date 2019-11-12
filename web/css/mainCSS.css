@@ -58,3 +58,27 @@ html, body{
     display: inline-block;
     border-radius: 3%;
 }
+/*Rechnung*/
+#rechnform{
+   width: 35%;
+    align-content: center;
+    background-color: rgba(68,72,69,0.8);
+    padding-bottom: 65px;
+    display: inline-block;
+    border-radius: 3%;
+    float: left;
+    margin-left: 20px;
+}
+#rechn_form{
+    float: none;
+    padding-left: 20%;
+}
+#head_rechn{
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    color: white;
+    padding-bottom: 5px;
+    padding-left: 20%;
+    font-size: 30px;
+    letter-spacing: 2px;
+}

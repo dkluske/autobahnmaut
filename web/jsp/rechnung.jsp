@@ -1,6 +1,6 @@
 <%-- 
-    Document   : fahrzeuge_registrieren
-    Created on : 11.11.2019, 13:04:25
+    Document   : rechnung
+    Created on : 12.11.2019, 10:55:44
     Author     : 17wi1199
 --%>
 
@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\taskbar.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\welcome.css">
         <link rel="icon" type="image/vnd.microsoft.icon" href="${pageContext.request.contextPath}\\favicon.ico">
-        <title>Fahrzeuge registrieren | Autobahnmaut</title>
+        <title>Rechnung anzeigen | Autobahnmaut</title>
     </head>
     
     <body>
@@ -27,28 +27,24 @@
                         <a href="">Function 4</a>
                 </div>
                 
-                <h1 id="head_start">Fahrzeuge registrieren</h1>
+                <h1 id="head_start">Rechnung anzeigen</h1>
             </div>
             
             <section id="a1">
             <div id="regin">
                 <h1 id="head_log">Autobahnmaut</h1>
             </div>
-            <div id="reg_back">
-                <div id="fz_regform">
+            <div id="rechn_back">
+                <div id="rechnform">
                     <form action="" method="post">
                         <br/>
-                        <text id="head_form">Fahrzeuge registrieren</text>
+                        <text id="head_rechn">Rechnung anzeigen</text>
                         <br/><br/><br/>
-                        <div id="l"><input type="text" name="hersteller" placeholder="Hersteller"> <br/>
-                            <input type="text" name="modell" placeholder="Modell"><br/>
-                            <input type="text" name="farbe" placeholder="Farbe"><br/>
-                            <input type="text" name="kennzeichen" placeholder="Kennzeichen"><br/>
-                        </div>
-                        <div id="r"><input type="text" name="firmenname" placeholder="Firmenname"> <br/>
+                        <div id="rechn_form"><input type="text" name="firma" placeholder="Firma"> <br/>
                             <input type="text" name="anschrift" placeholder="Anschrift"><br/>
-                            <input type="text" name="email" placeholder="E-Mail-Adresse"><br/><br/><br/>
-                            <input type="submit" name="register" value="Registrieren" id="loginbtn"><br/>
+                            <input type="text" name="rechnnr" placeholder="Rechnungsnummer"><br/>
+                            <input type="text" name="datum" placeholder="Datum"><br/><br/><br/>
+                            <input type="confirm" name="bestätigen" placeholder="Bestätigen" id="loginbtn">
                         </div>
                     </form>
                 </div>
