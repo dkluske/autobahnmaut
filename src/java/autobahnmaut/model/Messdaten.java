@@ -6,6 +6,7 @@
 package autobahnmaut.model;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 public class Messdaten {
     
     private Mautbruecke mautbruecke;
-    private LocalDateTime messZeit;    
+    private Date messZeit;    
     private String landBezeichnung;
     private String kennzeichen;
 
@@ -26,11 +27,11 @@ public class Messdaten {
         this.mautbruecke = mautbruecke;
     }
 
-    public LocalDateTime getMessZeit() {
+    public Date getMessZeit() {
         return messZeit;
     }
 
-    public void setMessZeit(LocalDateTime messZeit) {
+    public void setMessZeit(Date messZeit) {
         this.messZeit = messZeit;
     }
 

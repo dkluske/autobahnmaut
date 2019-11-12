@@ -61,13 +61,13 @@ public class FahrzeugManager {
                 + "from \n"
                 + "	land\n"
                 + "where \n"
-                + "	landId = '" + landId + "');";
+                + "	id = '" + landId + "');";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
             if (rs.next()) {
                 Land l = new Land();
-                l.setLandId(rs.getInt("landid"));
+                l.setLandId(rs.getInt("id"));
                 l.setBezeichnung(rs.getString("bezeichnung"));
                 l.setKurzBezeichnung(rs.getString("kurzbezeichnung"));               
 

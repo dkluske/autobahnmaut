@@ -5,7 +5,13 @@
  */
 package autobahnmaut.logik;
 
+import autobahnmaut.datenbank.FahrtenManager;
 import autobahnmaut.model.FahrtenLaufend;
+import autobahnmaut.model.Messdaten;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -13,9 +19,20 @@ import autobahnmaut.model.FahrtenLaufend;
  */
 public class DatenInput {
     
-    private static void datenAnnehmen(String Messdaten){
+    private static Messdaten datenUmwandeln(String simulatordaten) throws ParseException{
+        Messdaten messdaten= new Messdaten();
+        String [] messdatenArray = simulatordaten.split(";");
         
+        
+        messdaten.setKennzeichen(messdatenArray[0]);
+        messdaten.setLandBezeichnung(messdatenArray[1]);
+        messdaten.setMautbruecke(FahrtenManager.getMautbrueckeById(Integer.parseInt(messdatenArray[2])));
+        Date messzeit=new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").parse(messdatenArray[3]);
+        messdaten.setMessZeit(messzeit);
+        
+        return messdaten;
     }
+    
     private static FahrtenLaufend laufendeFahrtAnlegen(){
         FahrtenLaufend aktuelleFahrt = new FahrtenLaufend();
         return aktuelleFahrt;
