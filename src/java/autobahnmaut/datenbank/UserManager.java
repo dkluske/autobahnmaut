@@ -94,6 +94,7 @@ public class UserManager {
                     stm = Datenbank.getStatement();
                     rs = stm.executeQuery(query);
                     if (rs.next()) {
+                        
                         //Der angelegte Nutzer wird in einem Nutzerobjekt abgelegt und zurückgegeben
                         Nutzer n = new Nutzer();
                         n.setNutzerId(rs.getInt("id"));
