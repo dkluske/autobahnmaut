@@ -30,7 +30,7 @@ public class StatistikManager {
         String query = "select top 10 \n"
                 + "	* \n"
                 + "from \n"
-                + "	autobahnmaut.fahrten\n"
+                + "	Autobahn.fahrten\n"
                 + "where \n"
                 + "	nutzerid = '" + monat + "');";
         try {

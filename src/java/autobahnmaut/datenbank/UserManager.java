@@ -22,7 +22,7 @@ public class UserManager {
         String query = "select \n"
                 + "	* \n"
                 + "from \n"
-                + "	autobahnmaut.nutzer\n"
+                + "	Autobahn.nutzer\n"
                 + "where \n"
                 + "	email = '" + email + "' and \n"
                 + "	passwort = crypt('" + passwort + "',passwort);";
@@ -62,7 +62,7 @@ public class UserManager {
             String query = "select \n"
                     + "	* \n"
                     + "from \n"
-                    + "	autobahnmaut.nutzer\n"
+                    + "	Autobahn.nutzer\n"
                     + "where \n"
                     + "	email = '" + anmeldeemail + "' and \n"
                     + "	passwort = crypt('" + anmeldepasswort + "',passwort);";
@@ -75,7 +75,7 @@ public class UserManager {
                 } else {
                     //sonst wird Nutzer mit den Daten angelegt
                     stm = Datenbank.getStatement();
-                    query = "INSERT INTO autobahnmaut.nutzer(\n"
+                    query = "INSERT INTO Autobahn.nutzer(\n"
                             + "	email, passwort, rolle, name, strasse, plz, rabatt)\n"
                             + "	VALUES ('" + anmeldeemail + "',crypt('" + anmeldepasswort
                             + "',gen_salt('md5')) ,'" + rolle + "','" + name + "','" + strasse
@@ -86,7 +86,7 @@ public class UserManager {
                     query = "select \n"
                             + "	* \n"
                             + "from \n"
-                            + "	autobahnmaut.nutzer\n"
+                            + "	Autobahn.nutzer\n"
                             + "where \n"
                             + "	email = '" + anmeldeemail + "' and \n"
                             + "	passwort = crypt('" + anmeldepasswort + "',passwort);";
@@ -124,7 +124,7 @@ public class UserManager {
         String query = "select \n"
                 + "	* \n"
                 + "from \n"
-                + "	autobahnmaut.nutzer\n"
+                + "	Autobahn.nutzer\n"
                 + "where \n"
                 + "	nutzerid = '" + nutzerId + "');";
         try {

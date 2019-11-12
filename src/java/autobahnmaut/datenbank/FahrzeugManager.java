@@ -24,7 +24,7 @@ public class FahrzeugManager {
         String query = "select \n"
                 + "	* \n"
                 + "from \n"
-                + "	autobahnmaut.fahrzeug\n"
+                + "	Autobahn.fahrzeug\n"
                 + "where \n"
                 + "	nutzerid = '" + nutzerId + "';";
         try {
@@ -59,7 +59,7 @@ public class FahrzeugManager {
         String query = "select \n"
                 + "	* \n"
                 + "from \n"
-                + "	autobahnmaut.land\n"
+                + "	Autobahn.land\n"
                 + "where \n"
                 + "	landId = '" + landId + "');";
         try {
