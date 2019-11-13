@@ -1,6 +1,6 @@
 .navigation{
     width: 100%;
-    padding: 18px 0;
+    padding: 10px 0;
     font-weight: 700;
     box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.2);
     display: block;
@@ -10,7 +10,7 @@
     align-content: center;
 }
 .navigation text{
-    font-family: 'Century Gothic', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     font-size: 17px;
     text-transform: uppercase;
     color: black;
@@ -19,7 +19,7 @@
     margin-top: 8px;
 }
 .navigation a{
-    font-family: 'Century Gothic', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     font-size: 17px;
     text-transform: uppercase;
     text-decoration: none;
@@ -30,6 +30,7 @@
     padding: 3px;
     margin-right: 3%;
     transition: 0.2s;
+    margin-top: -10px;
 }
 .navigation a:hover{
     background: black;
