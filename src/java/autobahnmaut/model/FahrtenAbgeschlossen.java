@@ -6,6 +6,7 @@
 package autobahnmaut.model;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -14,25 +15,25 @@ import java.time.LocalDateTime;
 public class FahrtenAbgeschlossen {
     private int fahrtenAbgeschlossenId;
     private double kilometer;
-    private LocalDateTime startZeit;
-    private LocalDateTime endZeit;
+    private Date startZeit;
+    private Date endZeit;
     private Mautbruecke mautbrueckeStart;
     private Mautbruecke mautbrueckeRecent;
     private Fahrzeug fahrzeug;
 
-    public LocalDateTime getStartZeit() {
+    public Date getStartZeit() {
         return startZeit;
     }
 
-    public void setStartZeit(LocalDateTime startZeit) {
+    public void setStartZeit(Date startZeit) {
         this.startZeit = startZeit;
     }
 
-    public LocalDateTime getEndZeit() {
+    public Date getEndZeit() {
         return endZeit;
     }
 
-    public void setEndZeit(LocalDateTime endZeit) {
+    public void setEndZeit(Date endZeit) {
         this.endZeit = endZeit;
     }
 

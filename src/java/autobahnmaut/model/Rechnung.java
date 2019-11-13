@@ -6,6 +6,7 @@
 package autobahnmaut.model;
 
 import java.time.*;
+import java.util.Date;
 
 /**
  *
@@ -13,8 +14,8 @@ import java.time.*;
  */
 public class Rechnung {
     private int rechnungId;
-    private LocalDateTime erstellt;
-    private LocalDateTime bezahlt;
+    private Date erstellt;
+    private Date bezahlt;
     private double summe;
     private Nutzer nutzer;
 
@@ -26,19 +27,19 @@ public class Rechnung {
         this.rechnungId = rechnungId;
     }
 
-    public LocalDateTime getErstellt() {
+    public Date getErstellt() {
         return erstellt;
     }
 
-    public void setErstellt(LocalDateTime erstellt) {
+    public void setErstellt(Date erstellt) {
         this.erstellt = erstellt;
     }
 
-    public LocalDateTime getBezahlt() {
+    public Date getBezahlt() {
         return bezahlt;
     }
 
-    public void setBezahlt(LocalDateTime bezahlt) {
+    public void setBezahlt(Date bezahlt) {
         this.bezahlt = bezahlt;
     }
 
