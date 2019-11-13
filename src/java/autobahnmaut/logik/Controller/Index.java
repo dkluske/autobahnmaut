@@ -28,10 +28,8 @@ import javax.websocket.Session;
 @WebServlet(
         name = "Index und Loginpage", 
         urlPatterns = {
-//          http://localhost:8084/Autobahnmaut
-//          http://localhost:8084/Autobahnmaut/
-            "/index", 
-            "/login"
+            "/index",
+            ""
         }
 )
 public class Index extends HttpServlet {
@@ -42,6 +40,7 @@ public class Index extends HttpServlet {
         HttpSession session = request.getSession();
         
 //        Debugging stuff
+        System.out.println("GET BEI INDEX");
         PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
         String path = request.getRequestURI().substring(request.getContextPath().length());
@@ -62,12 +61,15 @@ public class Index extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        System.out.println("POST BEI INDEX");
         HttpSession session = request.getSession();
         List<String> errors = new ArrayList<String>();
         
         String anmeldeemail = request.getParameter("email");
         String anmeldepasswort = request.getParameter("password");
 
+        
 //        Validierung Anmeldedaten
         if (anmeldeemail.isEmpty()|| !Helper.isValidEmail(anmeldeemail)){
             errors.add("Email");
@@ -76,18 +78,21 @@ public class Index extends HttpServlet {
             errors.add("Password");
         }
         
+        
 //        Logge benutzer ein
         Nutzer n = UserManager.login(anmeldeemail, anmeldepasswort);
+        System.out.println("NUTZER: ");
         if (!(n  instanceof Nutzer)) {
             errors.add("Login Fehlgeschlagen");
         }
         
 //        Wenn Fehler, übergebe fehler an index.jsp -> KEIN LOGIN
         if (!errors.isEmpty()) {
+            System.out.println("Errors da ");
             request.setAttribute("errors", errors);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }else{
-            
+            System.out.println("ALLES OK");
 //            Wenn kein fehler, leite zu /start weiter -> LOGIN
             session.setAttribute("nutzer", n);
             response.sendRedirect(request.getContextPath() + "/start");
