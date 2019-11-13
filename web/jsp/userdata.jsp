@@ -24,6 +24,7 @@
                 </div>
                 <h1 id="head_start">Nutzerdaten</h1>
                 <div id="back_white">
+                    <!--Linke Seite der Nutzerdaten-->
                     <div id="regform1">
                         <form action="${pageContext.request.contextPath}/register" method="post">
                             <br/>
@@ -34,6 +35,7 @@
                             <input style="width:60%" type="button" name="change" value="Bearbeiten"><br/><br/>
                         </form>
                     </div>
+                    <!--Rechte Seite der Nutzerdaten-->
                     <div id="regform2">
                         <form action="${pageContext.request.contextPath}/register" method="post">
                             <br/>
