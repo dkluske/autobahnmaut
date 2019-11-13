@@ -44,7 +44,7 @@
                             <input type="text" name="anschrift" placeholder="Anschrift"><br/>
                             <input type="text" name="rechnnr" placeholder="Rechnungsnummer"><br/>
                             <input type="text" name="datum" placeholder="Datum"><br/><br/><br/>
-                            <input type="confirm" name="bestätigen" placeholder="Bestätigen" id="loginbtn">
+                            <input type="" name="bestätigen" placeholder="Bestätigen" id="loginbtn">
                         </div>
                     </form>
                 </div>
