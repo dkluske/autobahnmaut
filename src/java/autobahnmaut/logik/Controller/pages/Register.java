@@ -28,7 +28,31 @@ import javax.servlet.http.HttpSession;
         urlPatterns = {"/Register", "/register"}
 )
 public class Register extends HttpServlet {
+    private HttpSession session;
+    private String rolle;
+    private Nutzer nutzer;
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        this.session = (HttpSession) request.getSession();
+        this.nutzer = (Nutzer) this.session.getAttribute("nutzer");
+        this.rolle = (String) this.nutzer.getRolle();
+//       --- DEBUGGING
+//        PrintWriter out = response.getWriter();
+//        out.println(session.toString());
+//        out.println(session.getAttribute("nutzer").toString());       
+//       ----------------
+
+    }
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -40,6 +64,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
         
 //        Gebe register.jsp
         request.getRequestDispatcher("/jsp/register.jsp").forward(request, response);
@@ -107,8 +132,7 @@ public class Register extends HttpServlet {
                     rabatt);
             if (n instanceof Nutzer) {
 //                Wenn Registrierung ERFOLGREICH Nutzer in session speichern;
-                HttpSession session = request.getSession();
-                session.setAttribute("Nutzer", n);
+                this.session.setAttribute("Nutzer", n);
 //                Leite weiter zu Start.jsp
                 response.sendRedirect(request.getContextPath() + "/start");
                 

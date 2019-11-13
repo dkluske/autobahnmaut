@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="autobahnmaut.model.Nutzer"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,12 +21,12 @@
                 <div id="back_white">
                     <!--Hier Script für Anzeige der Liste der Nutzer im System einfügen-->
                     <ul>
-                        <% %><li></li><% %>
+                        
                     </ul>
                     <!--Input-Form für die Erfassung der Fahrzeuge eines Nutzers-->
                     <form action="" method="post">
                         <br/><br/>
-                        <input type="text" name="email" placeholder="E-Mail Adresse">
+                        <input type="text" name="email" placeholder="E-Mail Adresse" vlaue="admin">
                         <input type="submit" value="Fahrzeuge anzeigen">
                     </form>
                 </div>

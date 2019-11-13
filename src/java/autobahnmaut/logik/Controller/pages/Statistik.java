@@ -22,6 +22,10 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "statistik", urlPatterns = {"/Statistik","/statistik"})
 public class Statistik extends HttpServlet {
 
+    private HttpSession session;
+    private String rolle;
+    private Nutzer nutzer;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,29 +37,17 @@ public class Statistik extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        this.session = (HttpSession) request.getSession();
+        this.nutzer = (Nutzer) this.session.getAttribute("nutzer");
+        this.rolle = (String) this.nutzer.getRolle();
 //       --- DEBUGGING
 //        PrintWriter out = response.getWriter();
 //        out.println(session.toString());
 //        out.println(session.getAttribute("nutzer").toString());       
 //       ----------------
-        
-//        Wenn Nutzer hat KEIENN login, zurück zu
 
-        if (session.getAttribute("nutzer") == null) {
-            response.sendRedirect(request.getContextPath());
-        }else{
-            Nutzer n = (Nutzer) session.getAttribute("nutzer");
-            if (n.getRolle().equals("Ministerium") || n.getRolle().equals("Admin")) {
-                request.getRequestDispatcher("/jsp/statistik.jsp").forward(request, response);
-            }else{
-                response.sendRedirect(request.getContextPath() + "permissionDenied.jsp");
-            }
-//            Wenn Nutzer hat login, zugang gewährt.
-        }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -68,6 +60,18 @@ public class Statistik extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        if (this.nutzer == null) {
+//        Wenn Nutzer hat KEIENN login, zurück zu
+            response.sendRedirect(request.getContextPath());
+        }else{
+            if (this.rolle.equals("Ministerium") || this.rolle.equals("Admin")) {
+                request.getRequestDispatcher("/jsp/statistik.jsp").forward(request, response);
+            }else{
+//                Permission denied!
+                request.getRequestDispatcher("/jsp/permission.jsp").forward(request, response);
+            }            
+        }
     }
 
     /**
@@ -82,6 +86,22 @@ public class Statistik extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+//        Parameter erfassen
+        String Test = request.getParameter("Test");
+        
+        if (this.nutzer == null) {
+//        Wenn Nutzer hat KEIENN login, zurück zu
+            response.sendRedirect(request.getContextPath());
+        }else{
+            if (this.rolle.equals("Ministerium") || this.rolle.equals("Admin")) {
+//                Ändern in Datenbank
+            }else{
+//                Permission denied!
+                request.getRequestDispatcher("/jsp/permission.jsp").forward(request, response);
+            }
+//            Wenn Nutzer hat login, zugang gewährt.
+        }
     }
 
     /**

@@ -5,6 +5,7 @@
  */
 package autobahnmaut.logik.Controller.pages;
 
+import autobahnmaut.model.Nutzer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,6 +22,11 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "kfzRegister", urlPatterns = {"/kfzRegister"})
 public class KfzRegister extends HttpServlet {
 
+
+    private HttpSession session;
+    private String rolle;
+    private Nutzer nutzer;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,24 +38,18 @@ public class KfzRegister extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        this.session = (HttpSession) request.getSession();
+        this.nutzer = (Nutzer) this.session.getAttribute("nutzer");
+        this.rolle = (String) this.nutzer.getRolle();
 //       --- DEBUGGING
 //        PrintWriter out = response.getWriter();
 //        out.println(session.toString());
 //        out.println(session.getAttribute("nutzer").toString());       
 //       ----------------
         
-//        Wenn Nutzer hat KEIENN login, zurück zu
 
-        if (session.getAttribute("nutzer") == null) {
-            response.sendRedirect(request.getContextPath());
-        }else{
-//            Wenn Nutzer hat login, zugang gewährt.
-            request.getRequestDispatcher("/jsp/kfzRegister.jsp").forward(request, response);
-        }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -62,6 +62,18 @@ public class KfzRegister extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        if (this.nutzer == null) {
+//        Wenn Nutzer hat KEIENN login, zurück zu
+            response.sendRedirect(request.getContextPath());
+        }else{
+            if (this.rolle.equals("Admin") || this.rolle.equals("Nutzer")) {
+                request.getRequestDispatcher("/jsp/kfzRegister.jsp").forward(request, response);
+            }else{
+//                Permission denied!
+                request.getRequestDispatcher("/jsp/permission.jsp").forward(request, response);
+            }            
+        }
     }
 
     /**
@@ -76,6 +88,22 @@ public class KfzRegister extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+//        Parameter erfassen
+        String Test = request.getParameter("Test");
+        
+        if (this.nutzer == null) {
+//        Wenn Nutzer hat KEIENN login, zurück zu
+            response.sendRedirect(request.getContextPath());
+        }else{
+            if (this.rolle.equals("Admin") || this.rolle.equals("Nutzer")) {
+//                Ändern in Datenbank
+            }else{
+//                Permission denied!
+                request.getRequestDispatcher("/jsp/permission.jsp").forward(request, response);
+            }
+//            Wenn Nutzer hat login, zugang gewährt.
+        }
     }
 
     /**
@@ -86,6 +114,6 @@ public class KfzRegister extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

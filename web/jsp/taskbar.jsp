@@ -14,8 +14,8 @@
             <!--Verfügbare Funktionen des Nutzers-->
             <a href="">Function 1</a>
             <a href="">Function 2</a>
-            <a href="">Function 3</a>
-            <a href="">Logout</a>
+            <a href="${pageContext.request.contextPath}/nutzer">Profil</a>
+            <a href="${pageContext.request.contextPath}/logout">Logout</a>
         </div>
         <!--Die weiteren Taskbars für die Unterscheidung-->
         <!--
