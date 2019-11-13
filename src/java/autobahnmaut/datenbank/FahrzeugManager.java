@@ -24,7 +24,7 @@ public class FahrzeugManager {
         String query = "select \n"
                 + "	* \n"
                 + "from \n"
-                + "	Autobahn.fahrzeug\n"
+                + "	fahrzeug\n"
                 + "where \n"
                 + "	nutzerid = '" + nutzerId + "';";
         try {
@@ -61,13 +61,13 @@ public class FahrzeugManager {
                 + "from \n"
                 + "	land\n"
                 + "where \n"
-                + "	landId = '" + landId + "');";
+                + "	id = '" + landId + "');";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
             if (rs.next()) {
                 Land l = new Land();
-                l.setLandId(rs.getInt("landid"));
+                l.setLandId(rs.getInt("id"));
                 l.setBezeichnung(rs.getString("bezeichnung"));
                 l.setKurzBezeichnung(rs.getString("kurzbezeichnung"));               
 
@@ -82,5 +82,69 @@ public class FahrzeugManager {
          */
         return null;
     }
+    
+    public static Fahrzeug getFahrzeugById(int fahrzeugid) {
 
+        String query = "select \n"
+                + "	* \n"
+                + "from \n"
+                + "	fahrzeug\n"
+                + "where \n"
+                + "	id = '" + fahrzeugid + "');";
+        try {
+            Statement stm = Datenbank.getStatement();
+            ResultSet rs = stm.executeQuery(query);
+            if (rs.next()) {
+                Fahrzeug f = new Fahrzeug();
+
+                f.setFahrzeugId(rs.getInt("id"));
+                f.setKennzeichen(rs.getString("kennzeichen"));
+                f.setLand(FahrzeugManager.getLandById(rs.getInt("landid")));
+                f.setNutzer(UserManager.getNutzerById(rs.getInt("nutzerid")));
+                f.setPrivileg(rs.getBoolean("privileg"));
+
+                return f;
+            }
+        } catch (SQLException sqle) {
+
+        }
+
+        /*wenn ein Land gefunden wurde gib Land zurück
+                ansonsten null
+         */
+        return null;
+    }
+
+    
+    public static Fahrzeug getFahrzeugByKennzeichenAndLandid(String kennzeichen,int landid) {
+
+        String query = "select \n"
+                + "	* \n"
+                + "from \n"
+                + "	fahrzeug\n"
+                + "where \n"
+                + "	kennzeichen = '" + kennzeichen + "'and landid="+landid +");";
+        try {
+            Statement stm = Datenbank.getStatement();
+            ResultSet rs = stm.executeQuery(query);
+            if (rs.next()) {
+                Fahrzeug f = new Fahrzeug();
+
+                f.setFahrzeugId(rs.getInt("id"));
+                f.setKennzeichen(rs.getString("kennzeichen"));
+                f.setLand(FahrzeugManager.getLandById(rs.getInt("landid")));
+                f.setNutzer(UserManager.getNutzerById(rs.getInt("nutzerid")));
+                f.setPrivileg(rs.getBoolean("privileg"));
+
+                return f;
+            }
+        } catch (SQLException sqle) {
+
+        }
+
+        /*wenn ein Land gefunden wurde gib Land zurück
+                ansonsten null
+         */
+        return null;
+    }
 }

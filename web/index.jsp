@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 07.11.2019, 09:28:13
-    Author     : Dome
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -25,7 +25,7 @@
                 
                 <h1 id="head_start">Statistik</h1>
             </div>
-            <!--Hier Statistikdaten / SVG aus Daten einfügen-->        
+            <!--Hier Statistikdaten / ggf. SVG aus Daten einfügen-->        
             <div id="back_white">
                 
             </div>
