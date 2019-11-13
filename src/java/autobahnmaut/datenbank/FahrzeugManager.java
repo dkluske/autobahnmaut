@@ -26,7 +26,7 @@ public class FahrzeugManager {
                 + "from \n"
                 + "	fahrzeug\n"
                 + "where \n"
-                + "	nutzerid = '" + nutzerId + "';";
+                + "	nutzerid = " + nutzerId + ";";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
@@ -61,7 +61,7 @@ public class FahrzeugManager {
                 + "from \n"
                 + "	land\n"
                 + "where \n"
-                + "	id = '" + landId + "');";
+                + "	id = " + landId + ";";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
@@ -90,7 +90,7 @@ public class FahrzeugManager {
                 + "from \n"
                 + "	fahrzeug\n"
                 + "where \n"
-                + "	id = '" + fahrzeugid + "');";
+                + "	id = " + fahrzeugid + ";";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
