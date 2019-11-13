@@ -15,7 +15,7 @@
         <link rel="icon" type="image/vnd.microsoft.icon" href="${pageContext.request.contextPath}\\favicon.ico">
         <title>Fahrzeuge registrieren | Autobahnmaut</title>
     </head>
-    
+    /*Test*/
     <body>
         <section id="b1">
             <div id="inb1">
