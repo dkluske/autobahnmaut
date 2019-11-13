@@ -69,3 +69,19 @@ input:hover{
 ul{
     list-style-type: none;
 }
+
+#regform1{
+    width: 35%;
+    align-content: center;
+    padding-bottom: 65px;
+    display: inline-block;
+    border-radius: 5%;
+}
+#regform2{
+    width: 65%;
+    align-content: center;
+    padding-bottom: 65px;
+    display: inline-block;
+    border-radius: 5%;
+    float: right;
+}
