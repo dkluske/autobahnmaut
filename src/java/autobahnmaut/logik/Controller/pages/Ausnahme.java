@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package autobahnmaut.logik.Controller;
+package autobahnmaut.logik.Controller.pages;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,13 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Andi
  */
-@WebServlet(name = "Logout", urlPatterns = {"/Logout", "/logout"})
-public class Logout extends HttpServlet {
+@WebServlet(name = "ausnahme", urlPatterns = {"/ausnahme"})
+public class Ausnahme extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,8 +32,21 @@ public class Logout extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().setAttribute("nutzer", null);
-        response.sendRedirect(request.getContextPath());
+        HttpSession session = request.getSession();
+//       --- DEBUGGING
+//        PrintWriter out = response.getWriter();
+//        out.println(session.toString());
+//        out.println(session.getAttribute("nutzer").toString());       
+//       ----------------
+        
+//        Wenn Nutzer hat KEIENN login, zurück zu
+
+        if (session.getAttribute("nutzer") == null) {
+            response.sendRedirect(request.getContextPath());
+        }else{
+//            Wenn Nutzer hat login, zugang gewährt.
+            request.getRequestDispatcher("/jsp/ausnahme.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,5 +78,14 @@ public class Logout extends HttpServlet {
         processRequest(request, response);
     }
 
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
 }

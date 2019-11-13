@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package autobahnmaut.logik.Controller;
+package autobahnmaut.logik.Controller.pages;
 
 import autobahnmaut.datenbank.UserManager;
 import autobahnmaut.logik.Helper;

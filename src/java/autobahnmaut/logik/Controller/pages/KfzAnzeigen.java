@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package autobahnmaut.logik.Controller;
+package autobahnmaut.logik.Controller.pages;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,13 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Andi
  */
-//@WebServlet(name = "Controller", urlPatterns = {"/*", "", "/"})
-public class Controller extends HttpServlet {
+@WebServlet(name = "kfzAnzeigen", urlPatterns = {"/kfzAnzeigen"})
+public class KfzAnzeigen extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,28 +32,20 @@ public class Controller extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+//       --- DEBUGGING
+//        PrintWriter out = response.getWriter();
+//        out.println(session.toString());
+//        out.println(session.getAttribute("nutzer").toString());       
+//       ----------------
         
-        
-//        Debugging stuff
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html;charset=UTF-8");
-        String path = request.getRequestURI().substring(request.getContextPath().length());
-        out.println(path);
-        out.println("<hr> getRequestURI: " + request.getRequestURI());
-        out.println("<hr> getContextPath: " + request.getContextPath());
+//        Wenn Nutzer hat KEIENN login, zurück zu
 
-
-//        FrontController
-        switch(request.getPathInfo()){
-            case "/index.jsp":
-                out.println("/index");     
-                break;
-            case "/asd":
-                out.println("/asd");
-                break;
-            default:
-                out.println("NOT DEFINDED");
-                break;
+        if (session.getAttribute("nutzer") == null) {
+            response.sendRedirect(request.getContextPath());
+        }else{
+//            Wenn Nutzer hat login, zugang gewährt.
+            request.getRequestDispatcher("/jsp/kfzAnzeigen.jsp").forward(request, response);
         }
     }
 
