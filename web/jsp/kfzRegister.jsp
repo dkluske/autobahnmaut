@@ -33,7 +33,7 @@
                             <td>
                                 <ul>
                                     <!--Script für die anzeige der schon vorhandenen Fahrzeuge einfügen-->
-                                    <% %><li></li><% %>
+                                    <% %><li>BZ AB 123</li><% %>
                                 </ul>
                             </td>
                         </tr>

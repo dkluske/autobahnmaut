@@ -29,7 +29,6 @@
                                     <input type="text" name="kennz" placeholder="Kfz-Kennzeichen"><br/><br/>
                                     <input type="submit" name="hinzu" value="Hinzufügen" id="submit">
                                     <input type="submit" name="delete" value="Entfernen" id="submit">
-                                    <br/><br/>
                                 </form>
                             </td>
                             <!--Liste der geflagten Fahrzeuge-->
