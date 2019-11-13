@@ -1,9 +1,4 @@
-<%-- 
-    Document   : statistik
-    Created on : 11.11.2019, 12:31:22
-    Author     : Dome
---%>
-
+<%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,19 +11,27 @@
         <title>Statistik | Autobahnmaut</title>
     </head>
     <body>
-        <section id="b1">
-            <div id="inb1">
-                <!--Einbinden des Menübands-->
-                <div>
-                <jsp:include page="taskbar.jsp"/>
+        <%
+            Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
+            if (n.getRolle() == "Ministerium" || n.getRolle() == "Admin"){%>
+            <section id="b1">
+                <div id="inb1">
+                    <!--Einbinden des Menübands-->
+                    <div>
+                    <jsp:include page="taskbar.jsp"/>
+                    </div>
+                
+                    <h1 id="head_start">Statistik</h1>
                 </div>
+                <!--Hier Statistikdaten / ggf. SVG aus Daten einfügen-->        
+                <div id="back_white">
                 
-                <h1 id="head_start">Statistik</h1>
-            </div>
-            <!--Hier Statistikdaten / ggf. SVG aus Daten einfügen-->        
-            <div id="back_white">
-                
-            </div>
-        </section>
+                </div>
+            </section><%
+            }else{%>
+                <jsp:include page="permissionDenied.jsp"/><%
+            }
+        %>
+        
     </body>
 </html>
