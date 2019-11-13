@@ -19,32 +19,46 @@ import javax.servlet.http.HttpSession;
  *
  * @author Andi
  */
-@WebServlet(
-        name = "Login", 
-        urlPatterns = {"/Index","/index","", "/login", "/Login"}
-)
-public class Login extends HttpServlet {
+@WebServlet(name = "Start", urlPatterns = {"/Start", "/start"})
+public class Start extends HttpServlet {
 
+
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
-        if (session.getAttribute("nutzer") != null) {
-            response.sendRedirect(request.getContextPath() + "/dashboard");
+//        Wenn Nutzer hat KEIENN login, zurück zu
+        if (session.getAttribute("nutzer") == null) {
+            response.sendRedirect(request.getContextPath());
         }else{
+//            Wenn Nutzer hat login, zugang gewährt.
             RequestDispatcher rd;
-            rd = request.getRequestDispatcher("/jsp/index.jsp");
+            rd = request.getRequestDispatcher("/jsp/start.jsp");
             rd.forward(request, response);
         }
-        
     }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        
-    }    
+        doGet(request, response);
+    }
+
 
 }

@@ -40,10 +40,9 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd;
-        rd = request.getRequestDispatcher("/jsp/register.jsp");
-        rd.forward(request, response);
-
+        
+//        Gebe register.jsp
+        request.getRequestDispatcher("/jsp/register.jsp").forward(request, response);
     }
 
     /**
@@ -92,6 +91,7 @@ public class Register extends HttpServlet {
             errors.add("Ort");
         }
 
+//        Wenn Fehler, zurück auf register.jsp und Fehler mit übergeben
         if(!errors.isEmpty()){
             request.setAttribute("errors", errors);
             request.getRequestDispatcher("jsp/register.jsp").forward(request, response);
@@ -105,9 +105,20 @@ public class Register extends HttpServlet {
                     plz, 
                     ort, 
                     rabatt);
-    //      Nutzer in session speichern;
-            HttpSession session = request.getSession();
-            session.setAttribute("Nutzer", n);
+            if (n instanceof Nutzer) {
+//                Wenn Registrierung ERFOLGREICH Nutzer in session speichern;
+                HttpSession session = request.getSession();
+                session.setAttribute("Nutzer", n);
+//                Leite weiter zu Start.jsp
+                response.sendRedirect(request.getContextPath() + "/start");
+                
+            }else{
+//                Wenn Registrierung fehlgeschlagen, dann Fehler ausgeben auf register.jsp
+                errors.add("Registrierung Fehlgeschlagen");
+                request.setAttribute("errors", errors);
+                request.getRequestDispatcher("jsp/register.jsp").forward(request, response);                    
+            }
+
         }
 
     }
