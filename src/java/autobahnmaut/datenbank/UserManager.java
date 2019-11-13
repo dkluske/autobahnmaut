@@ -136,14 +136,14 @@ public class UserManager {
                 + "from \n"
                 + "	nutzer\n"
                 + "where \n"
-                + "	nutzerid = '" + nutzerId + "');";
+                + "	id = " + nutzerId + ";";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
             if (rs.next()) {
                 Nutzer n = new Nutzer();
-                n.setNutzerId(rs.getInt("nutzerid"));
-                n.setName(rs.getString("name"));
+                n.setNutzerId(rs.getInt("id"));
+                n.setName(rs.getString("nutzername"));
                 n.setEmail(rs.getString("email"));
                 n.setRolle(rs.getString("rolle"));
                 n.setStrasse(rs.getString("strasse"));
@@ -153,7 +153,7 @@ public class UserManager {
                 return n;
             }
         } catch (SQLException sqle) {
-
+              System.out.println(sqle);
         }
 
         /*wenn ein Nutzer gefunden wird gib Nutzer zurück
@@ -167,7 +167,7 @@ public class UserManager {
         cal.setTime(date);
         cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));
 
-        String pattern = "MM/dd/yyyy HH:mm:ss";        
+        String pattern = "yyyy-MM-dd";        
         DateFormat df = new SimpleDateFormat(pattern);
         String dateAsString = df.format(cal.getTime());
         return dateAsString;
@@ -178,7 +178,7 @@ public class UserManager {
         cal.setTime(date);
         cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
 
-        String pattern = "MM/dd/yyyy HH:mm:ss";      
+        String pattern = "yyyy-MM-dd";      
         DateFormat df = new SimpleDateFormat(pattern);        
         String dateAsString = df.format(cal.getTime());
         return dateAsString;
@@ -199,8 +199,9 @@ public class UserManager {
                 + "inner join standort ON standort.id = mautbruecke.standortid "
                 + "inner join standort standort2 ON standort2.id = mautbruecke2.standortid "
                 + "\n"
-                + "where nutzer.id = " + nutzerId + " and endzeitpunkt  between '" + getFirstDateOfMonth(monat) + "' and '" + getLastDateOfMonth(monat) + "' "
+                + "where nutzer.id = " + nutzerId +"and endzeitpunkt between '"+getFirstDateOfMonth(monat)+"' and '"+getLastDateOfMonth(monat)+"'"
                 + " order by fahrzeugid;";
+                System.out.println(getFirstDateOfMonth(monat)+getLastDateOfMonth(monat));
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
@@ -215,23 +216,31 @@ public class UserManager {
                     rpL.add(rp);
 
                     rp = new Rechnungsposition();
-                    rfL.clear();
+                    rfL = new ArrayList<>();
                     rp.setKennzeichen(rs.getString("kennzeichen"));
                 }
 
                 Rechnungsfahrten rf = new Rechnungsfahrten();
-                rf.setStartZeitpunkt(rs.getDate("startzeitpunkt"));
+                
+                rf.setStartZeitpunkt(rs.getTimestamp("startzeitpunkt"));
+                //System.out.println(rs.getTimestamp("startzeitpunkt"));
                 rf.setStartOrt(rs.getString("startort"));
-                rf.setEndZeitpunkt(rs.getDate("endzeitpunkt"));
+                rf.setEndZeitpunkt(rs.getTimestamp("endzeitpunkt"));
                 rf.setEndOrt(rs.getString("endort"));
                 rf.setKilometer(rs.getDouble("kilometer"));
+                //System.out.println(rf.getEndOrt());
                 rfL.add(rf);
+                System.out.println(rs.getInt("nutzerid"));
+                rechnung.setNutzer(getNutzerById(rs.getInt("nutzerid")));
 
             }
-            rechnung.setNutzer(getNutzerById(nutzerId));
+            rp.setRechnungsfahrtenListe(rfL);
+            rpL.add(rp);
+            
+            System.out.println(rechnung.getNutzer().getName());
             rechnung.setRechnungspostionsListe(rpL);
 
-            System.out.println("Klappt");
+            
             return rechnung;
 
         } catch (SQLException sqle) {

@@ -65,7 +65,7 @@ public class FahrtenManager {
                 + "from \n"
                 + "	mautbruecke\n"
                 + "where \n"
-                + "	id = '" + mautbrueckeId + "');";
+                + "	id = " + mautbrueckeId + ";";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
@@ -126,7 +126,7 @@ public class FahrtenManager {
                 + "from \n"
                 + "	standort\n"
                 + "where \n"
-                + "	id = '" + standordId + "');";
+                + "	id = " + standordId + ";";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);

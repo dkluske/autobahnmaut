@@ -20,7 +20,7 @@ import java.util.Date;
  */
 public class StatistikManager {
 
-    public static Statistik getStatistikdaten(Date monat) {
+    public static Statistik getStatistikdaten() {
         Statistik statistik = new Statistik();
 
         /* 
@@ -28,14 +28,14 @@ public class StatistikManager {
         
          */
         //Statement anpassen
-        String query = "Select\n"
-                + "sum(fa.kilometer) as kilometer, \n"
-                + "fz.landid as land\n"
-                + "from fahrtenabgeschlossen fa  \n"
-                + "join fahrzeug fz ON fz.id = fa.fahrzeugid \n"
-                + "where fz.landid > 1\n"
-                + "group by fz.landid\n"
-                + "order by kilometer desc\n"
+        String query = "Select "
+                + "sum(fa.kilometer) as kilometer, "
+                + "fz.landid as land "
+                + "from fahrtenabgeschlossen fa   "
+                + "join fahrzeug fz ON fz.id = fa.fahrzeugid  "
+                + "where fz.landid > 1 "
+                + "group by fz.landid "
+                + "order by kilometer desc "
                 + "limit 10";
         try {
             Statement stm = Datenbank.getStatement();
@@ -43,13 +43,17 @@ public class StatistikManager {
             while (rs.next()) {
                 Statistikdaten statistikdaten = new Statistikdaten();
                 statistikdaten.setKm(rs.getDouble("kilometer"));
-                statistikdaten.setLand(autobahnmaut.datenbank.FahrzeugManager.getLandById(rs.getInt("landid")));
+                statistikdaten.setLand(autobahnmaut.datenbank.FahrzeugManager.getLandById(rs.getInt("land")));
                 statistik.addStatistikListe(statistikdaten);
-
+                System.out.println(statistikdaten.getKm());
+                System.out.println(statistikdaten.getLand().getBezeichnung());
+             
+             
             }
+            System.out.println("Klappt");
             return statistik;
         } catch (SQLException sqle) {
-
+            System.out.println(sqle);
         }
 
         return null;
