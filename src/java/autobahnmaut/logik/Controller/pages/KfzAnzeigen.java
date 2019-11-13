@@ -5,9 +5,11 @@
  */
 package autobahnmaut.logik.Controller.pages;
 
+import autobahnmaut.datenbank.FahrzeugManager;
 import autobahnmaut.model.Nutzer;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +41,11 @@ public class KfzAnzeigen extends HttpServlet {
             throws ServletException, IOException {
         this.session = (HttpSession) request.getSession();
         this.nutzer = (Nutzer) this.session.getAttribute("nutzer");
-        this.rolle = (String) this.nutzer.getRolle();
+        if (this.nutzer != null) {
+            this.rolle = (String) this.nutzer.getRolle();
+        }else{
+            this.rolle = null;
+        }
 //       --- DEBUGGING
 //        PrintWriter out = response.getWriter();
 //        out.println(session.toString());
@@ -66,6 +72,10 @@ public class KfzAnzeigen extends HttpServlet {
             response.sendRedirect(request.getContextPath());
         }else{
             if (this.rolle.equals("Polizei") || this.rolle.equals("Admin") || this.rolle.equals("Nutzer")) {
+                
+                ArrayList AL = (ArrayList) this.nutzer.getFahrzeugListe();
+                System.out.println(AL.toString());
+                request.setAttribute("fahrzeuge", AL);
                 request.getRequestDispatcher("/jsp/kfzAnzeigen.jsp").forward(request, response);
             }else{
 //                Permission denied!
@@ -95,7 +105,7 @@ public class KfzAnzeigen extends HttpServlet {
             response.sendRedirect(request.getContextPath());
         }else{
             if (this.rolle.equals("Polizei") || this.rolle.equals("Admin") || this.rolle.equals("Nutzer")) {
-//                Ändern in Datenbank
+
             }else{
 //                Permission denied!
                 request.getRequestDispatcher("/jsp/permission.jsp").forward(request, response);

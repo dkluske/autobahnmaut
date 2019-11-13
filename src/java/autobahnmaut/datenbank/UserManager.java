@@ -113,9 +113,7 @@ public class UserManager {
             }
         }
 
-        /*wenn ein kunde gefunden wurde gib Kunden zurück
-                ansonsten null
-         */
+   
         return null;
     }
 

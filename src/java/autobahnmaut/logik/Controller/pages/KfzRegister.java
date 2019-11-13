@@ -40,7 +40,11 @@ public class KfzRegister extends HttpServlet {
             throws ServletException, IOException {
         this.session = (HttpSession) request.getSession();
         this.nutzer = (Nutzer) this.session.getAttribute("nutzer");
-        this.rolle = (String) this.nutzer.getRolle();
+        if (this.nutzer != null) {
+            this.rolle = (String) this.nutzer.getRolle();
+        }else{
+            this.rolle = null;
+        }
 //       --- DEBUGGING
 //        PrintWriter out = response.getWriter();
 //        out.println(session.toString());

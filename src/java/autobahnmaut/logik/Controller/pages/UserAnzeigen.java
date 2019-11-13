@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Andi
  */
-@WebServlet(name = "Nutzer", urlPatterns = {"/UserAnzeigen", "/userAnzeigen"})
+@WebServlet(name = "userAnzeigen", urlPatterns = {"/UserAnzeigen", "/userAnzeigen"})
 public class UserAnzeigen extends HttpServlet {
 
     private HttpSession session;
@@ -39,7 +39,11 @@ public class UserAnzeigen extends HttpServlet {
             throws ServletException, IOException {
         this.session = (HttpSession) request.getSession();
         this.nutzer = (Nutzer) this.session.getAttribute("nutzer");
-        this.rolle = (String) this.nutzer.getRolle();
+        if (this.nutzer != null) {
+            this.rolle = (String) this.nutzer.getRolle();
+        }else{
+            this.rolle = null;
+        }
 //       --- DEBUGGING
 //        PrintWriter out = response.getWriter();
 //        out.println(session.toString());

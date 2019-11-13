@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="autobahnmaut.model.Nutzer"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,7 +11,8 @@
         <!-- Default -->
         <div class="navigation">
             <!--Logo der Firma links in der Taskbar-->
-            <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
+                <img  src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
+            <a href="${pageContext.request.contextPath}/index">Home</a>
             <!--Verfügbare Funktionen des Nutzers-->
             <a href="">Function 1</a>
             <a href="">Function 2</a>
@@ -37,16 +39,17 @@
             <a href="">Statistik</a>
             <a href="">Logout</a>
         </div>
-        Nutzer
+        Nutzer-->        
         <div class="navigation">
-            <!--Logo der Firma links in der Taskbar
+            <!--Logo der Firma links in der Taskbar--> 
             <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
-            <!--Verfügbare Funktionen des Nutzers
-            <a href="">Fahrzeuge anzeigen</a>
-            <a href="">Fahrzeuge orten</a>
+            <!--Verfügbare Funktionen des Nutzers--> 
+            <a href="${pageContext.request.contextPath}/kfzAnzeigen">Fahrzeuge anzeigen</a>
+            <a href="${pageContext.request.contextPath}/kfzRegister">Fahrzeuge orten</a>
             <a href="">Rechnung</a>
             <a href="">Logout</a>
-        </div>
+        </div>--> 
+        <!--
         Verkehrswacht
         <div class="navigation">
             <!--Logo der Firma links in der Taskbar

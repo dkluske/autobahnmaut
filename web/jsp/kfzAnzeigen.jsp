@@ -20,7 +20,7 @@
                 <div id="back_white">
                     <ul>
                         <!--Script für Auflistung aller Fahrzeuge-->
-                        <% %><li></li><% %>
+                        <%  %><li></li><% %>
                     </ul>
                 </div>
             </div>
