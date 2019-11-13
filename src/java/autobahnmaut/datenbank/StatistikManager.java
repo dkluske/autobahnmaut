@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -19,20 +20,23 @@ import java.time.LocalDateTime;
  */
 public class StatistikManager {
 
-    public static Statistik erstelleStatistik(LocalDateTime monat) {
+    public static Statistik getStatistikdaten(Date monat) {
         Statistik statistik = new Statistik();
-        
+
         /* 
         Top 10 der Länder mit den meisten KM
         
          */
         //Statement anpassen
-        String query = "select top 10 \n"
-                + "	* \n"
-                + "from \n"
-                + "	fahrten\n"
-                + "where \n"
-                + "	nutzerid = '" + monat + "');";
+        String query = "Select\n"
+                + "sum(fa.kilometer) as kilometer, \n"
+                + "fz.landid as land\n"
+                + "from fahrtenabgeschlossen fa  \n"
+                + "join fahrzeug fz ON fz.id = fa.fahrzeugid \n"
+                + "where fz.landid > 1\n"
+                + "group by fz.landid\n"
+                + "order by kilometer desc\n"
+                + "limit 10";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
@@ -42,12 +46,12 @@ public class StatistikManager {
                 statistikdaten.setLand(autobahnmaut.datenbank.FahrzeugManager.getLandById(rs.getInt("landid")));
                 statistik.addStatistikListe(statistikdaten);
 
-                
-            }return statistik;
+            }
+            return statistik;
         } catch (SQLException sqle) {
 
         }
-        
+
         return null;
     }
 

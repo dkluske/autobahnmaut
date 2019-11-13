@@ -16,11 +16,11 @@ public class Datenbank {
             return Datenbank.connection;
         } else {
             //Neue Verbindung aufbauen und zurückgeben
-            String dbURL = "jdbc:postgresql://localhost:5432/autobahnmaut";
+            String dbURL = "jdbc:postgresql://ssabautzen3.ba-bautzen.de:5432/Autobahn";
             try {
                 Class.forName("org.postgresql.Driver");
                 //Nutzer definieren
-                Datenbank.connection = DriverManager.getConnection(dbURL, "netbeans", "netbeans");
+                Datenbank.connection = DriverManager.getConnection(dbURL, "postgres", "admin123");
                 return Datenbank.connection;
             } catch (SQLException sqle) {
                 System.out.println(sqle);

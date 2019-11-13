@@ -56,6 +56,8 @@ public class FahrtenManager {
         return null;
     }
 
+    
+    
     public static Mautbruecke getMautbrueckeById(int mautbrueckeId) {
 
         String query = "select \n"
