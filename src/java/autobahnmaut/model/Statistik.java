@@ -1,15 +1,21 @@
 package autobahnmaut.model;
 
+import java.util.ArrayList;
+
 public class Statistik {
 
-	public void erstelleStatistik() {
-		// TODO - implement Statistik.erstelleStatistik
-		throw new UnsupportedOperationException();
-	}
+    private ArrayList<Statistikdaten> statistikListe = new ArrayList<>();
 
-	public void erstelleJson() {
-		// TODO - implement Statistik.erstelleJson
-		throw new UnsupportedOperationException();
-	}
+    public ArrayList<Statistikdaten> getStatistikListe() {
+        return statistikListe;
+    }
+
+    public void setStatistikListe(ArrayList<Statistikdaten> statistikListe) {
+        this.statistikListe = statistikListe;
+    }
+    
+    public void addStatistikListe(Statistikdaten statistikdaten) {
+        this.statistikListe.add(statistikdaten);
+    }
 
 }
