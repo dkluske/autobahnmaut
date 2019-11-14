@@ -67,18 +67,19 @@ public class SampleQuery {
 //        System.out.println(s);
 //    }
     
-       ArrayList<Nutzer> nutzerDaten = UserManager.getNutzerListe();
-    int count=0;
-    for(Nutzer n :nutzerDaten ){
-        
-        
-        count++;
-        System.out.println(count);
-        System.out.println(n.getName());
-    }
-      
+//       ArrayList<Nutzer> nutzerDaten = UserManager.getNutzerListe();
+//    int count=0;
+//    for(Nutzer n :nutzerDaten ){
+//        
+//        
+//        count++;
+//        System.out.println(count);
+//        System.out.println(n.getName());
+//    }
+//      
+       Nutzer n =UserManager.login("polizei@deutschland.de", "admin");
        
-        
+        System.out.println(n.getEmail());
         
 
     }
