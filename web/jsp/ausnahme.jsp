@@ -12,7 +12,9 @@
     </head>
     <body>
         <%
+            //Nutzer-Objekt aus der Session bekommen
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
+            //Abfrage der Rolle und Prüfung der Berechtigung
             if (n.getRolle() == "Polizei"){%>
                 <section id="b1">
                     <div id="inb1">
@@ -47,6 +49,7 @@
                         </div>
                     </div>
                 </section><%
+            //Wenn keine Berechtigung vorhanden -> Weiterleiten auf Zugriff verweigert
             }else{%>
             <jsp:forward page="permissionDenied.jsp"/><%
             }
