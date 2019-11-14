@@ -15,7 +15,7 @@
             //Nutzer-Objekt aus der Session bekommen
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
             //Rollenabfrage für die Berechtigung
-            if(n.getRolle() == "Nutzer" || n.getRolle() == "Wacht"){%>
+            if(n.getRolle().equals("Nutzer") || n.getRolle().equals("Wacht") || n.getRolle().equals("Admin")){%>
                 <section id="b1">
                     <div id="inb1">
                         <!--Einbinden der Taskbar-->
