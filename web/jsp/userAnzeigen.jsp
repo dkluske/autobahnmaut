@@ -15,6 +15,7 @@
         <%
             //Nutzer-Objekt aus der Session bekommen
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
+            
             //Rolle aus dem Objekt nehmen und Berechtigung prüfen
             if(n.getRolle().equals("Wacht") || n.getRolle().equals("Polizei")){%>
                 <section id="b1">
@@ -34,7 +35,7 @@
                                     </tr>
                                     <c:forEach items="${nutzerliste}" var="item">
                                         <tr>
-                                            <td><c:out value="${item.name}"/></td>
+                                            <td><c:out value="${item.nutzername}"/></td>
                                             <td><c:out value="${item.plz}"/></td>
                                             <td><c:out value="${item.ort}"/></td>
                                         </tr>

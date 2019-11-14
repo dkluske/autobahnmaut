@@ -80,7 +80,7 @@ public class SampleQuery {
        
         Fahrzeug f = FahrzeugManager.getFahrzeugById(265);
         
-       FahrzeugManager.createFahrzeug(f);
+       FahrzeugManager.updateFahrzeug(f);
        
         System.out.println(f.getKennzeichen());
         

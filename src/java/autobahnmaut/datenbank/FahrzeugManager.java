@@ -147,6 +147,38 @@ public class FahrzeugManager {
          */
         return null;
     }
+    
+    public static Fahrzeug getFahrzeugByKennzeichen(String kennzeichen) {
+
+        String query = "select \n"
+                + "	* \n"
+                + "from \n"
+                + "	fahrzeug\n"
+                + "where \n"
+                + "	kennzeichen = '" + kennzeichen + "';";
+        try {
+            Statement stm = Datenbank.getStatement();
+            ResultSet rs = stm.executeQuery(query);
+            if (rs.next()) {
+                Fahrzeug f = new Fahrzeug();
+
+                f.setFahrzeugId(rs.getInt("id"));
+                f.setKennzeichen(rs.getString("kennzeichen"));
+                f.setLand(FahrzeugManager.getLandById(rs.getInt("landid")));
+                f.setNutzer(UserManager.getNutzerById(rs.getInt("nutzerid")));
+                f.setPrivileg(rs.getBoolean("privileg"));
+
+                return f;
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        /*wenn ein Land gefunden wurde gib Land zurück
+                ansonsten null
+         */
+        return null;
+    }
 
     public static ArrayList<Fahrzeug> getFahrzeugePolizei() {
         ArrayList<Fahrzeug> fahrzeugListe = new ArrayList<>();
@@ -176,17 +208,46 @@ public class FahrzeugManager {
          */
         return null;
     }
-    //muss geändert werden
+    
+    public static ArrayList<Fahrzeug> getFahrzeugPrivileg() {
+        ArrayList<Fahrzeug> fahrzeugListe = new ArrayList<>();
+        String query = "select * from fahrzeug where privileg= true;";
+        try {
+            Statement stm = Datenbank.getStatement();
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()) {
+                Fahrzeug f = new Fahrzeug();
+
+                f.setFahrzeugId(rs.getInt("id"));
+                f.setKennzeichen(rs.getString("kennzeichen"));
+                f.setLand(FahrzeugManager.getLandById(rs.getInt("landid")));
+                f.setNutzer(UserManager.getNutzerById(rs.getInt("nutzerid")));
+                f.setPrivileg(rs.getBoolean("privileg"));
+                fahrzeugListe.add(f);
+                
+            }return fahrzeugListe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        /*wenn ein Land gefunden wurde gib Land zurück
+                ansonsten null
+         */
+        return null;
+    }
+    
+    
     public static boolean updateFahrzeug(Fahrzeug fahrzeug) {        
         String query = "UPDATE fahrzeug SET  kennzeichen=   '" 
                 + fahrzeug.getKennzeichen() + "',  landid="
                 + fahrzeug.getLand().getLandId()+ ",  nutzerid="
-                + fahrzeug.getNutzer().getNutzerId()               
+                + fahrzeug.getNutzer().getNutzerId() + ",  privileg="  
+                + fahrzeug.isPrivileg()
                 + " WHERE fahrzeug.id = " + fahrzeug.getFahrzeugId() + ";";
         try {
             Statement stm = Datenbank.getStatement();
             System.out.println(query);
-            ResultSet rs = stm.executeQuery(query);
+            stm.executeQuery(query);
             return true;
         } catch (SQLException sqle) {
             System.out.println(sqle);
