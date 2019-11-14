@@ -1,3 +1,4 @@
+<%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -10,21 +11,32 @@
         <title>Kfz Anzeigen | Autobahnmaut</title>
     </head>
     <body>
-        <section id="b1">
-            <div id="inb1">
-                <!--Einbinden der Taskbar.jsp-->
-                <div>
-                    <jsp:include page="taskbar.jsp"/>
-                </div>
-                <h1 id="head_start">Fahrzeuge anzeigen</h1>
-                <div id="back_white">
-                    <ul>
-                        <!--Script für Auflistung aller Fahrzeuge-->
-                        <% %><li></li><% %>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        <%
+            //Nutzer-Objekt aus der Session bekommen
+            Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
+            //Rollen-Abfrage für die Berechtigung auf den Zugriff
+            if(n.getRolle() == "Polizei" || n.getRolle() == "Wacht"){%>
+                <section id="b1">
+                    <div id="inb1">
+                        <!--Einbinden der Taskbar.jsp-->
+                        <div>
+                            <jsp:include page="taskbar.jsp"/>
+                        </div>
+                        <h1 id="head_start">Fahrzeuge anzeigen</h1>
+                        <div id="back_white">
+                            <ul>
+                                <!--Script für Auflistung aller Fahrzeuge-->
+                                <% %><li></li><% %>
+                            </ul>
+                        </div>
+                    </div>
+                </section><%
+            //Wenn Berechtigung nicht vorhanden -> Weiterleitung auf Permission Denied 
+            }else{%>
+                <jsp:forward page="permissionDenied.jsp"/><%
+            }
+        %>
+        
         
     </body>
 </html>
