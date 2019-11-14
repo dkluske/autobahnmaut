@@ -276,6 +276,15 @@ public class FahrzeugManagerTest {
         assertEquals(testliste, fahrzeugListe);
         
     }
+    
+    @Test // Anzahl der Fahrzeuge von 15 = 20
+    public void testFahrzeuglisteAnzahl(){
+        System.out.println("testFahrzeuglisteAnzahl");
+        int AnzFahrzeug = FahrzeugManager.fahrzeuglisteNutzer(15).size();
+        int Erwartet = 20;
+        
+        assertEquals(AnzFahrzeug, Erwartet);
+    }
 
     /**
      * Test of getLandById method, of class FahrzeugManager.
