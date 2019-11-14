@@ -5,6 +5,11 @@
             30
         </session-timeout>
     </session-config>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/jsp/error.jsp</location>
+  </error-page>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
@@ -24,4 +29,8 @@
         <servlet-name>webdienst</servlet-name>
         <url-pattern>/webdienst</url-pattern>
     </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

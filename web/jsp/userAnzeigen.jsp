@@ -1,4 +1,6 @@
+<%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="autobahnmaut.model.Nutzer"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,27 +12,37 @@
         <title>Nutzer anzeigen | Autobahnmaut</title>
     </head>
     <body>
-        <section id="b1">
-            <div id="inb1">
-                <!--Einbettung der Taskbar-->
-                <div>
-                    <jsp:include page="taskbar.jsp"/>
-                </div>
-                <h1 id="head_start">Nutzer anzeigen</h1>
-                <div id="back_white">
-                    <!--Hier Script für Anzeige der Liste der Nutzer im System einfügen-->
-                    <ul>
-                        <% %><li></li><% %>
-                    </ul>
-                    <!--Input-Form für die Erfassung der Fahrzeuge eines Nutzers-->
-                    <form action="" method="post">
-                        <br/><br/>
-                        <input type="text" name="email" placeholder="E-Mail Adresse">
-                        <input type="submit" value="Fahrzeuge anzeigen">
-                        <br/><br/>
-                    </form>
-                </div>
-            </div>
-        </section>
+        <%
+            //Nutzer-Objekt aus der Session bekommen
+            Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
+            //Rolle aus dem Objekt nehmen und Berechtigung prüfen
+            if(n.getRolle() == "Wacht" || n.getRolle() == "Polizei"){%>
+                <section id="b1">
+                    <div id="inb1">
+                        <!--Einbettung der Taskbar-->
+                        <div>
+                            <jsp:include page="taskbar.jsp"/>
+                        </div>
+                        <h1 id="head_start">Nutzer anzeigen</h1>
+                        <div id="back_white">
+                            <!--Hier Script für Anzeige der Liste der Nutzer im System einfügen-->
+                            <ul>
+                                <% %><li></li><% %>
+                            </ul>
+                            <!--Input-Form für die Erfassung der Fahrzeuge eines Nutzers-->
+                            <form action="" method="post">
+                                <br/><br/>
+                                <input type="text" name="email" placeholder="E-Mail Adresse">
+                                <input type="submit" value="Fahrzeuge anzeigen">
+                                <br/><br/>
+                            </form>
+                        </div>
+                    </div>
+                </section><%
+            //Wenn keine Berechtigung vorhanden -> Weiterleiten auf Permission Denied
+            }else{%>
+                <jsp:forward page="permissionDenied.jsp"/><%
+            }
+        %>
     </body>
 </html>
