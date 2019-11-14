@@ -42,7 +42,7 @@ public class DatenbankTest {
     /**
      * Test of getConnection method, of class Datenbank.
      */
-    @Test
+    @Test // Verbindung sollte klappen, deshalb darf rückgabewert nicht null sein
     public void testGetConnection() {
         System.out.println("getConnection");
         Connection result = Datenbank.getConnection();
@@ -53,7 +53,7 @@ public class DatenbankTest {
      * Test of getStatement method, of class Datenbank.
      */
     
-    @Test
+    @Test // Verbindung sollte klappen, deshalb darf rückgabewert nicht null sein
     public void testGetStatement() {
         System.out.println("getStatement");
         Statement result = Datenbank.getStatement();

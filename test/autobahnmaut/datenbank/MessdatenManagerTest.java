@@ -5,7 +5,6 @@
  */
 package autobahnmaut.datenbank;
 
-import autobahnmaut.model.Statistik;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author 17wi1115
  */
-public class StatistikManagerTest {
+public class MessdatenManagerTest {
     
-    public StatistikManagerTest() {
+    public MessdatenManagerTest() {
     }
     
     @BeforeClass
@@ -38,13 +37,10 @@ public class StatistikManagerTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of getStatistikdaten method, of class StatistikManager.
-     */
-    @Test // Statistikdaten sind immer gefüllt <> null
-    public void testGetStatistikdaten() {
-        System.out.println("getStatistikdaten");
-        Statistik result = StatistikManager.getStatistikdaten();
-        assertNotNull(result);
+    @Test
+    public void testSomeMethod() {
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
+    
 }

@@ -45,7 +45,7 @@ public class UserManagerTest {
      * Test of login method, of class UserManager.
      */
     
-   @Test
+   @Test // Leere email und passwort --> Rückgabewert null
     public void testLoginNull() {
         System.out.println("LoginNullwert");
         String email = "";
@@ -55,7 +55,7 @@ public class UserManagerTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test // Nutzer definiert --> LoginMethode söllte selbe Daten zurück geben
     public void testLoginNutzer()
     {
         System.out.println("LoginNutzer");
@@ -82,7 +82,7 @@ public class UserManagerTest {
      * Test of getNutzerById method, of class UserManager.
      */
     
-    @Test
+    @Test // Login mit falschen Passwort --> Rückgabe null
     public void testLoginfalschesPasswort(){
         
         System.out.println("testLoginfalschesPasswort");
@@ -96,7 +96,7 @@ public class UserManagerTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test // Login mit falscher email --> Rückgabewert null
     public void testLoginfalscheEmail(){
         
         System.out.println("testLoginfalscheEmail");
@@ -110,7 +110,7 @@ public class UserManagerTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test // NutzerID 0 --> Rückgabewert 0
     public void testGetNutzerByIdNull() {
         System.out.println("getNutzerByIdNull");
         int nutzerId = 0;
@@ -119,7 +119,7 @@ public class UserManagerTest {
         assertEquals(expResult, result);
     } 
        
-    @Test
+    @Test // Nutzer wurde definiert --> Methode söllte selbe Werte zurück geben
     public void testGetNutzerByIDWert(){
         System.out.println("testGetNutzerByIdWert");
         
@@ -143,7 +143,7 @@ public class UserManagerTest {
        assertEquals(Test.getName(),n.getName());
     }
     
-    @Test
+    @Test // Nutzer wurde definiert --> Test ob in DB vorhanden
     public void testexestiertNutzer(){
         
         boolean Testergebnis = false;

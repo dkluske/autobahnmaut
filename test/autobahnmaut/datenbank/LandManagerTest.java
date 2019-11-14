@@ -41,7 +41,7 @@ public class LandManagerTest {
     /**
      * Test of getLandById method, of class LandManager.
      */
-    @Test
+    @Test // LandID 0 --> Rückgabewert null
     public void testGetLandById() {
         System.out.println("getLandById");
         int landId = 0;
@@ -50,7 +50,7 @@ public class LandManagerTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test // Land definiert --> Methode söllte selbe Daten zurück geben
     public void testGetLandByIDDaten(){
         System.out.println("testGetLandByIDDaten");
         
@@ -67,7 +67,7 @@ public class LandManagerTest {
         assertEquals(n.getBezeichnung(), test.getBezeichnung());
     }
     
-    @Test
+    @Test // Land definiert --> söllte in DB vorhanden sein
     public void testexistiertLand(){
         System.out.println("testexistiertLand");
         

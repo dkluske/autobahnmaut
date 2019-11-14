@@ -45,7 +45,7 @@ public class FahrtenManagerTest {
     /**
      * Test of getLaufendeFahrt method, of class FahrtenManager.
      */
-    @Test
+    @Test //Rückgabe null wenn Unbekannte fahrzeugId
     public void testGetLaufendeFahrt() {
         System.out.println("getLaufendeFahrt");
         int fahrzeugId = 0;
@@ -58,7 +58,7 @@ public class FahrtenManagerTest {
      * Test of getMautbrueckeById method, of class FahrtenManager.
      */
     
-    @Test
+    @Test // Rückgabe null wenn Unbekannte MautbrueckenId
     public void testGetMautbrueckeById() {
         System.out.println("getMautbrueckeById");
         int mautbrueckeId = 0;
@@ -67,7 +67,7 @@ public class FahrtenManagerTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test // Test auf eine vorhandene Mautbrücke --> Methode muss selbe Daten wie definierte Mautbrücke zurück geben
     public void testGetMautbrueckeByIdDaten() {
         System.out.println("testGetMautbrueckeByIdDaten");
         
@@ -90,7 +90,7 @@ public class FahrtenManagerTest {
         assertEquals(m.getMautbrueckeID(), testMaut.getMautbrueckeID());        
     }
     
-    @Test
+    @Test // Eine Mautbrücke wurde definiert --> es wird geprüft ob diese vorhanden ist
     public void testexistiertMautbrücke() {
         
         boolean Testergebnis = false;
@@ -121,7 +121,7 @@ public class FahrtenManagerTest {
     /**
      * Test of getAbschnittByIds method, of class FahrtenManager.
      */
-    @Test
+    @Test // Rückgabe null wenn AbschnittIDs nicht definiert
     public void testGetAbschnittByIds() {
         System.out.println("getAbschnittByIds");
         int startstandort = 0;
@@ -131,7 +131,7 @@ public class FahrtenManagerTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test // Test auf einen vorhandenen Abschnitt --> Methode muss selbe Daten wie definierter Abschnitt zurück geben
     public void testGetAbschnittByIDDaten(){
         System.out.println("testGetAbschnittByIDDaten");
         
@@ -163,7 +163,7 @@ public class FahrtenManagerTest {
         assertEquals(m.getAbschnittID(), test.getAbschnittID());
     }
     
-    @Test
+    @Test // Ein Abschnitt wurde definiert --> es wird geprüft ob dieser vorhanden ist
     public void testexestiertAbschnitt(){
         
         System.out.println("testexestiertAbschnitt");
@@ -206,7 +206,7 @@ public class FahrtenManagerTest {
      * Test of getStandordById method, of class FahrtenManager.
      */
     
-    @Test
+    @Test // // Rückgabe null wenn StandortId nicht definiert
     public void testGetStandordById() {
         System.out.println("getStandordById");
         int standordId = 0;
@@ -215,7 +215,7 @@ public class FahrtenManagerTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test // Test auf einen vorhandenen Standort --> Methode muss selbe Daten wie definierter Standort zurück geben
     public void testGetStandortByIdDaten(){
         System.out.println("testGetStandortByIdDaten");
         
@@ -233,7 +233,7 @@ public class FahrtenManagerTest {
         assertEquals(test.getBezeichnung(), m.getBezeichnung());        
     }
     
-    @Test
+    @Test // Ein Standort wurde definiert --> es wird geprüft ob dieser vorhanden ist
     public void testexistiertStandort(){
         
         boolean Testergebnis = false;

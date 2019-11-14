@@ -44,7 +44,7 @@ public class FahrzeugManagerTest {
     /**
      * Test of fahrzeuglisteNutzer method, of class FahrzeugManager.
      */
-    @Test
+    @Test // Leerer Nutzer --> Leere Fahrzeugliste
     public void testFahrzeuglisteNutzer() {
         System.out.println("fahrzeuglisteNutzer");
         int nutzerId = 0;
@@ -53,7 +53,7 @@ public class FahrzeugManagerTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test // Fahrzeugliste wurde definiert --> durch funktion wird eine abgerufen. Funktioniert nicht 
     public void testFahrzeuglisteNutzerDaten() {
         
         System.out.println("testFahrzeuglisteNutzerDaten");
@@ -280,7 +280,7 @@ public class FahrzeugManagerTest {
     /**
      * Test of getLandById method, of class FahrzeugManager.
      */
-    @Test
+    @Test // LandId 0 --> Kann kein Land zurück geben
     public void testGetLandById() {
         System.out.println("getLandById");
         int landId = 0;
@@ -289,7 +289,7 @@ public class FahrzeugManagerTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test // Land wurde definiert --> Funktion sollte selbe Werte zurück geben
     public void testGetLandByIdDaten(){
         
         System.out.println("testGetLandByIdDaten");
@@ -309,7 +309,7 @@ public class FahrzeugManagerTest {
         assertEquals(test.getBezeichnung(), m.getBezeichnung());       
     }
     
-    @Test
+    @Test // Land wurde definiert --> Sollte in DB vorhanden sein
     public void testLandvorhanden(){
         
         boolean Testergebnis = false;
@@ -337,7 +337,7 @@ public class FahrzeugManagerTest {
     /**
      * Test of getFahrzeugById method, of class FahrzeugManager.
      */
-    @Test
+    @Test // FahrzeugId 0 --> Rückgabewert null
     public void testGetFahrzeugById() {
         System.out.println("getFahrzeugById");
         int fahrzeugid = 0;
@@ -346,7 +346,7 @@ public class FahrzeugManagerTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test // FahrzeugId nicht vorhanden --> Rückgabewert null
     public void testGetFahrzeugunbekannteId(){
         
         System.out.println("testGetFahrzeugunbekannteId");
@@ -357,7 +357,7 @@ public class FahrzeugManagerTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test // Fahrzeug definiert --> Methode sollten selbe Werte zurück geben
     public void testGetFahrzeugByIdDaten(){
         
         System.out.println("testGetFahrzeugByIdDaten");
@@ -396,7 +396,7 @@ public class FahrzeugManagerTest {
         assertEquals(test.getKennzeichen(), n.getKennzeichen());
     }
     
-    @Test
+    @Test  // Fahrzeug wurde definiert --> Sollte in DB vorhanden sein
     public void testFahrzeugvorhanden(){
         
         boolean Testergebnis = false;
@@ -442,7 +442,7 @@ public class FahrzeugManagerTest {
     /**
      * Test of getFahrzeugByKennzeichenAndLandid method, of class FahrzeugManager.
      */
-    @Test
+    @Test // Kennzeichen und LandID 0 --> Rückgabewert null
     public void testGetFahrzeugByKennzeichenAndLandid() {
         System.out.println("getFahrzeugByKennzeichenAndLandid");
         String kennzeichen = "";
@@ -452,7 +452,7 @@ public class FahrzeugManagerTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test // Fahrzeug definiert --> Methode söllte selbe Werte zurück geben
     public void testGetFahrzeugByKennzeichenAndLandidDaten() {
         
         System.out.println("testGetFahrzeugByKennzeichenAndLandidDaten");
@@ -491,7 +491,7 @@ public class FahrzeugManagerTest {
         assertEquals(test.getFahrzeugId(), n.getFahrzeugId());
     }
     
-    @Test
+    @Test // Länge der Polizeiliste = 22
     public void testgetFahrzeugPolizei(){
         System.out.println("testgetFahrzeugPolizei");
         int AnzPolizei = FahrzeugManager.getFahrzeugePolizei().size();
