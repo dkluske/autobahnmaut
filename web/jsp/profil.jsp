@@ -17,13 +17,14 @@
                 <div>
                     <jsp:include page="taskbar.jsp"/>
                 </div>
-                
-                <c:out value="${nutzer.name}"/>
-                <c:out value="${nutzer.rolle}"/>
-                <c:out value="${nutzer.email}"/>
-                <c:out value="${nutzer.name}"/>
-                
-                <h1 id="head_start"> PROFIL</h1>
+                <div id="back_white">
+                    <h1 id="head_start"> PROFIL</h1><br/>
+                    <c:out value="${nutzer.name}"/><br/>
+                    <c:out value="${nutzer.rolle}"/><br/>
+                    <c:out value="${nutzer.email}"/><br/>
+                    
+
+                </div>
             </div>
         </section>
     </body>
