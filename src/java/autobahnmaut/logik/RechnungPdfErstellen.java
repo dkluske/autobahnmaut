@@ -39,7 +39,8 @@ import java.util.Date;
  */
 public class RechnungPdfErstellen {
     //Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    public static final String PDF = "/C:/Users/17wi1188/Documents/test.pdf";
+    //public static final String PDF = "/C:/Users/17wi1188/Documents/test.pdf";
+    public static final String PDF = "web\\pdf\\test.pdf";
 
     public void createPdf(String filename) throws DocumentException,
             IOException {
