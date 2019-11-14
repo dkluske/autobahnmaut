@@ -1,4 +1,5 @@
 
+<%@page import="autobahnmaut.datenbank.FahrzeugManager"%>
 <%@page import="autobahnmaut.model.Fahrzeug"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="autobahnmaut.model.Nutzer"%>
@@ -18,6 +19,7 @@
         <%
             //Nutzer-Objekt aus der Session bekommen
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
+
             //Rollen-Abfrage für die Berechtigung auf den Zugriff
             if(n.getRolle().equals("Polizei")  || n.getRolle().equals("Wacht")){%>
                 <section id="b1">

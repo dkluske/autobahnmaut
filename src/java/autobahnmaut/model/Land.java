@@ -18,6 +18,11 @@ public class Land {
         return landId;
     }
 
+    @Override
+    public String toString() {
+        return  bezeichnung ;
+    }
+
     public void setLandId(int landId) {
         this.landId = landId;
     }

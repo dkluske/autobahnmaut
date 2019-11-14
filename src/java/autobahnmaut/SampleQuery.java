@@ -67,18 +67,22 @@ public class SampleQuery {
 //        System.out.println(s);
 //    }
     
-       ArrayList<Nutzer> nutzerDaten = UserManager.getNutzerListe();
-    int count=0;
-    for(Nutzer n :nutzerDaten ){
-        
-        
-        count++;
-        System.out.println(count);
-        System.out.println(n.getName());
-    }
-      
+//       ArrayList<Nutzer> nutzerDaten = UserManager.getNutzerListe();
+//    int count=0;
+//    for(Nutzer n :nutzerDaten ){
+//        
+//        
+//        count++;
+//        System.out.println(count);
+//        System.out.println(n.getName());
+//    }
+//      
        
+        Fahrzeug f = FahrzeugManager.getFahrzeugById(265);
         
+       FahrzeugManager.createFahrzeug(f);
+       
+        System.out.println(f.getKennzeichen());
         
 
     }
