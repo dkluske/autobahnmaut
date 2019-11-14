@@ -15,6 +15,7 @@ import autobahnmaut.model.Standort;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -227,6 +228,32 @@ public class FahrtenManager {
                 ansonsten null
          */
         return false;
+    }
+    
+    public static ArrayList<String> getSimulatorDaten() {
+        ArrayList<String> simulatorDaten = new ArrayList<>();
+        String query = "select \n"
+                + "	* \n"
+                + "from \n"
+                + "	daten\n"
+                + ";";
+        try {
+            Statement stm = Datenbank.getStatement();
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()) {
+
+                simulatorDaten.add(rs.getString("line"));
+
+            }
+            return simulatorDaten;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        /*wenn ein kunde gefunden wurde gib Kunden zurück
+                ansonsten null
+         */
+        return null;
     }
 
 }

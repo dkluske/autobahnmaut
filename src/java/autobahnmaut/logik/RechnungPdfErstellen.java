@@ -38,15 +38,15 @@ import java.util.Date;
  * @author 17wi1188
  */
 public class RechnungPdfErstellen {
-
-    public static final String PDF = "/Users/17wi1188/Documents/document.pdf";
+    //Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    public static final String PDF = "/C:/Users/17wi1188/Documents/test.pdf";
 
     public void createPdf(String filename) throws DocumentException,
             IOException {
         Date monat = Calendar.getInstance().getTime();
 
         Rechnung rechnung = new Rechnung();
-        rechnung = UserManager.rechnungsdaten(3, monat);
+        rechnung = UserManager.rechnungsdaten(1, monat);
 
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document,
@@ -58,9 +58,10 @@ public class RechnungPdfErstellen {
         //setImage(cb, "img/memory.png", 40); 
         
         String rechnungHead= "Rechnung "+rechnung.getNutzer().getName();
-        
         document.add(getImage());
         document.add(getTitelHead(rechnungHead));
+        document.newPage();
+        //document.add(getTitelHead(rechnungHead));
         
         ArrayList<Rechnungsposition> rpL = rechnung.getRechnungspostionsListe();
         
@@ -81,56 +82,67 @@ public class RechnungPdfErstellen {
 //        }
 
     }
-
+    // Erstellen einer neuen Tabelle für die Rechnung 
     private PdfPTable createTable(Rechnungsposition rp) throws DocumentException {
         ArrayList<Rechnungsfahrten> rfL = new ArrayList<>();
         rfL = rp.getRechnungsfahrtenListe();
         PdfPTable table = new PdfPTable(6);
         table.setWidthPercentage(100);
-        table.setSpacingAfter(10f);
-        table.setSpacingBefore(15f);
+        table.setSpacingAfter(35f);
+        table.setSpacingBefore(10f);
         table.setWidths(new float[]{2f, 2f, 2f, 2f, 2f, 2f});
-        Font fontHeader = new Font(Font.FontFamily.COURIER, 7, Font.BOLD, BaseColor.DARK_GRAY);
+        //PdfContentByte[] canvas = null;
+        Font fontHeader = new Font(Font.FontFamily.COURIER, 9, Font.BOLD, BaseColor.DARK_GRAY);
         PdfPCell headerCell = new PdfPCell(new Phrase("AUFFAHRTSZEIT", fontHeader));
         headerCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
         headerCell.setPaddingBottom(5f);
+        headerCell.setPaddingTop( 5f);
+        headerCell.setPaddingLeft(3f);
         table.addCell(headerCell);
 
         headerCell = new PdfPCell(new Phrase("AUFFAHRTSORT", fontHeader));
         headerCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
         headerCell.setPaddingBottom(5f);
+        headerCell.setPaddingTop( 5f);
+        headerCell.setPaddingLeft(3f);
         table.addCell(headerCell);
 
         headerCell = new PdfPCell(new Phrase("ABFAHRTSZEIT", fontHeader));
         headerCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
         headerCell.setPaddingBottom(5f);
+        headerCell.setPaddingTop( 5f);
+        headerCell.setPaddingLeft(3f);
         table.addCell(headerCell);
 
         headerCell = new PdfPCell(new Phrase("ABFAHRTSORT", fontHeader));
         headerCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
         headerCell.setPaddingBottom(5f);
+        headerCell.setPaddingTop( 5f);
+        headerCell.setPaddingLeft(3f);
         table.addCell(headerCell);
 
         headerCell = new PdfPCell(new Phrase("KM", fontHeader));
         headerCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
         headerCell.setPaddingBottom(5f);
+        headerCell.setPaddingTop( 5f);
+        headerCell.setPaddingLeft(3f);
         table.addCell(headerCell);
 
         headerCell = new PdfPCell(new Phrase("PREIS", fontHeader));
         headerCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
         headerCell.setPaddingBottom(5f);
+        headerCell.setPaddingTop( 5f);
+        headerCell.setPaddingLeft(3f);
         table.addCell(headerCell);
 
+        // Befüllen der Tabellle 
         for (Rechnungsfahrten rf : rfL) {
             System.out.println("Fahrt hinzu Rechnung");
             Date date = rf.getStartZeitpunkt();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             String startDate = dateFormat.format(date);
-            
             Date date2 = rf.getStartZeitpunkt();
             String startDate2 = dateFormat.format(date2);
-            
-               
             table.addCell(startDate);
             table.addCell(rf.getStartOrt());
             table.addCell(startDate2);
@@ -139,32 +151,33 @@ public class RechnungPdfErstellen {
             table.addCell(rf.getKilometer()+"");
             table.addCell("Preis");
         }
-
         return table;
     }
-
+    
     private Chunk getTitel(String titel){
-        // Title        
-        Font titleFont = new Font(Font.FontFamily.COURIER, 22, Font.BOLD, BaseColor.WHITE);
+        // Title für das Kenzeichen über jeder Tabelle     
+        Font titleFont = new Font(Font.FontFamily.COURIER, 20, Font.BOLD, BaseColor.BLUE);
         Chunk titleObj = new Chunk(titel, titleFont);
-        titleObj.setBackground(new BaseColor(33, 33, 233), 1f, 1f, 1f, 3f);        
+        titleObj.setBackground(new BaseColor(255, 255, 255), 1f, 1f, 1f, 3f);  
         return titleObj;
     }
     
     private Chunk getTitelHead(String titel){
-        // Title        
-        Font titleFont = new Font(Font.FontFamily.COURIER, 22, Font.BOLD, BaseColor.WHITE);
+        // Title über dem Icon als Rechnungsnamen         
+        Font titleFont = new Font(Font.FontFamily.COURIER, 26, Font.BOLD, BaseColor.WHITE);
         Chunk titleObj = new Chunk(titel, titleFont);
-        titleObj.setBackground(new BaseColor(33, 33, 233), 1f, 1f, 1f, 3f);        
+        titleObj.setBackground(new BaseColor(219, 45, 224), 1f, 1f, 1f, 3f);   
         return titleObj;
     }
+      
     private Image getImage()
             throws MalformedURLException, IOException, DocumentException {
         String imagePath = "C:\\Users\\17wi1188\\Documents\\NetBeansProjects\\Autobahnmaut\\src\\java\\autobahnmaut\\logik\\RechnungIcon.PNG";
         Image img = Image.getInstance(imagePath);
-        img.setAbsolutePosition(415, 650);
-        img.scaleAbsolute(128f, 163f);
-        
+        //img.setAbsolutePosition(415, 650);
+        img.setAbsolutePosition(125, 250);
+        //img.scaleAbsolute(128f, 163f);
+        img.scaleAbsolute(335f, 387f);
         return img;
     }
 

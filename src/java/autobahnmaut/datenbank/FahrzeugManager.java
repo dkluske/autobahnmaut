@@ -41,8 +41,8 @@ public class FahrzeugManager {
 
                 fahrzeugListe.add(f);
 
-                
-            }return fahrzeugListe;
+            }
+            return fahrzeugListe;
         } catch (SQLException sqle) {
             System.out.println(sqle);
         }
@@ -52,8 +52,7 @@ public class FahrzeugManager {
          */
         return null;
     }
-    
-    
+
     public static Land getLandById(int landId) {
 
         String query = "select \n"
@@ -69,7 +68,7 @@ public class FahrzeugManager {
                 Land l = new Land();
                 l.setLandId(rs.getInt("id"));
                 l.setBezeichnung(rs.getString("bezeichnung"));
-                l.setKurzBezeichnung(rs.getString("kurzbezeichnung"));               
+                l.setKurzBezeichnung(rs.getString("kurzbezeichnung"));
 
                 return l;
             }
@@ -82,7 +81,7 @@ public class FahrzeugManager {
          */
         return null;
     }
-    
+
     public static Fahrzeug getFahrzeugById(int fahrzeugid) {
 
         String query = "select \n"
@@ -115,17 +114,16 @@ public class FahrzeugManager {
         return null;
     }
 
-    
-    public static Fahrzeug getFahrzeugByKennzeichenAndLandid(String kennzeichen,int landid) {
+    public static Fahrzeug getFahrzeugByKennzeichenAndLandid(String kennzeichen, int landid) {
 
         String query = "select \n"
                 + "	* \n"
                 + "from \n"
                 + "	fahrzeug\n"
                 + "where \n"
-                + "	kennzeichen = '" + kennzeichen + "'and landid="+landid +";";
+                + "	kennzeichen = '" + kennzeichen + "'and landid=" + landid + ";";
         try {
-            Statement stm = Datenbank.getStatement();           
+            Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
             if (rs.next()) {
                 Fahrzeug f = new Fahrzeug();
@@ -134,7 +132,7 @@ public class FahrzeugManager {
                 f.setKennzeichen(rs.getString("kennzeichen"));
                 f.setLand(FahrzeugManager.getLandById(rs.getInt("landid")));
                 f.setNutzer(UserManager.getNutzerById(rs.getInt("nutzerid")));
-                f.setPrivileg(rs.getBoolean("privileg"));                
+                f.setPrivileg(rs.getBoolean("privileg"));
 
                 return f;
             }
@@ -146,5 +144,55 @@ public class FahrzeugManager {
                 ansonsten null
          */
         return null;
+    }
+
+    public static ArrayList<Fahrzeug> getFahrzeugePolizei() {
+        ArrayList<Fahrzeug> fahrzeugListe = new ArrayList<>();
+        String query = "select * from fahrzeug \n"
+                + "inner join nutzer on fahrzeug.nutzerid = Nutzer.id\n"
+                + "where nutzer.rolle='Polizei';";
+        try {
+            Statement stm = Datenbank.getStatement();
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()) {
+                Fahrzeug f = new Fahrzeug();
+
+                f.setFahrzeugId(rs.getInt("id"));
+                f.setKennzeichen(rs.getString("kennzeichen"));
+                f.setLand(FahrzeugManager.getLandById(rs.getInt("landid")));
+                f.setNutzer(UserManager.getNutzerById(rs.getInt("nutzerid")));
+                f.setPrivileg(rs.getBoolean("privileg"));
+                fahrzeugListe.add(f);
+                
+            }return fahrzeugListe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        /*wenn ein Land gefunden wurde gib Land zurück
+                ansonsten null
+         */
+        return null;
+    }
+    //muss geändert werden
+    public static boolean updateFahrzeug(Fahrzeug fahrzeug) {        
+        String query = "UPDATE fahrzeug SET  kennzeichen=   '" 
+                + fahrzeug.getKennzeichen() + "',  landid="
+                + fahrzeug.getLand().getLandId()+ ",  nutzerid="
+                + fahrzeug.getNutzer().getNutzerId()               
+                + " WHERE fahrzeug.id = " + fahrzeug.getFahrzeugId() + ";";
+        try {
+            Statement stm = Datenbank.getStatement();
+            System.out.println(query);
+            ResultSet rs = stm.executeQuery(query);
+            return true;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        /*wenn ein Land gefunden wurde gib Land zurück
+                ansonsten null
+         */
+        return false;
     }
 }
