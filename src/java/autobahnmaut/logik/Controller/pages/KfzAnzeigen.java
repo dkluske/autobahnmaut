@@ -6,6 +6,7 @@
 package autobahnmaut.logik.Controller.pages;
 
 import autobahnmaut.datenbank.FahrzeugManager;
+import autobahnmaut.model.Fahrzeug;
 import autobahnmaut.model.Nutzer;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -73,9 +74,11 @@ public class KfzAnzeigen extends HttpServlet {
         }else{
             if (this.rolle.equals("Polizei") || this.rolle.equals("Admin") || this.rolle.equals("Nutzer")) {
                 
-                ArrayList AL = (ArrayList) this.nutzer.getFahrzeugListe();
-                System.out.println(AL.toString());
-                request.setAttribute("fahrzeuge", AL);
+                ArrayList <Fahrzeug> FL;
+                System.out.println("nutzer ID:" + this.nutzer.getNutzerId());
+                FL = (ArrayList<Fahrzeug>) FahrzeugManager.fahrzeuglisteNutzer(this.nutzer.getNutzerId());
+                System.out.println("Fahrzeugliste : " + FL);
+                request.setAttribute("fahrzeuge", FL);
                 request.getRequestDispatcher("/jsp/kfzAnzeigen.jsp").forward(request, response);
             }else{
 //                Permission denied!

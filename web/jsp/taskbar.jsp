@@ -1,5 +1,6 @@
 <%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -82,6 +83,7 @@
                         <a href="${pageContext.request.contextPath}/userAnzeigen">Nutzer</a>
                         <a href="${pageContext.request.contextPath}/kfzAnzeigen">Fahrzeuge</a>
                         <a href="${pageContext.request.contextPath}/ausnahmen">Ausnahmen</a>
+                        <a href="${pageContext.request.contextPath}/profil">Profil</a>
                         <a href="${pageContext.request.contextPath}/Logout">Logout</a>
                     </div>
                 <%

@@ -78,30 +78,29 @@ public class FahrzeugManager {
 //    }
     public static ArrayList<Fahrzeug> fahrzeuglisteNutzer(int nutzerId) {
         ArrayList<Fahrzeug> fahrzeugListe = new ArrayList<>();
-        String query = "select \n"
-                + "	* \n"
-                + "from \n"
-                + "	fahrzeug\n"
-                + "where \n"
-                + "	nutzerid = '" + nutzerId + "';";
+        String query = "SELECT * FROM fahrzeug WHERE nutzerid = " + nutzerId + ";";
         try {
             Statement stm = Datenbank.getStatement();
+            System.out.println(query);
             ResultSet rs = stm.executeQuery(query);
+            System.out.println("fahrzeuglisteNutzer called");
+
             while (rs.next()) {
 
                 Fahrzeug f = new Fahrzeug();
-                f.setFahrzeugId(rs.getInt("fahrzeugid"));
+                f.setFahrzeugId(rs.getInt("id"));
                 f.setKennzeichen(rs.getString("kennzeichen"));
                 f.setPrivileg(rs.getBoolean("privileg"));
                 f.setNutzer(autobahnmaut.datenbank.UserManager.getNutzerById(rs.getInt("nutzerid")));
                 f.setLand(autobahnmaut.datenbank.FahrzeugManager.getLandById(rs.getInt("landid")));
 
                 fahrzeugListe.add(f);
-
+                
+                System.out.println("Fahrzeugliste:" + f.toString());
                 
             }return fahrzeugListe;
         } catch (SQLException sqle) {
-
+            System.out.println(sqle);
         }
 
         /*wenn ein kunde gefunden wurde gib Kunden zurück
