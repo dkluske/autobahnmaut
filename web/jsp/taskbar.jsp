@@ -93,7 +93,7 @@
                 %>
                     <div class="navigation">
                         <!--Logo der Firma links in der Taskbar-->
-                        <img src="${paeContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
+                        <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
                         <a href="">Function1</a>
                         <a href="">Function2</a>
