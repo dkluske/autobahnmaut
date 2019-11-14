@@ -33,7 +33,7 @@ public class FahrzeugManager {
             while (rs.next()) {
 
                 Fahrzeug f = new Fahrzeug();
-                f.setFahrzeugId(rs.getInt("fahrzeugid"));
+                f.setFahrzeugId(rs.getInt("id"));
                 f.setKennzeichen(rs.getString("kennzeichen"));
                 f.setPrivileg(rs.getBoolean("privileg"));
                 f.setNutzer(autobahnmaut.datenbank.UserManager.getNutzerById(rs.getInt("nutzerid")));
@@ -44,7 +44,7 @@ public class FahrzeugManager {
                 
             }return fahrzeugListe;
         } catch (SQLException sqle) {
-
+            System.out.println(sqle);
         }
 
         /*wenn ein kunde gefunden wurde gib Kunden zurück
@@ -123,9 +123,9 @@ public class FahrzeugManager {
                 + "from \n"
                 + "	fahrzeug\n"
                 + "where \n"
-                + "	kennzeichen = '" + kennzeichen + "'and landid="+landid +");";
+                + "	kennzeichen = '" + kennzeichen + "'and landid="+landid +";";
         try {
-            Statement stm = Datenbank.getStatement();
+            Statement stm = Datenbank.getStatement();           
             ResultSet rs = stm.executeQuery(query);
             if (rs.next()) {
                 Fahrzeug f = new Fahrzeug();
@@ -134,12 +134,12 @@ public class FahrzeugManager {
                 f.setKennzeichen(rs.getString("kennzeichen"));
                 f.setLand(FahrzeugManager.getLandById(rs.getInt("landid")));
                 f.setNutzer(UserManager.getNutzerById(rs.getInt("nutzerid")));
-                f.setPrivileg(rs.getBoolean("privileg"));
+                f.setPrivileg(rs.getBoolean("privileg"));                
 
                 return f;
             }
         } catch (SQLException sqle) {
-
+            System.out.println(sqle);
         }
 
         /*wenn ein Land gefunden wurde gib Land zurück
