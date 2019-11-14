@@ -5,6 +5,7 @@
  */
 package autobahnmaut.datenbank;
 
+import autobahnmaut.model.FahrtenLaufend;
 import autobahnmaut.model.Fahrzeug;
 import autobahnmaut.model.Nutzer;
 import autobahnmaut.model.Rechnung;
@@ -126,6 +127,42 @@ public class UserManager {
         return null;
     }
 
+    public static ArrayList<Nutzer> getNutzerListe() {
+        ArrayList<Nutzer> nutzerListe = new ArrayList<>();
+        String query = "select \n"
+                + "	* \n"
+                + "from \n"
+                + "	nutzer\n"
+                + ";";
+        try {
+            Statement stm = Datenbank.getStatement();
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()) {
+
+                Nutzer n = new Nutzer();
+                n.setNutzerId(rs.getInt("id"));
+                n.setName(rs.getString("nutzername"));
+                n.setEmail(rs.getString("email"));
+                n.setRolle(rs.getString("rolle"));
+                n.setStrasse(rs.getString("strasse"));
+                n.setPlz(rs.getString("plz"));
+                n.setRabatt(rs.getDouble("rabatt"));
+                n.setOrt(rs.getString("ort"));
+
+                nutzerListe.add(n);
+
+            }
+            return nutzerListe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        /*wenn ein kunde gefunden wurde gib Kunden zurück
+                ansonsten null
+         */
+        return null;
+    }
+
     //Den Nutzer zur ID ermitteln
     public static Nutzer getNutzerById(int nutzerId) {
 
@@ -147,11 +184,12 @@ public class UserManager {
                 n.setStrasse(rs.getString("strasse"));
                 n.setPlz(rs.getString("plz"));
                 n.setRabatt(rs.getDouble("rabatt"));
+                n.setOrt(rs.getString("ort"));
 
                 return n;
             }
         } catch (SQLException sqle) {
-              System.out.println(sqle);
+            System.out.println(sqle);
         }
 
         /*wenn ein Nutzer gefunden wird gib Nutzer zurück
@@ -165,7 +203,7 @@ public class UserManager {
         cal.setTime(date);
         cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));
 
-        String pattern = "yyyy-MM-dd";        
+        String pattern = "yyyy-MM-dd";
         DateFormat df = new SimpleDateFormat(pattern);
         String dateAsString = df.format(cal.getTime());
         return dateAsString;
@@ -176,8 +214,8 @@ public class UserManager {
         cal.setTime(date);
         cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
 
-        String pattern = "yyyy-MM-dd";      
-        DateFormat df = new SimpleDateFormat(pattern);        
+        String pattern = "yyyy-MM-dd";
+        DateFormat df = new SimpleDateFormat(pattern);
         String dateAsString = df.format(cal.getTime());
         return dateAsString;
     }
@@ -197,9 +235,9 @@ public class UserManager {
                 + "inner join standort ON standort.id = mautbruecke.standortid "
                 + "inner join standort standort2 ON standort2.id = mautbruecke2.standortid "
                 + "\n"
-                + "where nutzer.id = " + nutzerId +"and endzeitpunkt between '"+getFirstDateOfMonth(monat)+"' and '"+getLastDateOfMonth(monat)+"'"
+                + "where nutzer.id = " + nutzerId + "and endzeitpunkt between '" + getFirstDateOfMonth(monat) + "' and '" + getLastDateOfMonth(monat) + "'"
                 + " order by fahrzeugid;";
-                System.out.println(getFirstDateOfMonth(monat)+getLastDateOfMonth(monat));
+        System.out.println(getFirstDateOfMonth(monat) + getLastDateOfMonth(monat));
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
@@ -219,7 +257,7 @@ public class UserManager {
                 }
 
                 Rechnungsfahrten rf = new Rechnungsfahrten();
-                
+
                 rf.setStartZeitpunkt(rs.getTimestamp("startzeitpunkt"));
                 //System.out.println(rs.getTimestamp("startzeitpunkt"));
                 rf.setStartOrt(rs.getString("startort"));
@@ -234,18 +272,60 @@ public class UserManager {
             }
             rp.setRechnungsfahrtenListe(rfL);
             rpL.add(rp);
-            
+
             System.out.println(rechnung.getNutzer().getName());
             rechnung.setRechnungspostionsListe(rpL);
 
-            
             return rechnung;
 
         } catch (SQLException sqle) {
             System.out.println(sqle);
         }
 
-        
         return null;
+    }
+
+    public static boolean updateNutzerDaten(Nutzer nutzer) {
+
+        String query = "UPDATE nutzer SET  nutzername=   '"
+                + nutzer.getName() + "',  email='"
+                + nutzer.getEmail() + "',  rolle='"
+                + nutzer.getRolle() + "',  ort='"
+                + nutzer.getOrt() + "',  strasse='"
+                + nutzer.getStrasse() + "', rabatt= "
+                + nutzer.getRabatt()
+                + " WHERE nutzer.id = " + nutzer.getNutzerId() + ";";
+
+        try {
+            Statement stm = Datenbank.getStatement();
+            System.out.println(query);
+            stm.executeUpdate(query);
+            return true;
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        return false;
+    }
+
+    public static boolean updateNutzerPasswort(Nutzer nutzer, String passwort) {
+
+        String query = "UPDATE nutzer SET  passwort=   crypt('"
+                + passwort
+                + "',gen_salt('md5'))"
+                + "WHERE nutzer.id = " + nutzer.getNutzerId() + ";";
+
+        try {
+            Statement stm = Datenbank.getStatement();
+            System.out.println(query);
+            stm.executeUpdate(query);
+            return true;
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        return false;
     }
 }

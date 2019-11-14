@@ -5,6 +5,7 @@
  */
 package autobahnmaut.logik.Controller.pages;
 
+import autobahnmaut.datenbank.UserManager;
 import autobahnmaut.model.Nutzer;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -72,7 +73,8 @@ public class UserAnzeigen extends HttpServlet {
         }else{
             if (this.rolle.equals("Polizei") || this.rolle.equals("Admin")) {
                 ArrayList <Nutzer> Nutzer;
-                Nutzer = (ArrayList<Nutzer>) UserManager.
+                Nutzer = (ArrayList<Nutzer>) UserManager.getNutzerListe();
+                request.setAttribute("nutzerliste", Nutzer);
                 request.getRequestDispatcher("/jsp/userAnzeigen.jsp").forward(request, response);
             }else{
 //                Permission denied!
