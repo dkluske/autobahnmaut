@@ -41,7 +41,9 @@
                                     <td>
                                         <ul>
                                             <!--Script zum anzeigen der geflagten Autos-->
-                                            <% %><li></li><% %>
+                                            <% %><li>
+                                                <%= %>
+                                            </li><% %>
                                         </ul>
                                     </td>
                                 </tr>
