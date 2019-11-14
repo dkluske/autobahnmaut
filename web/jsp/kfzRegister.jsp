@@ -21,7 +21,7 @@
             ArrayList<Fahrzeug> fzL = FahrzeugManager.fahrzeuglisteNutzer(n.getNutzerId());
 
             //Abfrage der Rolle aus dem Objekt und Prüfung der Berechtigung
-            if (n.getRolle().equals("Nutzer")) {%>
+            if (n.getRolle().equals("Nutzer") || n.getRolle().equals("Admin")) {%>
         <section id="b1">
             <div id="inb1">
                 <!--Einbinden der taskbar als jsp-->

@@ -17,7 +17,7 @@
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
             
             //Rolle aus dem Objekt nehmen und Berechtigung prüfen
-            if(n.getRolle().equals("Wacht") || n.getRolle().equals("Polizei")){%>
+            if(n.getRolle().equals("Wacht") || n.getRolle().equals("Polizei") || n.getRolle().equals("Admin")){%>
                 <section id="b1">
                     <div id="inb1">
                         <!--Einbettung der Taskbar-->
