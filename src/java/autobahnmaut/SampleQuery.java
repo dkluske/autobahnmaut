@@ -77,9 +77,12 @@ public class SampleQuery {
 //        System.out.println(n.getName());
 //    }
 //      
-       Nutzer n =UserManager.login("polizei@deutschland.de", "admin");
        
-        System.out.println(n.getEmail());
+        Fahrzeug f = FahrzeugManager.getFahrzeugById(265);
+        
+       FahrzeugManager.createFahrzeug(f);
+       
+        System.out.println(f.getKennzeichen());
         
 
     }

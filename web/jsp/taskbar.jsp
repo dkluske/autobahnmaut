@@ -46,7 +46,7 @@
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
                         <a href="${pageContext.request.contextPath}/statistik">Statistik</a>
-                        <a href="">Logout</a>
+                        <a href="${pageContext.request.contextPath}/Logout">Logout</a>
                     </div>
                 <%
                    }else if (n.getRolle().equals("Polizei")){ 

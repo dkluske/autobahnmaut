@@ -34,7 +34,7 @@
                         <tr>
                             <!--Input Form für die Fahrzeugregistrierung-->
                             <td>
-                                <form action="" method="post">
+                                <form action="${pageContext.request.contextPath}/jsp/kfzRegisterDB.jsp" method="post">
                                     <br/><br/>
                                     <input type="text" name="kennz" placeholder="Kfz-Kennzeichen"><br/><br/>
                                     <input type="submit" value="Registrieren" id="submit">

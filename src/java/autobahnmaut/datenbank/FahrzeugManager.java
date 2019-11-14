@@ -6,6 +6,7 @@
  */
 package autobahnmaut.datenbank;
 
+import autobahnmaut.model.FahrtenLaufend;
 import autobahnmaut.model.Fahrzeug;
 import autobahnmaut.model.Land;
 import autobahnmaut.model.Nutzer;
@@ -106,7 +107,7 @@ public class FahrzeugManager {
                 return f;
             }
         } catch (SQLException sqle) {
-
+            System.out.println(sqle);
         }
 
         /*wenn ein Land gefunden wurde gib Land zurück
@@ -187,6 +188,32 @@ public class FahrzeugManager {
             System.out.println(query);
             ResultSet rs = stm.executeQuery(query);
             return true;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        /*wenn ein Land gefunden wurde gib Land zurück
+                ansonsten null
+         */
+        return false;
+    }
+    
+    public static boolean createFahrzeug(Fahrzeug fahrzeug) {
+
+        String query = "INSERT INTO fahrzeug (kennzeichen, landid, nutzerid, privileg) VALUES('"
+                + fahrzeug.getKennzeichen()+ "', "
+                + fahrzeug.getLand().getLandId()+ ", "
+                + fahrzeug.getNutzer().getNutzerId() + ", "               
+                + fahrzeug.isPrivileg() + "); ";       
+        
+        
+        try {
+            Statement stm = Datenbank.getStatement();
+            //System.out.println(query);
+            stm.executeUpdate(query);
+            
+            return true;
+            
         } catch (SQLException sqle) {
             System.out.println(sqle);
         }
