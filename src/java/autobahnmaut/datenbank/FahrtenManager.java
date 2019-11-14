@@ -15,6 +15,7 @@ import autobahnmaut.model.Standort;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -29,7 +30,7 @@ public class FahrtenManager {
                 + "from \n"
                 + "	fahrtenlaufend\n"
                 + "where \n"
-                + "	id = '" + fahrzeugId + "');";
+                + "	fahrzeugid = " + fahrzeugId + ";";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
@@ -56,8 +57,6 @@ public class FahrtenManager {
         return null;
     }
 
-    
-    
     public static Mautbruecke getMautbrueckeById(int mautbrueckeId) {
 
         String query = "select \n"
@@ -95,7 +94,7 @@ public class FahrtenManager {
                 + "from \n"
                 + "	abschnitt\n"
                 + "where \n"
-                + "	startstandort = " + startstandort + "and endstandort =" + endstandort + ");";
+                + "	startstandort = " + startstandort + "and endstandort =" + endstandort + ";";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
@@ -106,11 +105,11 @@ public class FahrtenManager {
                 a.setDistanz(rs.getDouble("distanz"));
                 a.setStartStandort(getStandordById(rs.getInt("startstandort")));
                 a.setEndStandort(getStandordById(rs.getInt("endstandort")));
-
+                System.out.println("Klappt");
                 return a;
             }
         } catch (SQLException sqle) {
-
+            System.out.println(sqle);
         }
 
         /*wenn ein Land gefunden wurde gib Land zurück
@@ -147,6 +146,115 @@ public class FahrtenManager {
          */
         return null;
     }
+    public static boolean createNewLaufendeFahrt(FahrtenLaufend fahrtenlaufend) {
+
+        String query = "Insert into fahrtenlaufend (fahrzeugid, MautbrueckeStart, Startzeitpunkt,"
+                + " MautbrueckeRecent,Endzeitpunkt,Kilometer) values ( "
+                + fahrtenlaufend.getFahrzeug().getFahrzeugId() + ", "
+                + fahrtenlaufend.getMautbrueckeStart().getMautbrueckeID() + ", '"
+                + fahrtenlaufend.getStartZeit() + "', "
+                + fahrtenlaufend.getMautbrueckeRecent().getMautbrueckeID() + ", '"
+                + fahrtenlaufend.getAktuelleZeit() + "', "
+                + fahrtenlaufend.getKilometer() + "); ";
+        try {
+            Statement stm = Datenbank.getStatement();
+            System.out.println(query);
+            stm.executeUpdate(query);
+            return true;
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        /*wenn ein Land gefunden wurde gib Land zurück
+                ansonsten null
+         */
+        return false;
+    }
+
+    public static boolean updateLaufendeFahrt(FahrtenLaufend fahrtenlaufend) {
+
+        String query = "UPDATE fahrtenlaufend SET MautbrueckeRecent = "
+                + fahrtenlaufend.getMautbrueckeRecent().getMautbrueckeID()+", Endzeitpunkt=   '" 
+                + fahrtenlaufend.getAktuelleZeit() + "', "
+                + "Kilometer="+fahrtenlaufend.getKilometer()
+                + "WHERE fahrtenlaufend.id = " + fahrtenlaufend.getFahrtenLaufendId() + ";";        
+        
+       
+        try {
+            Statement stm = Datenbank.getStatement();
+            
+            stm.executeUpdate(query);
+            return true;
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        /*wenn ein Land gefunden wurde gib Land zurück
+                ansonsten null
+         */
+        return false;
+    }
+    public static boolean updateLaufendeFahrtToAbgeschlossen(FahrtenLaufend fahrtenlaufend) {
+
+        String query = "Insert into fahrtenabgeschlossen (fahrzeugid, MautbrueckeStart, Startzeitpunkt,"
+                + " MautbrueckeRecent,Endzeitpunkt,Kilometer) values ( "
+                + fahrtenlaufend.getFahrzeug().getFahrzeugId() + ", "
+                + fahrtenlaufend.getMautbrueckeStart().getMautbrueckeID() + ", '"
+                + fahrtenlaufend.getStartZeit() + "', "
+                + fahrtenlaufend.getMautbrueckeRecent().getMautbrueckeID() + ", '"
+                + fahrtenlaufend.getAktuelleZeit() + "', "
+                + fahrtenlaufend.getKilometer() + "); ";       
+        
+       
+        try {
+            Statement stm = Datenbank.getStatement();
+            
+            stm.executeUpdate(query);
+            
+            query = "DELETE FROM fahrtenlaufend WHERE fahrtenlaufend.id = "
+                    +fahrtenlaufend.getFahrtenLaufendId() +";";
+            
+            stm.executeUpdate(query);
+            return true;
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        /*wenn ein Land gefunden wurde gib Land zurück
+                ansonsten null
+         */
+        return false;
+    }
+    
+    public static ArrayList<String> getSimulatorDaten() {
+        ArrayList<String> simulatorDaten = new ArrayList<>();
+        String query = "select \n"
+                + "	* \n"
+                + "from \n"
+                + "	daten\n"
+                + ";";
+        try {
+            Statement stm = Datenbank.getStatement();
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()) {
+
+                simulatorDaten.add(rs.getString("line"));
+
+            }
+            return simulatorDaten;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        /*wenn ein kunde gefunden wurde gib Kunden zurück
+                ansonsten null
+         */
+        return null;
+    }
+
 //    public static void putFahrt(int standordId) {
 //
 //        String query = "insert "
