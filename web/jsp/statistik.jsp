@@ -29,7 +29,7 @@
                 </div>
             </section><%
             }else{%>
-                <jsp:include page="permissionDenied.jsp"/><%
+                <jsp:forward page="permissionDenied.jsp"/><%
             }
         %>
         

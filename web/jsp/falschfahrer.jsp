@@ -1,3 +1,4 @@
+<%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -10,20 +11,31 @@
         <title>Falschfahrer | Autobahnmaut</title>
     </head>
     <body>
-        <section id="b1">
-            <div id="inb1">
-                <!--Einbinden der Taskbar als JSP-->
-                <div>
-                    <jsp:include page="taskbar.jsp"/>
-                </div>
-                <h1 id="head_start">Falschfahrerliste</h1>
-                <div id="back_white">
-                    <ul>
-                        <!--Script für Liste der Falschfahrer einfügen-->
-                        <% %><li></li><% %>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        <%
+            //Nutzer-Objekt aus der Session bekommen
+            Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
+            //Rolle aus Nutzer-Objekt ziehen und Berechtigung prüfen
+            if(n.getRolle() == "Polizei"){%>
+                <section id="b1">
+                    <div id="inb1">
+                        <!--Einbinden der Taskbar als JSP-->
+                        <div>
+                            <jsp:include page="taskbar.jsp"/>
+                        </div>
+                        <h1 id="head_start">Falschfahrerliste</h1>
+                        <div id="back_white">
+                            <ul>
+                                <!--Script für Liste der Falschfahrer einfügen-->
+                                <% %><li></li><% %>
+                            </ul>
+                        </div>
+                    </div>
+                </section><%
+            //Wenn keine Berechtigung vorhanden -> Weiterleitung auf Permission Denied
+            }else{%>
+                <jsp:forward page="permissionDenied.jsp"/><%
+            }
+        %>
+        
     </body>
 </html>

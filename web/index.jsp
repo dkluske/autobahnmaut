@@ -17,7 +17,7 @@
                 <div id="log_back">
                     <div id="log_form">
                         <!--Eingabeform für den Login-->
-                        <form action="" method="post">
+                        <form action="${pageContext.request.contextPath}/index" method="post">
                             <br/>
                             <text id="head_form">Login</text>
                             <br/><br/><br/>
