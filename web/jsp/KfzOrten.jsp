@@ -1,3 +1,4 @@
+<%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -10,24 +11,35 @@
         <title>Orten | Autobahnmaut</title>
     </head>
     <body>
-        <section id="b1">
-            <div id="inb1">
-                <!--Einbinden der Taskbar-->
-                <div>
-                    <jsp:include page="taskbar.jsp"/>
-                </div>
-                <h1 id="head_start">Fahrzeug orten</h1>
-                <div id="back_white">
-                    <h1 id="head_form" style="color:rgb(68,72,69)">Zuletzt gemeldete Position</h1>
-                    <!--Input-Form für die Erfassung des gesuchten Fahrzeugs-->
-                    <form action="" method="post">
-                        <br/><br/>
-                        <input type="text" name="kennz" placeholder="Kfz-Kennzeichen"><br/><br/>
-                        <input type="submit" value="Fahrzeug orten">
-                        <br/><br/>
-                    </form>
-                </div>
-            </div>
-        </section>
+        <%
+            //Nutzer-Objekt aus der Session bekommen
+            Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
+            //Rollenabfrage für die Berechtigung
+            if(n.getRolle() == "Nutzer" || n.getRolle() == "Wacht"){%>
+                <section id="b1">
+                    <div id="inb1">
+                        <!--Einbinden der Taskbar-->
+                        <div>
+                            <jsp:include page="taskbar.jsp"/>
+                        </div>
+                        <h1 id="head_start">Fahrzeug orten</h1>
+                        <div id="back_white">
+                            <h1 id="head_form" style="color:rgb(68,72,69)">Zuletzt gemeldete Position</h1>
+                            <!--Input-Form für die Erfassung des gesuchten Fahrzeugs-->
+                            <form action="" method="post">
+                                <br/><br/>
+                                <input type="text" name="kennz" placeholder="Kfz-Kennzeichen"><br/><br/>
+                                <input type="submit" value="Fahrzeug orten">
+                                <br/><br/>
+                            </form>
+                        </div>
+                    </div>
+                </section><%
+            //Wenn Rolle nicht erfüllt -> Weiterleitung auf Zugriff verweigert
+            }else{%>
+                <jsp:forward page="permissionDenied.jsp"/><%
+            }
+        %>
+        
     </body>
 </html>

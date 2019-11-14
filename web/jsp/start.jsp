@@ -17,7 +17,7 @@
                     <jsp:include page="taskbar.jsp"/>
                 </div>
                 
-                <h1 id="head_start"> Startseite</h1>
+                <h1 id="head_start">Startseite</h1>
             </div>
         </section>
     </body>
