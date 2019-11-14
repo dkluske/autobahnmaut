@@ -83,7 +83,7 @@ public class LandManagerTest {
         
         for(int i = 1; i < 17; i++){
             n = LandManager.getLandById(i);
-            if(n.getBezeichnung() == test.getBezeichnung()){
+            if(n.getLandId() == test.getLandId()){
                 Testergebnis = true;
                 break;
             }
