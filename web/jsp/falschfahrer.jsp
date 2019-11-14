@@ -1,3 +1,4 @@
+<%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -10,20 +11,28 @@
         <title>Falschfahrer | Autobahnmaut</title>
     </head>
     <body>
-        <section id="b1">
-            <div id="inb1">
-                <!--Einbinden der Taskbar als JSP-->
-                <div>
-                    <jsp:include page="taskbar.jsp"/>
-                </div>
-                <h1 id="head_start">Falschfahrerliste</h1>
-                <div id="back_white">
-                    <ul>
-                        <!--Script für Liste der Falschfahrer einfügen-->
-                        <% %><li></li><% %>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        <%
+            Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
+            if(n.getRolle() == "Polizei"){%>
+                <section id="b1">
+                    <div id="inb1">
+                        <!--Einbinden der Taskbar als JSP-->
+                        <div>
+                            <jsp:include page="taskbar.jsp"/>
+                        </div>
+                        <h1 id="head_start">Falschfahrerliste</h1>
+                        <div id="back_white">
+                            <ul>
+                                <!--Script für Liste der Falschfahrer einfügen-->
+                                <% %><li></li><% %>
+                            </ul>
+                        </div>
+                    </div>
+                </section><%
+            }else{%>
+                <jsp:forward page="permissionDenied.jsp"/><%
+            }
+        %>
+        
     </body>
 </html>
