@@ -15,7 +15,7 @@
             //Nutzer-Objekt aus der Session bekommen
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
             //Rolle aus Nutzer-Objekt ziehen und Berechtigung prüfen
-            if(n.getRolle() == "Polizei"){%>
+            if(n.getRolle().equals("Polizei")){%>
                 <section id="b1">
                     <div id="inb1">
                         <!--Einbinden der Taskbar als JSP-->

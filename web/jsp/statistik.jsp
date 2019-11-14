@@ -13,7 +13,7 @@
     <body>
         <%
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
-            if (n.getRolle() == "Ministerium" || n.getRolle() == "Admin"){%>
+        if (n.getRolle().equals("Ministerium")  || n.getRolle().equals("Admin")){%>
             <section id="b1">
                 <div id="inb1">
                     <!--Einbinden des Menübands-->
