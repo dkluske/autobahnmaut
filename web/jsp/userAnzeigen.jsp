@@ -16,7 +16,7 @@
             //Nutzer-Objekt aus der Session bekommen
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
             //Rolle aus dem Objekt nehmen und Berechtigung prüfen
-            if(n.getRolle() == "Wacht" || n.getRolle() == "Polizei"){%>
+            if(n.getRolle().equals("Wacht") || n.getRolle().equals("Polizei")){%>
                 <section id="b1">
                     <div id="inb1">
                         <!--Einbettung der Taskbar-->
@@ -26,9 +26,20 @@
                         <h1 id="head_start">Nutzer anzeigen</h1>
                         <div id="back_white">
                             <!--Hier Script für Anzeige der Liste der Nutzer im System einfügen-->
-                            <ul>
-                                <% %><li></li><% %>
-                            </ul>
+                            <table border ="1" width="500" align="center">
+                                    <tr>
+                                    <th>Name</th>
+                                    <th>PLZ</th>
+                                    <th>Ort</th>
+                                    </tr>
+                                    <c:forEach items="${nutzerliste}" var="item">
+                                        <tr>
+                                            <td><c:out value="${item.name}"/></td>
+                                            <td><c:out value="${item.plz}"/></td>
+                                            <td><c:out value="${item.ort}"/></td>
+                                        </tr>
+                                    </c:forEach>
+                            </table>
                             <!--Input-Form für die Erfassung der Fahrzeuge eines Nutzers-->
                             <form action="" method="post">
                                 <br/><br/>
