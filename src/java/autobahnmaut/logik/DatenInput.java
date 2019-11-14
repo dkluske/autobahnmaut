@@ -9,6 +9,8 @@ import autobahnmaut.datenbank.FahrtenManager;
 import autobahnmaut.datenbank.FahrzeugManager;
 import autobahnmaut.model.FahrtenLaufend;
 import autobahnmaut.model.Messdaten;
+
+//import com.sun.xml.rpc.processor.modeler.j2ee.xml.genericBooleanType;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

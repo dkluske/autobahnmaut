@@ -1,3 +1,4 @@
+<%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -10,36 +11,44 @@
         <title>Kfz Registrieren | Autobahnmaut</title>
     </head>
     <body>
-        <section id="b1">
-            <div id="inb1">
-                <!--Einbinden der taskbar als jsp-->
-                <div>
-                    <jsp:include page="taskbar.jsp"/>
-                </div>
-                <h1 id="head_start">Fahrzeuge registrieren</h1>
-                <div id="back_white">
-                    <table style="width:100%">
-                        <tr>
-                            <!--Input Form für die Fahrzeugregistrierung-->
-                            <td>
-                                <form action="" method="post">
-                                    <br/><br/>
-                                    <input type="text" name="kennz" placeholder="Kfz-Kennzeichen"><br/><br/>
-                                    <input type="submit" value="Registrieren" id="submit">
-                                    <br/><br/>
-                                </form>
-                            </td>
-                            <!--Liste der schon vorhandenen Fahrzeuge-->
-                            <td>
-                                <ul>
-                                    <!--Script für die anzeige der schon vorhandenen Fahrzeuge einfügen-->
-                                    <% %><li>BZ AB 123</li><% %>
-                                </ul>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </section>
+        <%
+            Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
+            if(n.getRolle() == "Nutzer"){%>
+                <section id="b1">
+                    <div id="inb1">
+                        <!--Einbinden der taskbar als jsp-->
+                        <div>
+                            <jsp:include page="taskbar.jsp"/>
+                        </div>
+                        <h1 id="head_start">Fahrzeuge registrieren</h1>
+                        <div id="back_white">
+                            <table style="width:100%">
+                                <tr>
+                                    <!--Input Form für die Fahrzeugregistrierung-->
+                                    <td>
+                                        <form action="" method="post">
+                                            <br/><br/>
+                                            <input type="text" name="kennz" placeholder="Kfz-Kennzeichen"><br/><br/>
+                                            <input type="submit" value="Registrieren" id="submit">
+                                            <br/><br/>
+                                        </form>
+                                    </td>
+                                    <!--Liste der schon vorhandenen Fahrzeuge-->
+                                    <td>
+                                        <ul>
+                                            <!--Script für die anzeige der schon vorhandenen Fahrzeuge einfügen-->
+                                            <% %><li>BZ AB 123</li><% %>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </section><%
+            }else{%>
+                <jsp:forward page="permissionDenied.jsp"/><%
+            }
+        %>
+        
     </body>
 </html>

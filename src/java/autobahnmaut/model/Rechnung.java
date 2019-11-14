@@ -6,6 +6,7 @@
 package autobahnmaut.model;
 
 import java.time.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -18,6 +19,15 @@ public class Rechnung {
     private Date bezahlt;
     private double summe;
     private Nutzer nutzer;
+    private ArrayList<Rechnungsposition> rechnungspostionsListe = new ArrayList<>();
+
+    public ArrayList<Rechnungsposition> getRechnungspostionsListe() {
+        return rechnungspostionsListe;
+    }
+
+    public void setRechnungspostionsListe(ArrayList<Rechnungsposition> rechnungspostionsListe) {
+        this.rechnungspostionsListe = rechnungspostionsListe;
+    }
 
     public int getRechnungId() {
         return rechnungId;
