@@ -3,23 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package autobahnmaut;
-
 
 import autobahnmaut.datenbank.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+import java.util.Calendar;
+import java.util.Date;
 
 public class SampleQuery {
-    
-    public static void main (String[] args){
-        
+
+    public static void main(String[] args) {
+
         autobahnmaut.datenbank.Datenbank.getConnection();
-                        
-        autobahnmaut.datenbank.UserManager.registrieren("test@web.de", "admin", "Nutzer", "Testnutzer", "Teststraße","12341", "Testort", 0);
+        Date monat = Calendar.getInstance().getTime();
+        //autobahnmaut.datenbank.UserManager.rechnungsdaten(3, monat);
+        autobahnmaut.datenbank.StatistikManager.getStatistikdaten();
+
     }
-           
-    
 }
