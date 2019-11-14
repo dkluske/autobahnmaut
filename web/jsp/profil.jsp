@@ -16,14 +16,23 @@
                 <!--Einbinden der Taskbar-->
                 <div>
                     <jsp:include page="taskbar.jsp"/>
-                </div>
+                </div> 
+                <h1 id="head_start">Profil</h1>
                 <div id="back_white">
-                    <h1 id="head_start"> PROFIL</h1><br/>
-                    <c:out value="${nutzer.name}"/><br/>
-                    <c:out value="${nutzer.rolle}"/><br/>
-                    <c:out value="${nutzer.email}"/><br/>
-                    
-
+                    <table align="center" width="700">
+                        <tr>
+                            <td>Name</td>
+                            <td><c:out value="${nutzer.name}"/><br/></td>
+                        </tr>
+                        <tr>
+                            <td>E-Mail</td>
+                            <td><c:out value="${nutzer.email}"/><br/></td>
+                        </tr>
+                        <tr>
+                            <td>Rolle</td>
+                            <td><c:out value="${nutzer.rolle}"/><br/></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </section>

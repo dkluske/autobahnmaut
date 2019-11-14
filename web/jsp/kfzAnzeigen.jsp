@@ -21,7 +21,7 @@
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
 
             //Rollen-Abfrage für die Berechtigung auf den Zugriff
-            if(n.getRolle().equals("Polizei")  || n.getRolle().equals("Wacht")){%>
+    if(n.getRolle().equals("Polizei")  || n.getRolle().equals("Wacht") || n.getRolle().equals("Admin")){%>
                 <section id="b1">
                     <div id="inb1">
                         <!--Einbinden der Taskbar.jsp-->
