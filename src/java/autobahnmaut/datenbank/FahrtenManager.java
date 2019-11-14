@@ -6,11 +6,13 @@
 package autobahnmaut.datenbank;
 
 import autobahnmaut.model.Abschnitt;
+import autobahnmaut.model.FahrtenAbgeschlossen;
 import autobahnmaut.model.FahrtenLaufend;
 import autobahnmaut.model.Fahrzeug;
 import autobahnmaut.model.Land;
 
 import autobahnmaut.model.Mautbruecke;
+import autobahnmaut.model.Nutzer;
 import autobahnmaut.model.Standort;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,6 +49,37 @@ public class FahrtenManager {
 
                 return laufendeFahrt;
             }
+        } catch (SQLException sqle) {
+
+        }
+
+        /*wenn ein Land gefunden wurde gib Land zurück
+                ansonsten null
+         */
+        return null;
+    }
+
+    public static ArrayList<FahrtenAbgeschlossen> getFalschfahrten() {
+        ArrayList<FahrtenAbgeschlossen> flaschfahrtenListe = new ArrayList<>();
+        String query = "Select* from fahrtenabgeschlossen inner join "
+                + "mautbruecke ON mautbruecke.id = fahrtenabgeschlossen.mautbrueckestart"
+                + " where abfahrt =false;";
+        try {
+            Statement stm = Datenbank.getStatement();
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()) {
+                FahrtenAbgeschlossen abgeschlosseneFahrt = new FahrtenAbgeschlossen();
+
+                abgeschlosseneFahrt.setEndZeit(rs.getDate("endzeitpunkt"));
+                abgeschlosseneFahrt.setFahrtenAbgeschlossenId(rs.getInt("id"));
+                abgeschlosseneFahrt.setFahrzeug(FahrzeugManager.getFahrzeugById(rs.getInt("fahrzeugid")));
+                abgeschlosseneFahrt.setKilometer(rs.getDouble("kilometer"));
+                abgeschlosseneFahrt.setMautbrueckeRecent(getMautbrueckeById(rs.getInt("mautbrueckeRecent")));
+                abgeschlosseneFahrt.setStartZeit(rs.getDate("startzeitpunkt"));
+                abgeschlosseneFahrt.setMautbrueckeStart(getMautbrueckeById(rs.getInt("mautbrueckestart")));
+                flaschfahrtenListe.add(abgeschlosseneFahrt);
+            }
+            return flaschfahrtenListe;
         } catch (SQLException sqle) {
 
         }
@@ -146,6 +179,7 @@ public class FahrtenManager {
          */
         return null;
     }
+
     public static boolean createNewLaufendeFahrt(FahrtenLaufend fahrtenlaufend) {
 
         String query = "Insert into fahrtenlaufend (fahrzeugid, MautbrueckeStart, Startzeitpunkt,"
@@ -175,15 +209,14 @@ public class FahrtenManager {
     public static boolean updateLaufendeFahrt(FahrtenLaufend fahrtenlaufend) {
 
         String query = "UPDATE fahrtenlaufend SET MautbrueckeRecent = "
-                + fahrtenlaufend.getMautbrueckeRecent().getMautbrueckeID()+", Endzeitpunkt=   '" 
+                + fahrtenlaufend.getMautbrueckeRecent().getMautbrueckeID() + ", Endzeitpunkt=   '"
                 + fahrtenlaufend.getAktuelleZeit() + "', "
-                + "Kilometer="+fahrtenlaufend.getKilometer()
-                + "WHERE fahrtenlaufend.id = " + fahrtenlaufend.getFahrtenLaufendId() + ";";        
-        
-       
+                + "Kilometer=" + fahrtenlaufend.getKilometer()
+                + "WHERE fahrtenlaufend.id = " + fahrtenlaufend.getFahrtenLaufendId() + ";";
+
         try {
             Statement stm = Datenbank.getStatement();
-            
+
             stm.executeUpdate(query);
             return true;
 
@@ -196,6 +229,7 @@ public class FahrtenManager {
          */
         return false;
     }
+
     public static boolean updateLaufendeFahrtToAbgeschlossen(FahrtenLaufend fahrtenlaufend) {
 
         String query = "Insert into fahrtenabgeschlossen (fahrzeugid, MautbrueckeStart, Startzeitpunkt,"
@@ -205,17 +239,16 @@ public class FahrtenManager {
                 + fahrtenlaufend.getStartZeit() + "', "
                 + fahrtenlaufend.getMautbrueckeRecent().getMautbrueckeID() + ", '"
                 + fahrtenlaufend.getAktuelleZeit() + "', "
-                + fahrtenlaufend.getKilometer() + "); ";       
-        
-       
+                + fahrtenlaufend.getKilometer() + "); ";
+
         try {
             Statement stm = Datenbank.getStatement();
-            
+
             stm.executeUpdate(query);
-            
+
             query = "DELETE FROM fahrtenlaufend WHERE fahrtenlaufend.id = "
-                    +fahrtenlaufend.getFahrtenLaufendId() +";";
-            
+                    + fahrtenlaufend.getFahrtenLaufendId() + ";";
+
             stm.executeUpdate(query);
             return true;
 
@@ -228,7 +261,7 @@ public class FahrtenManager {
          */
         return false;
     }
-    
+
     public static ArrayList<String> getSimulatorDaten() {
         ArrayList<String> simulatorDaten = new ArrayList<>();
         String query = "select \n"
