@@ -16,7 +16,13 @@ import org.junit.runners.Suite;
  * @author 17wi1115
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({autobahnmaut.datenbank.DatenbankTest.class, autobahnmaut.datenbank.UserManagerTest.class, autobahnmaut.datenbank.FahrtenManagerTest.class , autobahnmaut.datenbank.FahrzeugManagerTest.class, autobahnmaut.datenbank.StatistikManagerTest.class})
+@Suite.SuiteClasses({autobahnmaut.datenbank.LandManagerTest.class,
+                     autobahnmaut.datenbank.DatenbankTest.class,
+                     autobahnmaut.datenbank.UserManagerTest.class,
+                     autobahnmaut.datenbank.FahrtenManagerTest.class,
+                     autobahnmaut.datenbank.FahrzeugManagerTest.class,
+                     autobahnmaut.datenbank.StatistikManagerTest.class})
+
 public class AutobahnTestSuite {
 
     @BeforeClass

@@ -21,11 +21,11 @@ import java.util.Date;
 public class SampleQuery {
 
     public static void main(String[] args) throws ParseException {
-        Date monat = Calendar.getInstance().getTime();
+     //   Date monat = Calendar.getInstance().getTime();
 
         autobahnmaut.datenbank.Datenbank.getConnection();
 
-        FahrtenLaufend fahrtenlaufend = new FahrtenLaufend();
+    //    FahrtenLaufend fahrtenlaufend = new FahrtenLaufend();
 
 //        fahrtenlaufend = autobahnmaut.datenbank.FahrtenManager.getLaufendeFahrt(213);
 //                fahrtenlaufend.setAktuelleZeit(monat);
@@ -67,7 +67,7 @@ public class SampleQuery {
 //        System.out.println(s);
 //    }
     
-       ArrayList<Nutzer> nutzerDaten = UserManager.getNutzerListe();
+/*       ArrayList<Nutzer> nutzerDaten = UserManager.getNutzerListe();
     int count=0;
     for(Nutzer n :nutzerDaten ){
         
@@ -77,7 +77,9 @@ public class SampleQuery {
         System.out.println(n.getName());
     }
       
-       
+ */
+
+    System.out.println(FahrzeugManager.getFahrzeugePolizei().size());
         
         
 

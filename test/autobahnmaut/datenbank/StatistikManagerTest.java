@@ -44,9 +44,7 @@ public class StatistikManagerTest {
     @Test
     public void testGetStatistikdaten() {
         System.out.println("getStatistikdaten");
-        Statistik expResult = null;
         Statistik result = StatistikManager.getStatistikdaten();
-        assertEquals(expResult, result);
+        assertNotNull(result);
     }
-    
 }

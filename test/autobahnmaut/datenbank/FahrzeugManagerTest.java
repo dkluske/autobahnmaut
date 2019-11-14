@@ -48,7 +48,7 @@ public class FahrzeugManagerTest {
     public void testFahrzeuglisteNutzer() {
         System.out.println("fahrzeuglisteNutzer");
         int nutzerId = 0;
-        ArrayList<Fahrzeug> expResult = null;
+        ArrayList<Fahrzeug> expResult = new ArrayList<Fahrzeug>();
         ArrayList<Fahrzeug> result = FahrzeugManager.fahrzeuglisteNutzer(nutzerId);
         assertEquals(expResult, result);
     }
@@ -478,7 +478,7 @@ public class FahrzeugManagerTest {
         
         Fahrzeug test = new Fahrzeug();
         
-        test.setFahrzeugId(1);
+        test.setFahrzeugId(262);
         test.setKennzeichen("SL,WS,18");
         test.setLand(testLand);
         test.setNutzer(testNutzer);
@@ -488,7 +488,16 @@ public class FahrzeugManagerTest {
         
         n = FahrzeugManager.getFahrzeugByKennzeichenAndLandid("SL,WS,18", 2);
         
-        assertEquals(test, n);
+        assertEquals(test.getFahrzeugId(), n.getFahrzeugId());
+    }
+    
+    @Test
+    public void testgetFahrzeugPolizei(){
+        System.out.println("testgetFahrzeugPolizei");
+        int AnzPolizei = FahrzeugManager.getFahrzeugePolizei().size();
+        int Erwartet = 22;
+        
+        assertEquals(AnzPolizei, Erwartet);
     }
     
 }
