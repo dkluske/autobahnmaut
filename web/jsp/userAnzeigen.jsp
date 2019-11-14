@@ -27,6 +27,7 @@
                         <br/><br/>
                         <input type="text" name="email" placeholder="E-Mail Adresse">
                         <input type="submit" value="Fahrzeuge anzeigen">
+                        <br/><br/>
                     </form>
                 </div>
             </div>
