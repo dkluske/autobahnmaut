@@ -7,6 +7,8 @@
         <title>Zugriff verweigert</title>
     </head>
     <body>
-        <h1 id="head_log">Zugriff verweigert!</h1>
+        <section id="a1">
+            <h1 id="head_log">Zugriff verweigert!</h1>
+        </section>
     </body>
 </html>
