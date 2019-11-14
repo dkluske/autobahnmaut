@@ -335,7 +335,7 @@ public class FahrzeugManagerTest {
         
         for(int i = 1; i < 17 ; i++){
             m = FahrzeugManager.getLandById(i);
-            if(m.getKurzBezeichnung() == test.getKurzBezeichnung()){
+            if(m.getLandId() == test.getLandId()){
                 Testergebnis =  true;
                 break;
             }

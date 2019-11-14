@@ -80,15 +80,15 @@ public class LandManagerTest {
         test.setKurzBezeichnung("F");
         
         Land n = new Land();
-        
-        for(int i = 1; i < 17; i++){
-            n = LandManager.getLandById(i);
-            if(n.getLandId() == test.getLandId()){
+              
+        for(int i = 1; i < 17; i++){   
+           n = LandManager.getLandById(i);
+           if(n.getLandId() == test.getLandId()){
                 Testergebnis = true;
                 break;
             }
         }
         assertTrue(Testergebnis);
-    }
-    
+        
+    } 
 }
