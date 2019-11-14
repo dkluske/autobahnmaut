@@ -11,7 +11,7 @@ package autobahnmaut.model;
  */
 public class Fahrzeug {
     private int fahrzeugId;
-    private String kennzeichen;
+    public String kennzeichen;
     private boolean privileg;
     private Nutzer nutzer;
     private Land land;

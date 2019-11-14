@@ -27,8 +27,8 @@ public class Nutzer {
         return fahrzeugListe;
     }
 
-    public void setFahrzeugListe(ArrayList<Fahrzeug> fahrzeugListe) {
-       this.fahrzeugListe = autobahnmaut.datenbank.FahrzeugManager.fahrzeuglisteNutzer(this.nutzerId);         
+    public void setFahrzeugListe() {
+       this.fahrzeugListe = autobahnmaut.datenbank.FahrzeugManager.fahrzeuglisteNutzer(this.nutzerId);
     }
     @Override
     public String toString() {

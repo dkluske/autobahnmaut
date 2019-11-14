@@ -1,5 +1,6 @@
 <%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,57 +30,64 @@
                         <!--Logo der Firma links in der Taskbar-->
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
-                        <a href="kfzRegister.jsp">Fahrzeuge</a>
-                        <a href="KfzOrten.jsp">Fahrzeuge orten</a>
-                        <a href="">Rechnung</a>
-                        <a href="">Logout</a>
+                        <a href="${pageContext.request.contextPath}/kfzRegister">Fahrzeuge</a>
+                        <a href="${pageContext.request.contextPath}/KfzOrten">Fahrzeuge orten</a>
+                        <a href="${pageContext.request.contextPath}/rechnung">Rechnung</a>
+                        <a href="${pageContext.request.contextPath}/profil">Profil</a>
+                        <a href="${pageContext.request.contextPath}/Logout">Logout</a>
                     </div>
                 <%
+                    break;
                 //Rolle / Taskbar Ministerium
                 case "Ministerium":%>
                     <div class="navigation">
                         <!--Logo der Firma links in der Taskbar-->
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
-                        <a href="${pageContext.request.contextPath}\\jsp\\statistik.jsp">Statistik</a>
+                        <a href="${pageContext.request.contextPath}/statistik">Statistik</a>
                         <a href="">Logout</a>
                     </div>
                 <%
+                    break;
                 //Rolle / Taskbar Polizei
                 case "Polizei":%>
                     <div class="navigation">
                         <!--Logo der Firma links in der Taskbar-->
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
-                        <a href="${pageContext.request.contextPath}\\jsp\\userAnzeigen.jsp">Nutzer</a>
-                        <a href="${pageContext.request.contextPath}\\jsp\\ausnahme.jsp">Ausnahmen</a>
-                        <a href="${pageContext.request.contextPath}\\jsp\\falschfahrer.jsp">Falschfahrer</a>
-                        <a href="">Logout</a>
+                        <a href="${pageContext.request.contextPath}/userAnzeigen">Nutzer</a>
+                        <a href="${pageContext.request.contextPath}/ausnahme">Ausnahmen</a>
+                        <a href="${pageContext.request.contextPath}/falschfahrer">Falschfahrer</a>
+                        <a href="${pageContext.request.contextPath}/Logout">Logout</a>
                     </div>
                 <%
+                    break;
                 //Rolle / Taskbar Verkehrswacht
                 case "Verkehrswacht":%>
                     <div class="navigation">
                         <!--Logo der Firma links in der Taskbar-->
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
-                        <a href="userAnzeigen.jsp">Nutzer</a>
-                        <a href="KfzOrten.jsp">Fahrzeuge orten</a>
-                        <a href="">Logout</a>
+                        <a href="${pageContext.request.contextPath}/userAnzeigen">Nutzer</a>
+                        <a href="${pageContext.request.contextPath}/KfzOrten">Fahrzeuge orten</a>
+                        <a href="${pageContext.request.contextPath}/Logout">Logout</a>
                     </div>
                 <%
+                    break;
                 //Rolle / Taskbar Administrator
                 case "Admin":%>
                     <div class="navigation">
                         <!--Logo der Firma links in der Taskbar-->
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
-                        <a href="userAnzeigen.jsp">Nutzer</a>
-                        <a href="kfzAnzeigen.jsp">Fahrzeuge</a>
-                        <a href="ausnahmen.jsp">Ausnahmen</a>
-                        <a href="">Logout</a>
+                        <a href="${pageContext.request.contextPath}/userAnzeigen">Nutzer</a>
+                        <a href="${pageContext.request.contextPath}/kfzAnzeigen">Fahrzeuge</a>
+                        <a href="${pageContext.request.contextPath}/ausnahmen">Ausnahmen</a>
+                        <a href="${pageContext.request.contextPath}/profil">Profil</a>
+                        <a href="${pageContext.request.contextPath}/Logout">Logout</a>
                     </div>
                 <%
+                    break;
                 default:%>
                     <div class="navigation">
                         <!--Logo der Firma links in der Taskbar-->

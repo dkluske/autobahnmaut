@@ -1,5 +1,9 @@
+
+<%@page import="autobahnmaut.model.Fahrzeug"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,10 +28,22 @@
                         </div>
                         <h1 id="head_start">Fahrzeuge anzeigen</h1>
                         <div id="back_white">
-                            <ul>
-                                <!--Script für Auflistung aller Fahrzeuge-->
-                                <% %><li></li><% %>
-                            </ul>
+                            <table border ="1" width="500" align="center"> 
+                              <tr bgcolor="00FF7F"> 
+                              <th><b>Fahrzeug ID</b></th> 
+                              <th><b>Fahrzeug Kennzeichen</b></th> 
+                              <th><b>Course Undertaken</b></th> 
+                              </tr> 
+                
+                
+                              <c:forEach items="${fahrzeuge}" var="item">
+                              <tr>
+                              <td><c:out value="${item.fahrzeugId}"/></td>
+                              <td><c:out value="${item.kennzeichen}"/></td>
+                              <td></td>
+                              </tr>
+                              </c:forEach>
+                            </table>
                         </div>
                     </div>
                 </section><%
@@ -36,7 +52,5 @@
                 <jsp:forward page="permissionDenied.jsp"/><%
             }
         %>
-        
-        
     </body>
 </html>

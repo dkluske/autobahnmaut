@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package autobahnmaut.logik.Controller;
+package autobahnmaut.logik.Controller.pages;
 
 import autobahnmaut.datenbank.UserManager;
 import autobahnmaut.logik.Helper;
@@ -28,7 +28,35 @@ import javax.servlet.http.HttpSession;
         urlPatterns = {"/Register", "/register"}
 )
 public class Register extends HttpServlet {
+    private HttpSession session;
+    private String rolle;
+    private Nutzer nutzer;
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        this.session = (HttpSession) request.getSession();
+        this.nutzer = (Nutzer) this.session.getAttribute("nutzer");
+        if (this.nutzer != null) {
+            this.rolle = (String) this.nutzer.getRolle();
+        }else{
+            this.rolle = null;
+        }
+//       --- DEBUGGING
+//        PrintWriter out = response.getWriter();
+//        out.println(session.toString());
+//        out.println(session.getAttribute("nutzer").toString());       
+//       ----------------
+
+    }
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -40,10 +68,10 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd;
-        rd = request.getRequestDispatcher("/jsp/register.jsp");
-        rd.forward(request, response);
-
+        processRequest(request, response);
+        
+//        Gebe register.jsp
+        request.getRequestDispatcher("/jsp/register.jsp").forward(request, response);
     }
 
     /**
@@ -92,6 +120,7 @@ public class Register extends HttpServlet {
             errors.add("Ort");
         }
 
+//        Wenn Fehler, zurück auf register.jsp und Fehler mit übergeben
         if(!errors.isEmpty()){
             request.setAttribute("errors", errors);
             request.getRequestDispatcher("jsp/register.jsp").forward(request, response);
@@ -105,9 +134,19 @@ public class Register extends HttpServlet {
                     plz, 
                     ort, 
                     rabatt);
-    //      Nutzer in session speichern;
-            HttpSession session = request.getSession();
-            session.setAttribute("Nutzer", n);
+            if (n instanceof Nutzer) {
+//                Wenn Registrierung ERFOLGREICH Nutzer in session speichern;
+                this.session.setAttribute("Nutzer", n);
+//                Leite weiter zu Start.jsp
+                response.sendRedirect(request.getContextPath() + "/start");
+                
+            }else{
+//                Wenn Registrierung fehlgeschlagen, dann Fehler ausgeben auf register.jsp
+                errors.add("Registrierung Fehlgeschlagen");
+                request.setAttribute("errors", errors);
+                request.getRequestDispatcher("jsp/register.jsp").forward(request, response);                    
+            }
+
         }
 
     }

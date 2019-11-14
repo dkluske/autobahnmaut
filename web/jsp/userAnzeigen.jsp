@@ -1,5 +1,6 @@
 <%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="autobahnmaut.model.Nutzer"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -43,6 +44,5 @@
                 <jsp:forward page="permissionDenied.jsp"/><%
             }
         %>
-        
     </body>
 </html>
