@@ -78,7 +78,16 @@ public class FahrzeugManager {
 //    }
     public static ArrayList<Fahrzeug> fahrzeuglisteNutzer(int nutzerId) {
         ArrayList<Fahrzeug> fahrzeugListe = new ArrayList<>();
+
         String query = "SELECT * FROM fahrzeug WHERE nutzerid = " + nutzerId + ";";
+
+        String query = "select \n"
+                + "	* \n"
+                + "from \n"
+                + "	fahrzeug\n"
+                + "where \n"
+                + "	nutzerid = " + nutzerId + ";";
+
         try {
             Statement stm = Datenbank.getStatement();
             System.out.println(query);
@@ -117,7 +126,7 @@ public class FahrzeugManager {
                 + "from \n"
                 + "	land\n"
                 + "where \n"
-                + "	id = '" + landId + "');";
+                + "	id = " + landId + ";";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
@@ -146,7 +155,7 @@ public class FahrzeugManager {
                 + "from \n"
                 + "	fahrzeug\n"
                 + "where \n"
-                + "	id = '" + fahrzeugid + "');";
+                + "	id = " + fahrzeugid + ";";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);

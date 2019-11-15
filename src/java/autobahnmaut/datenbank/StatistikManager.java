@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -19,35 +20,42 @@ import java.time.LocalDateTime;
  */
 public class StatistikManager {
 
-    public static Statistik erstelleStatistik(LocalDateTime monat) {
+    public static Statistik getStatistikdaten() {
         Statistik statistik = new Statistik();
-        
+
         /* 
         Top 10 der Länder mit den meisten KM
         
          */
         //Statement anpassen
-        String query = "select top 10 \n"
-                + "	* \n"
-                + "from \n"
-                + "	fahrten\n"
-                + "where \n"
-                + "	nutzerid = '" + monat + "');";
+        String query = "Select "
+                + "sum(fa.kilometer) as kilometer, "
+                + "fz.landid as land "
+                + "from fahrtenabgeschlossen fa   "
+                + "join fahrzeug fz ON fz.id = fa.fahrzeugid  "
+                + "where fz.landid > 1 "
+                + "group by fz.landid "
+                + "order by kilometer desc "
+                + "limit 10";
         try {
             Statement stm = Datenbank.getStatement();
             ResultSet rs = stm.executeQuery(query);
             while (rs.next()) {
                 Statistikdaten statistikdaten = new Statistikdaten();
                 statistikdaten.setKm(rs.getDouble("kilometer"));
-                statistikdaten.setLand(autobahnmaut.datenbank.FahrzeugManager.getLandById(rs.getInt("landid")));
+                statistikdaten.setLand(autobahnmaut.datenbank.FahrzeugManager.getLandById(rs.getInt("land")));
                 statistik.addStatistikListe(statistikdaten);
-
-                
-            }return statistik;
+                System.out.println(statistikdaten.getKm());
+                System.out.println(statistikdaten.getLand().getBezeichnung());
+             
+             
+            }
+            System.out.println("Klappt");
+            return statistik;
         } catch (SQLException sqle) {
-
+            System.out.println(sqle);
         }
-        
+
         return null;
     }
 
