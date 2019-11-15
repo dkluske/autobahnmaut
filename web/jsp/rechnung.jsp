@@ -1,55 +1,80 @@
-<%-- 
-    Document   : rechnung
-    Created on : 12.11.2019, 10:55:44
-    Author     : 17wi1199
---%>
-
+<%@page import="autobahnmaut.model.Rechnungsfahrten"%>
+<%@page import="autobahnmaut.model.Rechnungsposition"%>
+<%@page import="autobahnmaut.model.Rechnung"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
+<%@page import="autobahnmaut.datenbank.UserManager"%>
+<%@page import="autobahnmaut.model.Fahrzeug"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="autobahnmaut.datenbank.FahrzeugManager"%>
+<%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--Einbinden der CSS Datei und der favicon.ico -->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\mainCSS.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\taskbar.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\welcome.css">
         <link rel="icon" type="image/vnd.microsoft.icon" href="${pageContext.request.contextPath}\\favicon.ico">
-        <title>Rechnung anzeigen | Autobahnmaut</title>
+        <title>Rechnung | Autobahnmaut</title>
     </head>
-    
     <body>
+        <%
+            //Nutzer-Objekt aus der Session bekommen
+            Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
+            Date monat = Calendar.getInstance().getTime();
+            Rechnung rechnung = UserManager.rechnungsdaten(n.getNutzerId(), monat);
+            ArrayList<Rechnungsposition> rpL = rechnung.getRechnungspostionsListe();
+
+            //Abfrage der Rolle aus dem Objekt und Prüfung der Berechtigung
+            if (n.getRolle().equals("Nutzer")) { %>
         <section id="b1">
             <div id="inb1">
-                <div class="navigation">
-                    <text>Autobahnmaut</text>
-                        <a href="">Function 1</a>
-                        <a href="">Function 2</a>
-                        <a href="">Function 3</a>
-                        <a href="">Function 4</a>
+                <!--Einbinden der taskbar als jsp-->
+                <div>
+                    <jsp:include page="taskbar.jsp"/>
                 </div>
-                
-                <h1 id="head_start">Rechnung anzeigen</h1>
-            </div>
-            
-            <section id="a1">
-            <div id="regin">
-                <h1 id="head_log">Autobahnmaut</h1>
-            </div>
-            <div id="rechn_back">
-                <div id="rechnform">
-                    <form action="" method="post">
-                        <br/>
-                        <text id="head_rechn">Rechnung anzeigen</text>
-                        <br/><br/><br/>
-                        <div id="rechn_form"><input type="text" name="firma" placeholder="Firma"> <br/>
-                            <input type="text" name="anschrift" placeholder="Anschrift"><br/>
-                            <input type="text" name="rechnnr" placeholder="Rechnungsnummer"><br/>
-                            <input type="text" name="datum" placeholder="Datum"><br/><br/><br/>
-                            <input type="" name="bestätigen" placeholder="Bestätigen" id="loginbtn">
-                        </div>
-                    </form>
+                <h1 id="head_start">Rechnung</h1>
+                <div id="back_white">
+                    
+
+                                <table border ="1" width="500" align="center">
+                                    <tr>
+                                        <th>Kennzeichen</th>
+                                        <th>Startort</th>
+                                        <th>Endort</th>
+                                        <th>Kilometer</th>
+                                    </tr>
+
+                                    <% for (Rechnungsposition rp : rpL) {
+                                            ArrayList<Rechnungsfahrten> rfL = rp.getRechnungsfahrtenListe();
+                                    %>   
+                                    <tr>
+                                        <th><%= rp.getKennzeichen()%></th>
+
+                                    </tr>
+                                    <% for (Rechnungsfahrten rf : rfL) {
+
+                                    %>
+                                    <td></td>
+                                    <td><%= rf.getStartOrt()%></td>
+                                    <td><%= rf.getEndOrt()%></td>
+                                    <td><%= rf.getKilometer()%></td>
+                                    <%
+                                            }
+                                        }
+                                    %>
+
+
+                      
                 </div>
             </div>
-        </section>
-        </section>
+        </section><%
+            //Wenn keine Berechtigung -> Weiterleiten auf Zugriff verweigert
+        } else { %>
+        <jsp:forward page="permissionDenied.jsp"/><%
+            }
+        %>
     </body>
 </html>

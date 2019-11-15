@@ -133,6 +133,7 @@ public class UserManager {
                 + "	* \n"
                 + "from \n"
                 + "	nutzer\n"
+                + "order by id asc"
                 + ";";
         try {
             Statement stm = Datenbank.getStatement();

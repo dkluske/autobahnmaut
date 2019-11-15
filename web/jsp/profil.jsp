@@ -16,8 +16,7 @@
                 <!--Einbinden der Taskbar-->
                 <div>
                     <jsp:include page="taskbar.jsp"/>
-                </div>
-
+                </div> 
                 <h1 id="head_start">Profil</h1>
                 <div id="back_white">
                     <table align="center" width="700">
@@ -30,20 +29,10 @@
                             <td><c:out value="${nutzer.email}"/><br/></td>
                         </tr>
                         <tr>
-                            <td>Postleitzahl</td>
-                            <td><c:out value="${nutzer.plz}"/><br/></td>
-                        </tr>
-                        <tr>
-                            <td>Ort</td>
-                            <td><c:out value="${nutzer.ort}"/><br/></td>
+                            <td>Rolle</td>
+                            <td><c:out value="${nutzer.rolle}"/><br/></td>
                         </tr>
                     </table>
-                        
-                        
-                        
-                        
-                    
-                    
                 </div>
             </div>
         </section>

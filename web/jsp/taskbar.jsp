@@ -31,9 +31,8 @@
                         <!--Logo der Firma links in der Taskbar-->
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
-                        <a href="${pageContext.request.contextPath}/kfzRegister">Fahrzeuge</a>
-                        <a href="${pageContext.request.contextPath}/KfzOrten">Fahrzeuge orten</a>
-                        <a href="${pageContext.request.contextPath}/rechnung">Rechnung</a>
+                        <a href="${pageContext.request.contextPath}/kfzRegister">Fahrzeuge</a>                        
+                        <a href="${pageContext.request.contextPath}/pdf">Rechnung</a>
                         <a href="${pageContext.request.contextPath}/profil">Profil</a>
                         <a href="${pageContext.request.contextPath}/Logout">Logout</a>
                     </div>

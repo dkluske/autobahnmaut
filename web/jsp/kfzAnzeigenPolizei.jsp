@@ -1,34 +1,41 @@
-<%@page import="java.util.ArrayList"%>
 <%@page import="autobahnmaut.datenbank.UserManager"%>
+<%@page import="autobahnmaut.model.Fahrzeug"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="autobahnmaut.datenbank.FahrzeugManager"%>
 <%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="autobahnmaut.model.Nutzer"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!--Einbinden der CSS Formatierungen und des Favicons-->
+        <!--Einbinden der CSS Datei und der favicon.ico -->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\mainCSS.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\taskbar.css">
         <link rel="icon" type="image/vnd.microsoft.icon" href="${pageContext.request.contextPath}\\favicon.ico">
-        <title>Nutzer anzeigen | Autobahnmaut</title>
+        <title>Nutzerfahrzeuge | Autobahnmaut</title>
     </head>
     <body>
         <%
+
+            String nutzerId = (String) request.getParameter("nid");
+
             //Nutzer-Objekt aus der Session bekommen
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
-            ArrayList<Nutzer> nL = UserManager.getNutzerListe();
-            //Rolle aus dem Objekt nehmen und Berechtigung prüfen
-            if (n.getRolle().equals("Wacht") || n.getRolle().equals("Polizei") || n.getRolle().equals("Admin")) {%>
+
+            ArrayList<Fahrzeug> fzL = FahrzeugManager.fahrzeuglisteNutzer(Integer.parseInt(nutzerId));
+            
+            Nutzer nu = UserManager.getNutzerById(Integer.parseInt(nutzerId));
+
+            //Abfrage der Rolle aus dem Objekt und Prüfung der Berechtigung
+            if (n.getRolle().equals("Polizei")) {%>
         <section id="b1">
             <div id="inb1">
-                <!--Einbettung der Taskbar-->
+                <!--Einbinden der taskbar als jsp-->
                 <div>
                     <jsp:include page="taskbar.jsp"/>
                 </div>
-                <h1 id="head_start">Nutzer anzeigen</h1>
+                <h1 id="head_start">Fahrzeuge zum Nutzer: <%= nu.getName()  %></h1>
                 <div id="back_white">
-                    <!--Hier Script für Anzeige der Liste der Nutzer im System einfügen-->
                     <table border ="1" width="500" align="center">
                         <tr>
                             <th>Nutzer ID</th>
@@ -37,34 +44,30 @@
                             <th>Ort</th>
                         </tr>
 
-                        <% for (Nutzer nutzer : nL) {
+                        <!--Script für die anzeige der schon vorhandenen Fahrzeuge einfügen-->
+                        <% for (Fahrzeug f : fzL) {
 
                         %>   
+
                         <tr>
-                            <td><%=nutzer.getNutzerId()%></td>
-                            <td><%=nutzer.getName()%></td>
-                            <td><%=nutzer.getOrt()%></td>
-                            <td><%=nutzer.getPlz()%></td>
+                            <td><%=f.getFahrzeugId()%></td>
+                            <td><%=f.getKennzeichen()%></td>
+                            <td><%= f.isPrivileg() %></td>
+                            <td><%= f.getLand().getBezeichnung() %></td>
                         </tr>
                         
+
+
 
                         <%
                             }
                         %>
 
-
                     </table>
-                    <!--Input-Form für die Erfassung der Fahrzeuge eines Nutzers-->
-                    <form action="${pageContext.request.contextPath}/jsp/kfzAnzeigenPolizei.jsp" method="post">
-                        <br/><br/>
-                        <input type="text" name="nid" placeholder="Nutzer ID">
-                        <input type="submit" value="Fahrzeuge anzeigen">
-                        <br/><br/>
-                    </form>
                 </div>
             </div>
         </section><%
-            //Wenn keine Berechtigung vorhanden -> Weiterleiten auf Permission Denied
+            //Wenn keine Berechtigung -> Weiterleiten auf Zugriff verweigert
         } else {%>
         <jsp:forward page="permissionDenied.jsp"/><%
             }
