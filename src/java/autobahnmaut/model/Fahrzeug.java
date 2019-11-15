@@ -15,6 +15,7 @@ public class Fahrzeug {
     private boolean privileg;
     private Nutzer nutzer;
     private Land land;
+    
 
     public int getFahrzeugId() {
         return fahrzeugId;

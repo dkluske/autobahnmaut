@@ -5,11 +5,9 @@
  */
 package autobahnmaut.logik.Controller.pages;
 
-import autobahnmaut.datenbank.UserManager;
 import autobahnmaut.model.Nutzer;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +19,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author Andi
  */
-@WebServlet(name = "userAnzeigen", urlPatterns = {"/UserAnzeigen", "/userAnzeigen"})
-public class UserAnzeigen extends HttpServlet {
+@WebServlet(name = "rechnung", urlPatterns = {"/rechnung"})
+public class Rechnung extends HttpServlet {
+
 
     private HttpSession session;
     private String rolle;
@@ -51,6 +50,7 @@ public class UserAnzeigen extends HttpServlet {
 //        out.println(session.toString());
 //        out.println(session.getAttribute("nutzer").toString());       
 //       ----------------
+        
 
     }
 
@@ -71,11 +71,8 @@ public class UserAnzeigen extends HttpServlet {
 //        Wenn Nutzer hat KEIENN login, zurück zu
             response.sendRedirect(request.getContextPath());
         }else{
-            if (this.rolle.equals("Polizei") || this.rolle.equals("Admin")) {
-                ArrayList <Nutzer> Nutzer;
-                Nutzer = (ArrayList<Nutzer>) UserManager.getNutzerListe();
-                request.setAttribute("nutzerliste", Nutzer);
-                request.getRequestDispatcher("/jsp/userAnzeigen.jsp").forward(request, response);
+            if (this.rolle.equals("Admin") || this.rolle.equals("Nutzer")) {
+                request.getRequestDispatcher("/jsp/rechnung.jsp").forward(request, response);
             }else{
 //                Permission denied!
                 request.getRequestDispatcher("/jsp/permission.jsp").forward(request, response);
@@ -103,7 +100,7 @@ public class UserAnzeigen extends HttpServlet {
 //        Wenn Nutzer hat KEIENN login, zurück zu
             response.sendRedirect(request.getContextPath());
         }else{
-            if (this.rolle.equals("Polizei") || this.rolle.equals("Admin")) {
+            if (this.rolle.equals("Admin") || this.rolle.equals("Nutzer")) {
 //                Ändern in Datenbank
             }else{
 //                Permission denied!
@@ -121,6 +118,6 @@ public class UserAnzeigen extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

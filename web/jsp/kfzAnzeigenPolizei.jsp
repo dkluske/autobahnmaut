@@ -15,13 +15,16 @@
     </head>
     <body>
         <%
+
+            String nutzerId = (String) request.getParameter("nid");
+
             //Nutzer-Objekt aus der Session bekommen
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
 
-            ArrayList<Fahrzeug> fzL = FahrzeugManager.fahrzeuglisteNutzer(n.getNutzerId());
+            ArrayList<Fahrzeug> fzL = FahrzeugManager.fahrzeuglisteNutzer(Integer.parseInt(nutzerId));
 
             //Abfrage der Rolle aus dem Objekt und Prüfung der Berechtigung
-            if (n.getRolle().equals("Nutzer") || n.getRolle().equals("Admin")) {%>
+            if (n.getRolle().equals("Polizei")) {%>
         <section id="b1">
             <div id="inb1">
                 <!--Einbinden der taskbar als jsp-->
@@ -30,41 +33,39 @@
                 </div>
                 <h1 id="head_start">Fahrzeuge registrieren</h1>
                 <div id="back_white">
-                    <table style="width:100%">
+                    <table border ="1" width="500" align="center">
                         <tr>
-                            <!--Input Form für die Fahrzeugregistrierung-->
-                            <td>
-                                <form action="${pageContext.request.contextPath}/jsp/kfzRegisterDB.jsp" method="post">
-                                    <br/><br/>
-                                    <input type="text" name="kennz" placeholder="Kfz-Kennzeichen"><br/><br/>
-                                    <input type="submit" value="Registrieren" id="submit">
-                                    <br/><br/>
-                                </form>
-                            </td>
-                            <!--Liste der schon vorhandenen Fahrzeuge-->
-                            <td>
-                                <ul>
-                                    <!--Script für die anzeige der schon vorhandenen Fahrzeuge einfügen-->
-                                    <% for (Fahrzeug f : fzL) {
-                                        
-                                    %>   
-
-                                    <li> <%=f.getKennzeichen()%></li>
-
-
-
-                                    <%
-                                        }
-                                    %>
-                                </ul>
-                            </td>
+                            <th>Nutzer ID</th>
+                            <th>Name</th>
+                            <th>PLZ</th>
+                            <th>Ort</th>
                         </tr>
+
+                        <!--Script für die anzeige der schon vorhandenen Fahrzeuge einfügen-->
+                        <% for (Fahrzeug f : fzL) {
+
+                        %>   
+
+                        <tr>
+                            <td><%=f.getFahrzeugId()%></td>
+                            <td><%=f.getKennzeichen()%></td>
+                            <td><%= f.isPrivileg() %></td>
+                            <td><%= f.getLand().getBezeichnung() %></td>
+                        </tr>
+                        
+
+
+
+                        <%
+                            }
+                        %>
+
                     </table>
                 </div>
             </div>
         </section><%
-                    //Wenn keine Berechtigung -> Weiterleiten auf Zugriff verweigert
-                } else {%>
+            //Wenn keine Berechtigung -> Weiterleiten auf Zugriff verweigert
+        } else {%>
         <jsp:forward page="permissionDenied.jsp"/><%
             }
         %>

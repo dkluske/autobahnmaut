@@ -27,34 +27,34 @@
             //Nutzer-Element aus der Session bekommen
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
             //Taskbar nach den Rollen unterscheiden
-            switch(n.getRolle()){
-                //Rolle / Taskbar Normalnutzer
-                case "Nutzer": %>
+           
+                //Rolle / Taskbar Normalnutzer              
+        if(n.getRolle().equals("Nutzer")){
+        %>
                     <div class="navigation">
                         <!--Logo der Firma links in der Taskbar-->
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
-                        <a href="${pageContext.request.contextPath}/kfzRegister">Fahrzeuge</a>
-                        <a href="${pageContext.request.contextPath}/KfzOrten">Fahrzeuge orten</a>
+                        <a href="${pageContext.request.contextPath}/kfzRegister">Fahrzeuge</a>                        
                         <a href="${pageContext.request.contextPath}/rechnung">Rechnung</a>
                         <a href="${pageContext.request.contextPath}/profil">Profil</a>
                         <a href="${pageContext.request.contextPath}/Logout">Logout</a>
                     </div>
                 <%
-                    break;
+                  }else if (n.getRolle().equals("Ministerium")){  
                 //Rolle / Taskbar Ministerium
-                case "Ministerium":%>
+                %>
                     <div class="navigation">
                         <!--Logo der Firma links in der Taskbar-->
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
                         <a href="${pageContext.request.contextPath}/statistik">Statistik</a>
-                        <a href="">Logout</a>
+                        <a href="${pageContext.request.contextPath}/Logout">Logout</a>
                     </div>
                 <%
-                    break;
+                   }else if (n.getRolle().equals("Polizei")){ 
                 //Rolle / Taskbar Polizei
-                case "Polizei":%>
+                %>
                     <div class="navigation">
                         <!--Logo der Firma links in der Taskbar-->
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
@@ -65,9 +65,9 @@
                         <a href="${pageContext.request.contextPath}/Logout">Logout</a>
                     </div>
                 <%
-                    break;
+                   }else if(n.getRolle().equals("Verkehrswacht")){ 
                 //Rolle / Taskbar Verkehrswacht
-                case "Verkehrswacht":%>
+               %>
                     <div class="navigation">
                         <!--Logo der Firma links in der Taskbar-->
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
@@ -77,13 +77,14 @@
                         <a href="${pageContext.request.contextPath}/Logout">Logout</a>
                     </div>
                 <%
-                    break;
+                    }else if(n.getRolle().equals("Admin")){ 
                 //Rolle / Taskbar Administrator
-                case "Admin":%>
+                %>
                     <div class="navigation">
                         <!--Logo der Firma links in der Taskbar-->
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
+                        <a href="${pageContext.request.contextPath}/dataimport.jsp">Zack rein</a>
                         <a href="${pageContext.request.contextPath}/userAnzeigen">Nutzer</a>
                         <a href="${pageContext.request.contextPath}/kfzAnzeigen">Fahrzeuge</a>
                         <a href="${pageContext.request.contextPath}/ausnahmen">Ausnahmen</a>
@@ -91,11 +92,11 @@
                         <a href="${pageContext.request.contextPath}/Logout">Logout</a>
                     </div>
                 <%
-                    break;
-                default:%>
+                   }else { 
+                %>
                     <div class="navigation">
                         <!--Logo der Firma links in der Taskbar-->
-                        <img src="${paeContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
+                        <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
                         <a href="">Function1</a>
                         <a href="">Function2</a>

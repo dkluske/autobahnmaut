@@ -39,6 +39,13 @@ img{
 }
 table{
     align-content: center;
+    font-family: 'Segoe UI';
+}
+li{
+    font-family: 'Segoe UI';
+    letter-spacing: 3px;
+    border-bottom: 1px solid black;
+    font-size: 20px;
 }
 /*Eingabefelder*/
 input{
@@ -98,4 +105,20 @@ ul{
     z-index: 3;
 
     display: none;
+}
+
+#regform1{
+    width: 35%;
+    align-content: center;
+    padding-bottom: 65px;
+    display: inline-block;
+    border-radius: 5%;
+}
+#regform2{
+    width: 65%;
+    align-content: center;
+    padding-bottom: 65px;
+    display: inline-block;
+    border-radius: 5%;
+    float: right;
 }

@@ -1,3 +1,6 @@
+<%@page import="autobahnmaut.datenbank.FahrtenManager"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="autobahnmaut.model.FahrtenAbgeschlossen"%>
 <%@page import="autobahnmaut.model.Nutzer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,8 +17,9 @@
         <%
             //Nutzer-Objekt aus der Session bekommen
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
+            ArrayList<FahrtenAbgeschlossen> fL = FahrtenManager.getFalschfahrten();
             //Rolle aus Nutzer-Objekt ziehen und Berechtigung prüfen
-            if(n.getRolle() == "Polizei"){%>
+            if(n.getRolle().equals("Polizei")){%>
                 <section id="b1">
                     <div id="inb1">
                         <!--Einbinden der Taskbar als JSP-->
@@ -24,10 +28,39 @@
                         </div>
                         <h1 id="head_start">Falschfahrerliste</h1>
                         <div id="back_white">
-                            <ul>
-                                <!--Script für Liste der Falschfahrer einfügen-->
-                                <% %><li></li><% %>
-                            </ul>
+                            <table border ="1" width="500" align="center">
+                        <tr>
+                            <th>Fahrtennummer</th>
+                            <th>Kennzeichen</th>
+                            <th>Auffahrtsort</th>
+                            <th>Auffahrtszeit</th>
+                            <th>Abfahrtsort</th>
+                            <th>Abffahrtszeit</th>
+                        </tr>
+
+                        <!--Script für die anzeige der schon vorhandenen Fahrzeuge einfügen-->
+                        <% for (FahrtenAbgeschlossen fahrt : fL) {
+
+                        %>   
+
+                        <tr>
+                            <td><%= fahrt.getFahrtenAbgeschlossenId() %></td>
+                            <td><%=fahrt.getFahrzeug().getKennzeichen()%></td>
+                            <td><%= fahrt.getMautbrueckeStart().getStandort().getBezeichnung() %></td>
+                            <td><%= fahrt.getStartZeit() %></td>
+                            <td><%= fahrt.getMautbrueckeRecent().getStandort().getBezeichnung() %></td>
+                            <td><%= fahrt.getEndZeit() %></td>
+                            
+                        </tr>
+                        
+
+
+
+                        <%
+                            }
+                        %>
+
+                    </table>
                         </div>
                     </div>
                 </section><%
