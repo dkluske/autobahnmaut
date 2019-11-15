@@ -20,7 +20,7 @@
 
             ArrayList<Fahrzeug> fzL = FahrzeugManager.getFahrzeugPrivileg();
             //Abfrage der Rolle und Prüfung der Berechtigung
-            if (n.getRolle().equals("Polizei")) {%>
+    if (n.getRolle().equals("Polizei") || n.getRolle().equals("Admin")) {%>
         <section id="b1">
             <div id="inb1">
                 <!--Einbinden des Menübands-->

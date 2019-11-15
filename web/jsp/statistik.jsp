@@ -34,7 +34,7 @@
             <!--Hier Statistikdaten / ggf. SVG aus Daten einfügen-->        
             <div id="back_white">
 
-                <table border ="1" width="500" align="center"> 
+                <table border ="1" width="700" align="center"> 
                         <tr bgcolor="00FF7F"> 
                             <th><b>Postion</b></th> 
                             <th><b>Land</b></th> 
