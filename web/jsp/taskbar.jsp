@@ -80,7 +80,7 @@
                         <!--Logo der Firma links in der Taskbar-->
                         <img src="${pageContext.request.contextPath}\\css\\Logo_dMb_klein_neu.png">
                         <!--Verfügbare Funktionen des Nutzers-->
-                        <a href="${pageContext.request.contextPath}/dataimport.jsp">Zack rein</a>
+                        <a href="${pageContext.request.contextPath}/dataimport">Zack rein</a>
                         <a href="${pageContext.request.contextPath}/userAnzeigen">Nutzer</a>
                         <a href="${pageContext.request.contextPath}/kfzAnzeigen">Fahrzeuge</a>
                         <a href="${pageContext.request.contextPath}/ausnahmen">Ausnahmen</a>
