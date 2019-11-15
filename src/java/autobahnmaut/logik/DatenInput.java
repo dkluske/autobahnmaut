@@ -42,7 +42,7 @@ public class DatenInput {
     }
 
     public static FahrtenLaufend laufendeFahrtAktualisieren(Messdaten messdaten) {
-        FahrtenLaufend aktuelleFahrt ;
+        FahrtenLaufend aktuelleFahrt;
 
         if (FahrtenManager.getLaufendeFahrt(messdaten.getFahrzeug().getFahrzeugId()) != null) {
             aktuelleFahrt = FahrtenManager.getLaufendeFahrt(messdaten.getFahrzeug().getFahrzeugId());
@@ -60,7 +60,7 @@ public class DatenInput {
 
             } else {
                 abstand = FahrtenManager.getAbschnittByIds(aktuelleFahrt.getMautbrueckeRecent().getStandort().getStandortID(), messdaten.getMautbruecke().getStandort().getStandortID()).getDistanz();
-                
+
                 aktuelleFahrt.setKilometer(aktuelleFahrt.getKilometer() + abstand);
                 aktuelleFahrt.setMautbrueckeRecent(messdaten.getMautbruecke());
                 aktuelleFahrt.setAktuelleZeit(messdaten.getMessZeit());
@@ -81,15 +81,32 @@ public class DatenInput {
         }
         return aktuelleFahrt;
     }
-    public static void simulatorDatenHochladen(){
-       ArrayList<String> simDaten = FahrtenManager.getSimulatorDaten();       
-       for (String s:simDaten){
-           try {
-               autobahnmaut.logik.DatenInput.laufendeFahrtAktualisieren(autobahnmaut.logik.DatenInput.datenUmwandeln(s));
-           } catch (ParseException ex) {
-               Logger.getLogger(DatenInput.class.getName()).log(Level.SEVERE, null, ex);
-           }
+
+    public static void simulatorDatenHochladen() {
+        ArrayList<String> simDaten = FahrtenManager.getSimulatorDaten();
+        for (String s : simDaten) {
+            try {
+                autobahnmaut.logik.DatenInput.laufendeFahrtAktualisieren(autobahnmaut.logik.DatenInput.datenUmwandeln(s));
+            } catch (ParseException ex) {
+                Logger.getLogger(DatenInput.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+
+    public static void simulatorInFahrten() {
+        FahrtenManager.deleteFahrten();
+        ArrayList<String> simDaten = FahrtenManager.getSimulatorDaten();
+        FahrtenLaufend fahrtenlaufend;
         
-       }
+        for (String s : simDaten) {
+
+            try {
+                fahrtenlaufend = autobahnmaut.logik.DatenInput.laufendeFahrtAktualisieren(autobahnmaut.logik.DatenInput.datenUmwandeln(s));
+            } catch (ParseException ex) {
+                Logger.getLogger(DatenInput.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }
 }

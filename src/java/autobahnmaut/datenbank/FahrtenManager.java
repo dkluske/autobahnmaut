@@ -288,6 +288,28 @@ public class FahrtenManager {
         return null;
     }
 
+    public static boolean deleteFahrten() {
+
+        String query = "delete from fahrtenabgeschlossen;";
+
+        try {
+            Statement stm = Datenbank.getStatement();
+
+            stm.executeUpdate(query);
+            query = "delete from fahrtenlaufend;";
+            stm.executeUpdate(query);
+            return true;
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        /*wenn ein Land gefunden wurde gib Land zurück
+                ansonsten null
+         */
+        return false;
+    }
+
 //    public static void putFahrt(int standordId) {
 //
 //        String query = "insert "
