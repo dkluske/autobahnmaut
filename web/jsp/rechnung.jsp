@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\mainCSS.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\taskbar.css">
         <link rel="icon" type="image/vnd.microsoft.icon" href="${pageContext.request.contextPath}\\favicon.ico">
-        <title>Kfz Registrieren | Autobahnmaut</title>
+        <title>Rechnung | Autobahnmaut</title>
     </head>
     <body>
         <%
@@ -35,7 +35,7 @@
                 <div>
                     <jsp:include page="taskbar.jsp"/>
                 </div>
-                <h1 id="head_start">Fahrzeuge registrieren</h1>
+                <h1 id="head_start">Rechnung</h1>
                 <div id="back_white">
                     
 

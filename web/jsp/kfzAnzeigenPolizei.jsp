@@ -1,3 +1,4 @@
+<%@page import="autobahnmaut.datenbank.UserManager"%>
 <%@page import="autobahnmaut.model.Fahrzeug"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="autobahnmaut.datenbank.FahrzeugManager"%>
@@ -11,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\mainCSS.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\taskbar.css">
         <link rel="icon" type="image/vnd.microsoft.icon" href="${pageContext.request.contextPath}\\favicon.ico">
-        <title>Kfz Registrieren | Autobahnmaut</title>
+        <title>Nutzerfahrzeuge | Autobahnmaut</title>
     </head>
     <body>
         <%
@@ -22,6 +23,8 @@
             Nutzer n = (Nutzer) request.getSession().getAttribute("nutzer");
 
             ArrayList<Fahrzeug> fzL = FahrzeugManager.fahrzeuglisteNutzer(Integer.parseInt(nutzerId));
+            
+            Nutzer nu = UserManager.getNutzerById(Integer.parseInt(nutzerId));
 
             //Abfrage der Rolle aus dem Objekt und Prüfung der Berechtigung
             if (n.getRolle().equals("Polizei")) {%>
@@ -31,7 +34,7 @@
                 <div>
                     <jsp:include page="taskbar.jsp"/>
                 </div>
-                <h1 id="head_start">Fahrzeuge registrieren</h1>
+                <h1 id="head_start">Fahrzeuge zum Nutzer: <%= nu.getName()  %></h1>
                 <div id="back_white">
                     <table border ="1" width="500" align="center">
                         <tr>
