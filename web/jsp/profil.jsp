@@ -17,13 +17,26 @@
                 <div>
                     <jsp:include page="taskbar.jsp"/>
                 </div>
+
                 
-                <c:out value="${nutzer.name}"/>
-                <c:out value="${nutzer.rolle}"/>
-                <c:out value="${nutzer.email}"/>
-                <c:out value="${nutzer.name}"/>
-                
-                <h1 id="head_start"> PROFIL</h1>
+                <h1 id="head_start">PROFIL</h1>
+                <div id="back_white">
+                    <div class="centered">
+                        <form action="${pageContext.request.contextPath}\profil" method="post">
+                            <!--<label for="name">Name</label>-->
+                            <input name="name" placeholder="name" value="<c:out value="${nutzer.name}"/>">
+                            <!--<label for="email">Email</label>-->
+                            <input name="email" placeholder="email" value="<c:out value="${nutzer.email}"/>">
+                            <!--<label for="strasse">Strasse</label>-->
+                            <input name="strasse" placeholder="strasse" value="<c:out value="${nutzer.strasse}"/>">
+                            <!--<label for="plz">PLZ</label>-->
+                            <input name="plz" placeholder="plz" value="<c:out value="${nutzer.plz}"/>">
+                            <!--<label for="ort">Ort</label>-->
+                            <input name="ort" placeholder="ort" value="<c:out value="${nutzer.ort}"/>">
+                            <input type="submit">
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
     </body>

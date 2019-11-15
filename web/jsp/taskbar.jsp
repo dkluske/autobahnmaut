@@ -7,8 +7,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--Einbinden der CSS Datei für die Formatierung der Taskbar-->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\\css\\taskbar.css">
+        <script type="text/javascript" src="${pageContext.request.contextPath}\js\jquery.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}\js\main.js"></script>
     </head>
     <body>
+        <div class="loader"></div>
+        <div class="greyscreen"></div>
         <!-- Default
         <div class="navigation">
             <!--Logo der Firma links in der Taskbar

@@ -5,6 +5,7 @@
  */
 package autobahnmaut.logik.Controller.pages;
 
+import autobahnmaut.datenbank.UserManager;
 import autobahnmaut.model.Nutzer;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -101,6 +102,14 @@ public class Profil extends HttpServlet {
             response.sendRedirect(request.getContextPath());
         }else{
             if (this.rolle.equals("Admin") || this.rolle.equals("Nutzer")) {
+                
+                String name = request.getParameter("name");
+                String rolle = request.getParameter("rolle");
+                String email = request.getParameter("email");
+                
+                
+//                UserManager.updateUser();
+                
 //                Ändern in Datenbank
             }else{
 //                Permission denied!

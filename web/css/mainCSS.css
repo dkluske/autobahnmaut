@@ -30,7 +30,6 @@ img{
 }
 /*Statistik*/
 #back_white{
-    width: 99%;
     height: 78.5%;
     border: 1px solid transparent;
     border-radius: 15px;
@@ -68,4 +67,35 @@ input:hover{
 }
 ul{
     list-style-type: none;
+}
+.centered{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.loader {
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    display: none;
+
+	border: 16px solid #f3f3f3; /* Light grey */
+	border-top: 16px solid #ff134e; /* red */
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	animation: spin 2s linear infinite;
+}
+.greyscreen{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: gray;
+    opacity: 0.5;
+    z-index: 3;
+
+    display: none;
 }

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import com.google.gson.*;
 
 /**
  *
@@ -143,7 +144,8 @@ public class Register extends HttpServlet {
             }else{
 //                Wenn Registrierung fehlgeschlagen, dann Fehler ausgeben auf register.jsp
                 errors.add("Registrierung Fehlgeschlagen");
-                request.setAttribute("errors", errors);
+                String errorsjson = new com.google.gson.Gson().toJson(errors);
+                request.setAttribute("errors", errorsjson);
                 request.getRequestDispatcher("jsp/register.jsp").forward(request, response);                    
             }
 
